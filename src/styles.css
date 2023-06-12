@@ -11,10 +11,32 @@
     --dark-black-menu: #13161C;
     --dark-gray-background: #2C323C;
     --dark-footer-background: #1C2028;
+
+
+    --color-aqua: #006d77;
+    --color-caramel: #8a3800;
+    --color-midnight: #1c2241;
+    --color-slate: #36454f;
+    --color-ruby: #b10026;
+    --color-plum: #81007f;
+    --color-coral: #ff4545;
+    --color-brick: #a3260b;
+    --color-ocean: #0076a3;
+    --color-electric: #1ba1e2;
+    --color-raspberry: #db0064;
+    --color-orchid: #9a0089;
+    --color-golden: #ffb900;
+    --color-salmon: #ff6666;
+    --color-olivegreen: #658900;
+    --color-jade: #00aba9;
+    --color-steel: #56729c;
+    --color-lavender: #8a79af;
+    --color-terra: #b7590f;
+    --color-moss: #327a00;
 }
 
 body {
-    background-color: var(--dark-blue-background);
+    background-color: var(--dark-black-menu);
 }
 
 /* Google fonts icons */
