@@ -1,0 +1,22 @@
+.footer {
+    margin-top: 2em;
+    background-color: var(--dark-footer-background);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+    line-height: 24px;
+    color: var(--white-font-menu);
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.footer__text {
+    font-size: 18px;
+    margin: 0;
+}
+
+.footer__text--english {
+    margin-left: 1em;
+}

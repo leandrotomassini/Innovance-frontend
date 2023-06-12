@@ -1,0 +1,27 @@
+@import "~normalize.css";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --dark-blue-background: #121F3D;
+    --white-font-menu: #eff3f8;
+    --dark-black-menu: #13161C;
+    --dark-gray-background: #2C323C;
+    --dark-footer-background: #1C2028;
+}
+
+body {
+    background-color: var(--dark-blue-background);
+}
+
+/* Google fonts icons */
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48
+}
