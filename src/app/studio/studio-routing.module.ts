@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { DashboardLayoutComponent } from './pages/dashboard-layout/dashboard-layout.component';
+import { StudioLayoutComponent } from './pages/studio-layout/studio-layout.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DashboardLayoutComponent
+    component: StudioLayoutComponent
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule { }
+export class StudioRoutingModule { }
