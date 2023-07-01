@@ -1,8 +1,9 @@
-<div class="container">
-  <div class="card">
-    <h2>Iniciar sesión</h2>
-    <input type="text" placeholder="usuario">
-    <input type="password" placeholder="password">
-    <button class="btn-login">Ingresar</button>
-  </div>
+<div class="card">
+  <form class="login100-form" autocomplete="off" [formGroup]="myForm" (ngSubmit)="login()">
+    <input type="text" placeholder="usuario" formControlName="email">
+    <input type="password" placeholder="password" formControlName="password">
+    <button class="btn-login" type="submit">Iniciar sesión</button>
+  </form>
+  <hr>
+  <button class="btn-register">Crear cuenta</button>
 </div>
