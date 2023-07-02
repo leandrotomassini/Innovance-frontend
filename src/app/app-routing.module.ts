@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { isAdminGuard, isAuthenticatedGuard, isNotAuthenticatedGuard } from './auth/guards';
+import { isAdminGuard, isAuthenticatedGuard, isInstructorGuard, isNotAuthenticatedGuard } from './auth/guards';
 
 const routes: Routes = [
   {
@@ -16,11 +16,12 @@ const routes: Routes = [
   },
   {
     path: 'control-panel',
-    canActivate: [isAuthenticatedGuard],
+    canActivate: [isAdminGuard],
     loadChildren: () => import('./control-panel/control-panel.module').then(m => m.ControlPanelModule)
   },
   {
     path: 'studio',
+    canActivate: [isInstructorGuard],
     loadChildren: () => import('./studio/studio.module').then(m => m.StudioModule)
   },
   {

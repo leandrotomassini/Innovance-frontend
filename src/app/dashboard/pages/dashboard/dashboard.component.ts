@@ -8,15 +8,10 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent{
-  
-  
-  private authService = inject(AuthService);
-  
-  public user = computed(() => this.authService.currentUser());
-  
 
-  onLogout() {
+  private authService = inject(AuthService);
+
+  logout(){
     this.authService.logout();
   }
-
 }

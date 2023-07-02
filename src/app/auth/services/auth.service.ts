@@ -1,9 +1,11 @@
-import { Injectable, computed, inject, signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
+import { Injectable, computed, inject, signal } from '@angular/core';
+import { catchError, map, Observable, of, throwError, pipe, switchMap } from 'rxjs';
+import { Router } from '@angular/router';
 
-import { enviroment } from 'src/environments/environments';
-import { AuthStatus, CheckTokenResponse, LoginResponse, User } from '../interfaces';
+import { enviroment } from 'src/environments/environments.example';
+import { CheckTokenResponse, LoginResponse, User } from '../interfaces';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,38 +14,37 @@ export class AuthService {
 
   private readonly baseUrl: string = enviroment.baseUrl;
   private http = inject(HttpClient);
+  private router = inject(Router);
 
-  private _currentUser = signal<User | null>(null);
-  private _authStatus = signal<AuthStatus>(AuthStatus.checking);
+  currentUser: User = {
+    email: '',
+    fullName: '',
+    id: '',
+    isActive: false,
+    roles: ['']
+  };
 
-  public currentUser = computed(() => this._currentUser());
-  public authStatus = computed(() => this._authStatus());
+  authStatus: boolean = false;
 
-  constructor() {
-    this.checkAuthStatus().subscribe();
-  }
-
-  private setAuthentication(user: User, token: string): boolean {
-    this._currentUser.set(user);
-    this._authStatus.set(AuthStatus.authenticated);
+  private setAuthentication(user: User, token: string): Observable<boolean> {
+    this.currentUser = user;
     localStorage.setItem('token', token);
-    return true;
+    this.authStatus = true;
+    return of(true);
   }
 
   login(email: string, password: string): Observable<boolean> {
     const url = `${this.baseUrl}/auth/login`;
     const body = { email, password };
 
-    return this.http.post<LoginResponse>(url, body)
-      .pipe(
-
-        map(({ user, token }) => this.setAuthentication(user, token)),
-
-        catchError(err => {
-          return throwError(() => err.error.message);
-        })
-
-      );
+    return this.http.post<LoginResponse>(url, body).pipe(
+      switchMap(({ user, token }) => {
+        return this.setAuthentication(user, token);
+      }),
+      catchError(err => {
+        return throwError(() => err.error.message);
+      })
+    );
   }
 
   checkAuthStatus(): Observable<boolean> {
@@ -57,26 +58,34 @@ export class AuthService {
       return of(false);
     }
 
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${token}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     return this.http.get<CheckTokenResponse>(url, { headers })
       .pipe(
-
-        map(({ user, token }) => this.setAuthentication(user, token)),
-
-        catchError(() => {
-          this._authStatus.set(AuthStatus.notAuthenticated);
-          return of(false);
+        switchMap(({ user, token }) => {
+          this.setAuthentication(user, token);
+          return of(true);
         })
-
       );
   }
 
   logout() {
+
     localStorage.removeItem('token');
     localStorage.clear();
-    this._currentUser.set(null);
-    this._authStatus.set(AuthStatus.notAuthenticated);
+
+    this.currentUser = {
+      email: '',
+      fullName: '',
+      id: '',
+      isActive: false,
+      roles: ['']
+    };
+
+    this.authStatus = false;
+    this.router.navigateByUrl('/');
   }
+
+
+
 }
