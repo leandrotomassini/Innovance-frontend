@@ -1,0 +1,17 @@
+.full-width{
+  width: 100%;
+}
+.search-input {
+  display: flex;
+  align-items: center;
+}
+
+.search-text {
+  flex: 1;
+  border: none;
+  box-shadow: none;
+}
+
+.search-icon {
+  margin-left: 8px;
+}

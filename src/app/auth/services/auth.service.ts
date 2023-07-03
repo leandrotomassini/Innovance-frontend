@@ -1,20 +1,17 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, computed, inject, signal } from '@angular/core';
-import { catchError, map, Observable, of, throwError, pipe, switchMap } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { catchError, switchMap } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 
-import { enviroment } from 'src/environments/environments.example';
+import { enviroment } from '../../../environments/environments';
 import { CheckTokenResponse, LoginResponse, User } from '../interfaces';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
   private readonly baseUrl: string = enviroment.baseUrl;
-  private http = inject(HttpClient);
-  private router = inject(Router);
 
   currentUser: User = {
     email: '',
@@ -26,11 +23,12 @@ export class AuthService {
 
   authStatus: boolean = false;
 
-  private setAuthentication(user: User, token: string): Observable<boolean> {
+  constructor(private http: HttpClient, private router: Router) { }
+
+  private setAuthentication(user: User, token: string): void {
     this.currentUser = user;
     localStorage.setItem('token', token);
     this.authStatus = true;
-    return of(true);
   }
 
   login(email: string, password: string): Observable<boolean> {
@@ -39,7 +37,8 @@ export class AuthService {
 
     return this.http.post<LoginResponse>(url, body).pipe(
       switchMap(({ user, token }) => {
-        return this.setAuthentication(user, token);
+        this.setAuthentication(user, token);
+        return of(true);
       }),
       catchError(err => {
         return throwError(() => err.error.message);
@@ -48,9 +47,7 @@ export class AuthService {
   }
 
   checkAuthStatus(): Observable<boolean> {
-
     const url = `${this.baseUrl}/auth/check-status`;
-
     const token = localStorage.getItem('token');
 
     if (!token) {
@@ -60,17 +57,15 @@ export class AuthService {
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    return this.http.get<CheckTokenResponse>(url, { headers })
-      .pipe(
-        switchMap(({ user, token }) => {
-          this.setAuthentication(user, token);
-          return of(true);
-        })
-      );
+    return this.http.get<CheckTokenResponse>(url, { headers }).pipe(
+      switchMap(({ user, token }) => {
+        this.setAuthentication(user, token);
+        return of(true);
+      })
+    );
   }
 
-  logout() {
-
+  logout(): void {
     localStorage.removeItem('token');
     localStorage.clear();
 
@@ -86,6 +81,17 @@ export class AuthService {
     this.router.navigateByUrl('/');
   }
 
+  usersList(): Observable<User[]> {
+    const url = `${this.baseUrl}/auth/users`;
+    const token = localStorage.getItem('token');
 
+    if (!token) {
+      this.logout();
+      return of([]);
+    }
 
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<User[]>(url, { headers });
+  }
 }

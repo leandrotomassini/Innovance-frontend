@@ -15,7 +15,7 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
-    path: 'control-panel',
+    path: 'panel-control',
     canActivate: [isAdminGuard],
     loadChildren: () => import('./control-panel/control-panel.module').then(m => m.ControlPanelModule)
   },
@@ -23,10 +23,6 @@ const routes: Routes = [
     path: 'studio',
     canActivate: [isInstructorGuard],
     loadChildren: () => import('./studio/studio.module').then(m => m.StudioModule)
-  },
-  {
-    path: 'subscriptions',
-    loadChildren: () => import('./subscriptions/subscriptions.module').then(m => m.SubscriptionsModule)
   },
   {
     path: 'dashboard',

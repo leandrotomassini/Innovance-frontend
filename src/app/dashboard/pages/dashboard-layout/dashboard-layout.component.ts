@@ -11,7 +11,7 @@ import { AuthService } from '../../../auth/services/auth.service';
 export class DashboardLayoutComponent implements OnInit {
 
   public sidebarItems = [
-    { label: 'Panel de control', icon: 'label', url: '/control-panel' },
+    { label: 'Panel de control', icon: 'label', url: '/panel-control' },
     { label: 'Dashboard', icon: 'add', url: '/dashboard' },
     { label: 'Studio', icon: 'search', url: '/studio' },
   ];
