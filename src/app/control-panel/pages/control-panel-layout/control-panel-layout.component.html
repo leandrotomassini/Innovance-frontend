@@ -1,1 +1,54 @@
-<p>control-panel-layout works!</p>
+
+<mat-sidenav-container fullscreen>
+
+  <mat-sidenav #sidenav mode="push" [ngStyle]="{width: '250'}">
+
+    <mat-toolbar>
+
+      <span>Menú</span>
+
+      <span class="spacer"></span>
+
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <mat-list-item *ngFor="let item of sidebarItems" [routerLink]="item.url"
+        (click)="sidenav.toggle()">
+        <mat-icon matListItemIcon [fontSet]="'material-icons-outlined'">{{item.icon}}</mat-icon>
+        {{item.label}}
+      </mat-list-item>
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <mat-toolbar color="primary">
+
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <span>Innovance</span>
+
+    <span class="spacer"></span>
+
+    <button mat-icon-button
+      aria-label="Notificaciones">
+      <mat-icon>notifications</mat-icon>
+    </button>
+
+    <button mat-icon-button
+      aria-label="Cerrar sesión" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+
+  </mat-toolbar>
+
+  <div class="container">
+    <router-outlet />
+  </div>
+
+</mat-sidenav-container>
