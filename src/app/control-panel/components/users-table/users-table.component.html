@@ -11,7 +11,9 @@
   <!-- Column definitions -->
   <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
     <th mat-header-cell *matHeaderCellDef>{{ columnLabels[column] }}</th>
-    <td mat-cell *matCellDef="let user">{{ getColumnValue(user, column) }}</td>
+    <td mat-cell *matCellDef="let user" (click)="showUserId(user.id)" class="hoverable-row">
+      {{ getColumnValue(user, column) }}
+    </td>
   </ng-container>
 
   <!-- Table rows -->

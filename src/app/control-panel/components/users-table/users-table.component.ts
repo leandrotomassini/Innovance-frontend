@@ -47,4 +47,8 @@ export class UsersTableComponent implements OnChanges {
     }
     return user[column];
   }
+
+  showUserId(userId: string) {
+    console.log('User ID:', userId);
+  }
 }
