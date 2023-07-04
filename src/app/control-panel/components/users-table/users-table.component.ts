@@ -55,14 +55,10 @@ export class UsersTableComponent implements OnChanges {
     return user[column];
   }
 
-  showUserId(userId: string) {
-    console.log('User ID:', userId);
-  }
-
-  openModal() {
+  openModal(userId: string) {
     const dialogRef = this.dialog.open(UsersFormComponent, {
       width: '400px',
-      data: { message: 'Hola mundo' }
+      data: { userId }
     });
 
     dialogRef.afterClosed().subscribe(result => {

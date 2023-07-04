@@ -94,4 +94,19 @@ export class AuthService {
 
     return this.http.get<User[]>(url, { headers });
   }
+
+  findOneById(id: string): Observable<User> {
+    const url = `${this.baseUrl}/auth/${id}`;
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      this.logout();
+      return throwError(() => new Error('Token not found'));
+    }
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<User>(url, { headers });
+  }
+
 }
