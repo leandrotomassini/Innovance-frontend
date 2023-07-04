@@ -1,5 +1,10 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+
+import { UsersFormComponent } from '../users-form/users-form.component';
 import { User } from 'src/app/auth/interfaces';
+
+
 
 interface UserWithIndexSignature extends User {
   [key: string]: any;
@@ -23,6 +28,8 @@ export class UsersTableComponent implements OnChanges {
 
   filterValue: string = '';
   filteredUsers: User[] = [];
+
+  constructor(public dialog: MatDialog) { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['users']) {
@@ -50,5 +57,16 @@ export class UsersTableComponent implements OnChanges {
 
   showUserId(userId: string) {
     console.log('User ID:', userId);
+  }
+
+  openModal() {
+    const dialogRef = this.dialog.open(UsersFormComponent, {
+      width: '400px',
+      data: { message: 'Hola mundo' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('El modal se ha cerrado');
+    });
   }
 }

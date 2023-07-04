@@ -6,7 +6,7 @@
     </button>
   </div>
 </mat-form-field>
-
+<button mat-raised-button (click)="openModal()">Abrir Modal</button>
 <table mat-table [dataSource]="filteredUsers" class="mat-elevation-z8">
   <!-- Column definitions -->
   <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">

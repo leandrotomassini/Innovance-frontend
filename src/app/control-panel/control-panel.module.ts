@@ -8,6 +8,7 @@ import { ControlPanelLayoutComponent } from './pages/control-panel-layout/contro
 import { UsersComponent } from './pages/users/users.component';
 import { UsersTableComponent } from './components/users-table/users-table.component';
 import { SubscriptionsComponent } from './pages/subscriptions/subscriptions.component';
+import { UsersFormComponent } from './components/users-form/users-form.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { SubscriptionsComponent } from './pages/subscriptions/subscriptions.comp
     ControlPanelLayoutComponent,
     UsersComponent,
     UsersTableComponent,
-    SubscriptionsComponent
+    SubscriptionsComponent,
+    UsersFormComponent
   ],
   imports: [
     CommonModule,
