@@ -20,6 +20,10 @@
       </select>
     </mat-form-field>
 
+    <mat-checkbox formControlName="instructor" [checked]="user.roles.includes('instructor')">Instructor</mat-checkbox>
+    <mat-checkbox formControlName="user" [checked]="user.roles.includes('user')">Usuario</mat-checkbox>
+    <mat-checkbox formControlName="admin" [checked]="user.roles.includes('admin')">Administrador</mat-checkbox>
+
     <div class="button-row">
       <button mat-button color="primary" type="submit">Guardar</button>
       <button mat-button (click)="closeModal()" type="button">Cerrar</button>

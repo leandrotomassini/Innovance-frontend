@@ -22,7 +22,7 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     fullName: '',
     email: '',
     isActive: false,
-    roles: [],
+    roles: []
   };
 
   constructor(
@@ -35,6 +35,9 @@ export class UsersFormComponent implements OnInit, OnDestroy {
       email: ['', [Validators.required]],
       fullName: ['', [Validators.required]],
       isActive: [false, [Validators.required]],
+      instructor: [false],
+      user: [false],
+      admin: [false]
     });
   }
 
@@ -46,7 +49,10 @@ export class UsersFormComponent implements OnInit, OnDestroy {
           this.userForm.patchValue({
             email: user.email,
             fullName: user.fullName,
-            isActive: user.isActive
+            isActive: user.isActive,
+            instructor: user.roles.includes('instructor'),
+            user: user.roles.includes('user'),
+            admin: user.roles.includes('admin')
           });
           return this.authService.findOneById(this.data.userId);
         })
@@ -66,6 +72,19 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     this.user.fullName = this.userForm.value.fullName;
     this.user.email = this.userForm.value.email;
     this.user.isActive = this.userForm.value.isActive;
+    this.user.roles = [];
+
+    if (this.userForm.value.instructor) {
+      this.user.roles.push('instructor');
+    }
+
+    if (this.userForm.value.user) {
+      this.user.roles.push('user');
+    }
+
+    if (this.userForm.value.admin) {
+      this.user.roles.push('admin');
+    }
 
     this.authService.updateUser(this.user.id, this.user)
       .subscribe(() => {
@@ -73,3 +92,4 @@ export class UsersFormComponent implements OnInit, OnDestroy {
       });
   }
 }
+
