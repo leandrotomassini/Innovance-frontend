@@ -55,7 +55,7 @@ export class UsersFormComponent implements OnInit, OnDestroy {
   }
 
   closeModal(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   ngOnDestroy(): void {
@@ -68,6 +68,8 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     this.user.isActive = this.userForm.value.isActive;
 
     this.authService.updateUser(this.user.id, this.user)
-      .subscribe(console.log);
+      .subscribe(() => {
+        this.dialogRef.close(true);
+      });
   }
 }

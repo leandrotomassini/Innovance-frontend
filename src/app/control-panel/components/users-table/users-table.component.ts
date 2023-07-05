@@ -1,8 +1,10 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 
 import { UsersFormComponent } from '../users-form/users-form.component';
 import { User } from 'src/app/auth/interfaces';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 interface UserWithIndexSignature extends User {
   [key: string]: any;
@@ -27,11 +29,16 @@ export class UsersTableComponent implements OnChanges {
   filterValue: string = '';
   filteredUsers: User[] = [];
 
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    public dialog: MatDialog,
+    private authService: AuthService,
+    private _snackBar: MatSnackBar
+  ) { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['users']) {
       this.filteredUsers = this.users.slice();
+      this.sortUsersByEmail(); // Ordenar por email cuando cambia la lista de usuarios
     }
   }
 
@@ -44,6 +51,11 @@ export class UsersTableComponent implements OnChanges {
         user.roles.some((role: string) => role.toLowerCase().includes(filter))
       );
     });
+    this.sortUsersByEmail(); // Volver a ordenar por email después de filtrar
+  }
+
+  sortUsersByEmail() {
+    this.filteredUsers.sort((a, b) => a.email.localeCompare(b.email));
   }
 
   getColumnValue(user: UserWithIndexSignature, column: string): string {
@@ -60,7 +72,30 @@ export class UsersTableComponent implements OnChanges {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      if (result) {
+        this.reloadUsers();
+        this.openSnackBar('Usuario guardado', 'ok');
+      }
+    });
+  }
+
+  // Función para recargar los usuarios después de cerrar el diálogo de edición
+  reloadUsers() {
+    this.authService.usersList().subscribe(
+      (users) => {
+        this.users = users;
+        this.filteredUsers = users.slice();
+        this.sortUsersByEmail(); // Volver a ordenar por email después de recargar los usuarios
+      },
+      (error) => {
+        console.error('Error while fetching users:', error);
+      }
+    );
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action,  {
+      duration: 3000
     });
   }
 }
