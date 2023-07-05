@@ -4,8 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { UsersFormComponent } from '../users-form/users-form.component';
 import { User } from 'src/app/auth/interfaces';
 
-
-
 interface UserWithIndexSignature extends User {
   [key: string]: any;
 }
@@ -19,8 +17,8 @@ export class UsersTableComponent implements OnChanges {
   @Input() users: User[] = [];
 
   columnLabels: { [key: string]: string } = {
-    email: 'Correo',
-    fullName: 'Nombre completo',
+    email: 'Email',
+    fullName: 'Full Name',
     roles: 'Roles'
   };
 
@@ -62,7 +60,7 @@ export class UsersTableComponent implements OnChanges {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('El modal se ha cerrado');
+      console.log('The dialog was closed');
     });
   }
 }

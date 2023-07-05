@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '../material/material.module';
 import { ControlPanelRoutingModule } from './control-panel-routing.module';
@@ -23,7 +23,8 @@ import { UsersFormComponent } from './components/users-form/users-form.component
     CommonModule,
     ControlPanelRoutingModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ControlPanelModule { }

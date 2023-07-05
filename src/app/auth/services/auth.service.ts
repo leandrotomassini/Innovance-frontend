@@ -109,4 +109,27 @@ export class AuthService {
     return this.http.get<User>(url, { headers });
   }
 
+  updateUser(id: string, formData: Partial<User>) {
+    
+    const url = `${this.baseUrl}/auth/${id}`;
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      this.logout();
+      return throwError(() => new Error('Token not found'));
+    }
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+
+    const updatedUser: User = {
+      ...this.currentUser,
+      ...formData
+    };
+
+    console.log({updatedUser})
+
+    return this.http.patch<User>(url, updatedUser, { headers });
+  }
+
 }
