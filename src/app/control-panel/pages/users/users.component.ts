@@ -18,10 +18,11 @@ export class UsersComponent implements OnInit {
   users: User[] = [];
 
   ngOnInit(): void {
-    this.authService.usersList().subscribe({
-      next: (users) => this.users = users,
-      error: (error) => console.error(error)
-    });
+    this.authService.usersList()
+      .subscribe({
+        next: (users) => this.users = users,
+        error: (error) => console.error(error)
+      });
   }
 
 

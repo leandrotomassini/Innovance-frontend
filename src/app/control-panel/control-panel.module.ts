@@ -9,6 +9,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { UsersTableComponent } from './components/users-table/users-table.component';
 import { SubscriptionsComponent } from './pages/subscriptions/subscriptions.component';
 import { UsersFormComponent } from './components/users-form/users-form.component';
+import { SubscriptionsTableComponent } from './components/subscriptions-table/subscriptions-table.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { UsersFormComponent } from './components/users-form/users-form.component
     UsersComponent,
     UsersTableComponent,
     SubscriptionsComponent,
-    UsersFormComponent
+    UsersFormComponent,
+    SubscriptionsTableComponent
   ],
   imports: [
     CommonModule,

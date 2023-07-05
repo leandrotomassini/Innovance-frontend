@@ -20,7 +20,7 @@ export class UsersTableComponent implements OnChanges {
 
   columnLabels: { [key: string]: string } = {
     email: 'Email',
-    fullName: 'Full Name',
+    fullName: 'Nombre completo',
     roles: 'Roles'
   };
 
@@ -51,7 +51,7 @@ export class UsersTableComponent implements OnChanges {
         user.roles.some((role: string) => role.toLowerCase().includes(filter))
       );
     });
-    this.sortUsersByEmail(); // Volver a ordenar por email después de filtrar
+    this.sortUsersByEmail();
   }
 
   sortUsersByEmail() {
@@ -79,22 +79,22 @@ export class UsersTableComponent implements OnChanges {
     });
   }
 
-  // Función para recargar los usuarios después de cerrar el diálogo de edición
   reloadUsers() {
-    this.authService.usersList().subscribe(
-      (users) => {
+    this.authService.usersList().subscribe({
+      next: (users) => {
         this.users = users;
         this.filteredUsers = users.slice();
-        this.sortUsersByEmail(); // Volver a ordenar por email después de recargar los usuarios
+        this.sortUsersByEmail();
       },
-      (error) => {
+      error: (error) => {
         console.error('Error while fetching users:', error);
       }
-    );
+    });
   }
 
+
   openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action,  {
+    this._snackBar.open(message, action, {
       duration: 3000
     });
   }
