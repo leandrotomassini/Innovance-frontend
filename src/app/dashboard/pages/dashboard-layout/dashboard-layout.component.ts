@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 
 import { AuthService } from '../../../auth/services/auth.service';
 
@@ -17,7 +17,8 @@ export class DashboardLayoutComponent implements OnInit {
   ];
 
 
-  constructor(private authService: AuthService) { }
+  private authService = inject(AuthService);
+
 
   ngOnInit() {
     this.authService.checkAuthStatus().subscribe((result) => {
@@ -26,5 +27,9 @@ export class DashboardLayoutComponent implements OnInit {
     });
   }
 
+
+  logout(){
+    this.authService.logout();
+  }
 
 }
