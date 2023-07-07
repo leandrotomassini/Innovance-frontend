@@ -12,10 +12,11 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 export class ControlPanelLayoutComponent {
 
   public sidebarItems = [
-    { label: 'Dashboard', icon: 'data_thresholding', url: '/dashboard' },
     { label: 'Panel de control', icon: 'data_thresholding', url: '/panel-control' },
     { label: 'Usuarios', icon: 'groups', url: '/panel-control/usuarios' },
+    { label: 'Instructores', icon: 'person_book', url: '/panel-control/instructores' },
     { label: 'Subscripciones', icon: 'price_change', url: '/panel-control/subscripciones' },
+    { label: 'Dashboard', icon: 'school', url: '/dashboard' },
   ];
 
   private authService = inject(AuthService);

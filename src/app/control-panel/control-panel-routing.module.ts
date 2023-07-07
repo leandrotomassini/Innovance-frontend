@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ControlPanelLayoutComponent } from './pages/control-panel-layout/control-panel-layout.component';
 import { UsersComponent } from './pages/users/users.component';
 import { SubscriptionsComponent } from './pages/subscriptions/subscriptions.component';
+import { InstructorsComponent } from './pages/instructors/instructors.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
       {
         path: 'usuarios',
         component: UsersComponent
+      },
+      {
+        path: 'instructores',
+        component: InstructorsComponent
       },
       {
         path: 'subscripciones',
