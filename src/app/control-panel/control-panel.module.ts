@@ -12,6 +12,7 @@ import { UsersFormComponent } from './components/users-form/users-form.component
 import { SubscriptionsTableComponent } from './components/subscriptions-table/subscriptions-table.component';
 import { InstructorsComponent } from './pages/instructors/instructors.component';
 import { InstructorsTableComponent } from './components/instructors-table/instructors-table.component';
+import { InstructorFormComponent } from './components/instructor-form/instructor-form.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { InstructorsTableComponent } from './components/instructors-table/instru
     UsersFormComponent,
     SubscriptionsTableComponent,
     InstructorsComponent,
-    InstructorsTableComponent
+    InstructorsTableComponent,
+    InstructorFormComponent
   ],
   imports: [
     CommonModule,

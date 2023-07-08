@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+
 import { InstructorService } from '../../services/instructor.service';
 import { Instructor } from '../../interfaces';
-
+import { InstructorFormComponent } from '../instructor-form/instructor-form.component';
 
 @Component({
   selector: 'app-instructors-table',
@@ -21,7 +23,10 @@ export class InstructorsTableComponent implements OnInit {
 
   displayedColumns: string[] = Object.keys(this.columnLabels);
 
-  constructor(private instructorService: InstructorService) {}
+  constructor(
+    private instructorService: InstructorService,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.instructorService.findAll().subscribe((instructors: Instructor[]) => {
@@ -39,5 +44,17 @@ export class InstructorsTableComponent implements OnInit {
         instructor.title.toLowerCase().includes(filterText)
       );
     }
+  }
+
+  openModal(instructorId: string): void {
+    const dialogRef = this.dialog.open(InstructorFormComponent, {
+      width: '400px'
+    });
+
+    dialogRef.componentInstance.instructorId = instructorId; // Asignar instructorId al componente hijo
+
+    dialogRef.afterClosed().subscribe(result => {
+      // Aquí puedes realizar alguna acción después de que se cierre el diálogo
+    });
   }
 }

@@ -12,7 +12,7 @@
   <!-- Definición de columnas -->
   <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
     <th mat-header-cell *matHeaderCellDef>{{ columnLabels[column] }}</th>
-    <td mat-cell *matCellDef="let instructor">
+    <td mat-cell *matCellDef="let instructor" (click)="openModal(instructor.idInstructor)" class="row-hover">
       <ng-container *ngIf="column === 'imgUrl'">
         <img src="{{ instructor.imgUrl }}" alt="Foto" class="profile-img">
       </ng-container>
