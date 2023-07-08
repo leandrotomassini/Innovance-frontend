@@ -26,6 +26,7 @@ export class InstructorFormComponent implements OnInit {
     this.instructorForm = this.fb.group({
       imgUrl: ['', [Validators.required]],
       title: ['', [Validators.required]],
+      status: ['', [Validators.required]],
     });
   }
 
@@ -35,29 +36,55 @@ export class InstructorFormComponent implements OnInit {
         this.instructor = instructor;
         this.instructorForm.patchValue({
           imgUrl: instructor.imgUrl,
-          title: instructor.title
+          title: instructor.title,
+          status: instructor.status.toString(), // Convierte el booleano a string
         });
       });
     }
   }
 
   saveInstructor() {
-    const updatedInstructor: Instructor = {
-      idInstructor: this.instructorId,
-      imgUrl: this.instructorForm.value.imgUrl,
-      title: this.instructorForm.value.title,
-      status: this.instructor?.status || false,
-      user: this.instructor?.user || {} as User
-    };
+    if (this.instructorId) {
+      // Actualizar instructor existente
+      const updatedInstructor: Instructor = {
+        idInstructor: this.instructorId,
+        imgUrl: this.instructorForm.value.imgUrl,
+        title: this.instructorForm.value.title,
+        status: this.instructorForm.value.status === 'true', // Convierte el string a booleano
+        user: this.instructor?.user.id
+      };
 
-    console.log('Instructor guardado:', updatedInstructor);
+      this.instructorService.updateById(this.instructorId, updatedInstructor).subscribe(() => {
+        console.log('Instructor guardado:', updatedInstructor);
 
-    // Mostrar el mensaje de "Usuario guardado" durante 3 segundos
-    this.snackBar.open('Usuario guardado', '', {
-      duration: 3000
-    });
+        // Mostrar el mensaje de "Usuario guardado" durante 3 segundos con opción de cerrar
+        this.snackBar.open('Usuario guardado', 'OK', {
+          duration: 3000
+        }).onAction().subscribe(() => {
+          this.dialogRef.close(true); // Cerrar el modal después de guardar
+        });
+      });
+    } else {
+      // Agregar nuevo instructor
+      const newInstructor: Instructor = {
+        idInstructor: '',
+        imgUrl: this.instructorForm.value.imgUrl,
+        title: this.instructorForm.value.title,
+        status: this.instructorForm.value.status === 'true', // Convierte el string a booleano
+        user: '' // El usuario se asigna en el backend
+      };
 
-    this.dialogRef.close(true); // Cerrar el modal después de guardar
+      this.instructorService.create(newInstructor).subscribe((instructor: Instructor) => {
+        console.log('Instructor creado:', instructor);
+
+        // Mostrar el mensaje de "Usuario guardado" durante 3 segundos con opción de cerrar
+        this.snackBar.open('Usuario guardado', 'OK', {
+          duration: 3000
+        }).onAction().subscribe(() => {
+          this.dialogRef.close(true); // Cerrar el modal después de guardar
+        });
+      });
+    }
   }
 
   closeModal(): void {

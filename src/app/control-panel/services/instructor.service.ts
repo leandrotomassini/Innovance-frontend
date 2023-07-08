@@ -38,6 +38,12 @@ export class InstructorService {
     return this.http.get<Instructor>(url);
   }
 
+  create(newInstructor: Instructor) {
+    const url = `${this.baseUrl}/instructor`;
+    const headers = this.getHeaders();
+    return this.http.post<Instructor>(url, newInstructor, { headers });
+  }
+
   updateById(id: string, updateInstructor: Instructor) {
     const url = `${this.baseUrl}/instructor/${id}`;
     const headers = this.getHeaders();

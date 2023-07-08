@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Editar instructor</h2>
+<h2 mat-dialog-title>{{ instructorId ? 'Editar' : 'Agregar nuevo' }} instructor</h2>
 
 <div mat-dialog-content>
   <form (ngSubmit)="saveInstructor()" [formGroup]="instructorForm">
@@ -9,11 +9,19 @@
 
     <mat-form-field class="full-width">
       <mat-label>URL de foto de perfil</mat-label>
-      <input matInput placeholder="URL completa de la foto (https://imgur.com/...)" formControlName="imgUrl">
+      <input matInput placeholder="URL completa de la foto (<https://imgur.com/>...)" formControlName="imgUrl">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="true">Activo</mat-option>
+        <mat-option value="false">Inactivo</mat-option>
+      </mat-select>
     </mat-form-field>
 
     <div class="button-row">
-      <button mat-button color="primary" type="submit">Guardar</button>
+      <button mat-button color="primary" type="submit">{{ instructorId ? 'Guardar' : 'Guardar nuevo' }}</button>
       <button mat-button (click)="closeModal()" type="button">Cerrar</button>
     </div>
   </form>

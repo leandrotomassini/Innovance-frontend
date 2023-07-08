@@ -5,5 +5,5 @@ export interface Instructor {
   imgUrl:       string;
   title:        string;
   status:       boolean;
-  user:         User;
+  user?:        any;
 }

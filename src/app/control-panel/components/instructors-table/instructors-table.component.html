@@ -8,6 +8,8 @@
   </div>
 </mat-form-field>
 
+<button mat-raised-button color="primary" (click)="openModal('')">Agregar nuevo</button>
+
 <table mat-table [dataSource]="filteredInstructors" class="mat-elevation-z8">
   <!-- Definición de columnas -->
   <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">

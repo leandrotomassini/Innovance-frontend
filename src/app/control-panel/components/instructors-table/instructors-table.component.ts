@@ -54,7 +54,13 @@ export class InstructorsTableComponent implements OnInit {
     dialogRef.componentInstance.instructorId = instructorId; // Asignar instructorId al componente hijo
 
     dialogRef.afterClosed().subscribe(result => {
-      // Aquí puedes realizar alguna acción después de que se cierre el diálogo
+      if (result) {
+        // Si se guardó correctamente, actualizar la lista de instructores
+        this.instructorService.findAll().subscribe((instructors: Instructor[]) => {
+          this.instructorsList = instructors;
+          this.applyFilter();
+        });
+      }
     });
   }
 }
