@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialogRef } from '@angular/material/dialog';
+
 import { InstructorService } from '../../services/instructor.service';
 import { Instructor } from '../../interfaces';
-import { MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/app/auth/interfaces';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-instructor-form',
@@ -14,77 +16,90 @@ import { User } from 'src/app/auth/interfaces';
 export class InstructorFormComponent implements OnInit {
   instructorId: string = '';
   instructor: Instructor | undefined;
+  users: User[] = [];
 
   instructorForm: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<InstructorFormComponent>,
     private instructorService: InstructorService,
+    private authService: AuthService,
     private fb: FormBuilder,
     private snackBar: MatSnackBar
   ) {
     this.instructorForm = this.fb.group({
       imgUrl: ['', [Validators.required]],
       title: ['', [Validators.required]],
-      status: ['', [Validators.required]],
+      status: [true],
+      user: ['', [Validators.required]]
     });
   }
 
   ngOnInit(): void {
-    if (this.instructorId) {
-      this.instructorService.findById(this.instructorId).subscribe((instructor: Instructor) => {
-        this.instructor = instructor;
-        this.instructorForm.patchValue({
-          imgUrl: instructor.imgUrl,
-          title: instructor.title,
-          status: instructor.status.toString(), // Convierte el booleano a string
+    this.authService.usersList().subscribe((users: User[]) => {
+      this.users = users;
+
+      if (this.instructorId) {
+        this.instructorService.findById(this.instructorId).subscribe((instructor: Instructor) => {
+          this.instructor = instructor;
+          this.instructorForm.patchValue({
+            imgUrl: instructor.imgUrl,
+            title: instructor.title,
+            status: instructor.status.toString(),
+            user: instructor.user?.id
+          });
         });
-      });
-    }
+      } else {
+        const instructorUser = this.authService.currentUser?.id;
+        if (instructorUser) {
+          const instructorIndex = this.users.findIndex(user => user.id === instructorUser);
+          if (instructorIndex !== -1) {
+            this.instructorForm.patchValue({
+              user: this.users[instructorIndex].id
+            });
+          }
+        }
+      }
+    });
   }
 
   saveInstructor() {
-    if (this.instructorId) {
-      // Actualizar instructor existente
-      const updatedInstructor: Instructor = {
-        idInstructor: this.instructorId,
-        imgUrl: this.instructorForm.value.imgUrl,
-        title: this.instructorForm.value.title,
-        status: this.instructorForm.value.status === 'true', // Convierte el string a booleano
-        user: this.instructor?.user.id
-      };
-
-      this.instructorService.updateById(this.instructorId, updatedInstructor).subscribe(() => {
-        console.log('Instructor guardado:', updatedInstructor);
-
-        // Mostrar el mensaje de "Usuario guardado" durante 3 segundos con opción de cerrar
-        this.snackBar.open('Usuario guardado', 'OK', {
-          duration: 3000
-        }).onAction().subscribe(() => {
-          this.dialogRef.close(true); // Cerrar el modal después de guardar
-        });
-      });
-    } else {
-      // Agregar nuevo instructor
-      const newInstructor: Instructor = {
-        idInstructor: '',
-        imgUrl: this.instructorForm.value.imgUrl,
-        title: this.instructorForm.value.title,
-        status: this.instructorForm.value.status === 'true', // Convierte el string a booleano
-        user: '' // El usuario se asigna en el backend
-      };
-
-      this.instructorService.create(newInstructor).subscribe((instructor: Instructor) => {
-        console.log('Instructor creado:', instructor);
-
-        // Mostrar el mensaje de "Usuario guardado" durante 3 segundos con opción de cerrar
-        this.snackBar.open('Usuario guardado', 'OK', {
-          duration: 3000
-        }).onAction().subscribe(() => {
-          this.dialogRef.close(true); // Cerrar el modal después de guardar
-        });
-      });
+    if (this.instructorForm.invalid) {
+      return;
     }
+
+    const formValue = this.instructorForm.value;
+
+    const instructor: Instructor = {
+      idInstructor: this.instructorId || '',
+      imgUrl: formValue.imgUrl,
+      title: formValue.title,
+      status: formValue.status === 'true',
+      user: formValue.user
+    };
+
+    const saveObservable = this.instructorId
+      ? this.instructorService.updateById(this.instructorId, instructor)
+      : this.instructorService.create(instructor);
+
+      saveObservable.subscribe({
+        next: () => {
+          this.snackBar.open('Instructor guardado', 'OK', {
+            duration: 3000
+          }).onAction().subscribe(() => {
+            this.dialogRef.close(true);
+          });
+          this.dialogRef.close(true); // Agregar esta línea
+        },
+        error: (error) => {
+          console.error('Error al guardar el instructor:', error);
+          this.snackBar.open('Error al guardar el instructor', 'OK', {
+            duration: 3000
+          });
+        }
+      });
+      
+      
   }
 
   closeModal(): void {
