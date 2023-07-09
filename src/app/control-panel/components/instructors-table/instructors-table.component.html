@@ -1,15 +1,17 @@
 <mat-form-field class="full-width">
-  
   <div class="search-input">
-    <input type="text" matInput placeholder="Buscar instructor..." class="search-text" [(ngModel)]="filterValue"
-      (input)="applyFilter()">
+    <input type="text" matInput placeholder="Buscar instructor..." class="search-text" [(ngModel)]="filterValue" (input)="applyFilter()">
     <button mat-icon-button class="search-icon" aria-label="Buscar">
       <mat-icon>search</mat-icon>
     </button>
   </div>
 </mat-form-field>
 
-<button mat-raised-button color="primary" (click)="openModal('')">Agregar nuevo</button>
+<button mat-stroked-button aria-label="Agregar nuevo instructor" (click)="openModal('')" class="mb-2">
+  <mat-icon>add</mat-icon> Crear nuevo instructor
+</button>
+
+
 
 <table mat-table [dataSource]="filteredInstructors" class="mat-elevation-z8">
   <!-- Definición de columnas -->
