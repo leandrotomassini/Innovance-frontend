@@ -30,8 +30,8 @@ export class InstructorFormComponent implements OnInit {
     this.instructorForm = this.fb.group({
       imgUrl: ['', [Validators.required]],
       title: ['', [Validators.required]],
-      status: [true],
-      user: ['', [Validators.required]]
+      user: ['', [Validators.required]],
+      status: [true]
     });
   }
 
@@ -45,8 +45,8 @@ export class InstructorFormComponent implements OnInit {
           this.instructorForm.patchValue({
             imgUrl: instructor.imgUrl,
             title: instructor.title,
-            status: instructor.status.toString(),
-            user: instructor.user?.id
+            user: instructor.user?.id,
+            status: instructor.status.toString() // Convertir el valor booleano a cadena de texto
           });
         });
       } else {
@@ -59,6 +59,7 @@ export class InstructorFormComponent implements OnInit {
             });
           }
         }
+        this.instructorForm.removeControl('status'); // Remover el control 'status' para un nuevo instructor
       }
     });
   }
@@ -70,26 +71,27 @@ export class InstructorFormComponent implements OnInit {
 
     const formValue = this.instructorForm.value;
 
-    const instructor: Instructor = {
-      idInstructor: this.instructorId || '',
+    let instructor: Partial<Instructor> = {
       imgUrl: formValue.imgUrl,
       title: formValue.title,
-      status: formValue.status === 'true',
       user: formValue.user
     };
 
-    const saveObservable = this.instructorId
-      ? this.instructorService.updateById(this.instructorId, instructor)
-      : this.instructorService.create(instructor);
+    if (this.instructorId) {
+      instructor = {
+        ...instructor,
+        idInstructor: this.instructorId,
+        status: formValue.status === 'true'
+      };
 
-      saveObservable.subscribe({
+      this.instructorService.updateById(this.instructorId, instructor as Instructor).subscribe({
         next: () => {
           this.snackBar.open('Instructor guardado', 'OK', {
             duration: 3000
           }).onAction().subscribe(() => {
             this.dialogRef.close(true);
           });
-          this.dialogRef.close(true); // Agregar esta línea
+          this.dialogRef.close(true);
         },
         error: (error) => {
           console.error('Error al guardar el instructor:', error);
@@ -98,8 +100,24 @@ export class InstructorFormComponent implements OnInit {
           });
         }
       });
-      
-      
+    } else {
+      this.instructorService.create(instructor as Instructor).subscribe({
+        next: () => {
+          this.snackBar.open('Instructor guardado', 'OK', {
+            duration: 3000
+          }).onAction().subscribe(() => {
+            this.dialogRef.close(true);
+          });
+          this.dialogRef.close(true);
+        },
+        error: (error) => {
+          console.error('Error al guardar el instructor:', error);
+          this.snackBar.open('Error al guardar el instructor', 'OK', {
+            duration: 3000
+          });
+        }
+      });
+    }
   }
 
   closeModal(): void {
