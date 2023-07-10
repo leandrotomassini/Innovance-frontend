@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StudioLayoutComponent } from './pages/studio-layout/studio-layout.component';
 import { CoursesComponent } from './pages/courses/courses.component';
 import { SchoolsComponent } from './pages/schools/schools.component';
+import { RoutesCoursesComponent } from './pages/routes-courses/routes-courses.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: 'escuelas',
         component: SchoolsComponent
+      },
+      {
+        path: 'rutas',
+        component: RoutesCoursesComponent
       },
       {
         path: '**',
