@@ -2,11 +2,27 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { StudioLayoutComponent } from './pages/studio-layout/studio-layout.component';
+import { CoursesComponent } from './pages/courses/courses.component';
+import { SchoolsComponent } from './pages/schools/schools.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: StudioLayoutComponent
+    component: StudioLayoutComponent,
+    children: [
+      {
+        path: 'cursos',
+        component: CoursesComponent
+      },
+      {
+        path: 'escuelas',
+        component: SchoolsComponent
+      },
+      {
+        path: '**',
+        redirectTo: ''
+      }
+    ]
   }
 ];
 

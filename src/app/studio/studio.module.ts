@@ -5,6 +5,7 @@ import { StudioRoutingModule } from './studio-routing.module';
 import { StudioLayoutComponent } from './pages/studio-layout/studio-layout.component';
 import { CoursesComponent } from './pages/courses/courses.component';
 import { SchoolsComponent } from './pages/schools/schools.component';
+import { MaterialModule } from '../material/material.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { SchoolsComponent } from './pages/schools/schools.component';
   ],
   imports: [
     CommonModule,
-    StudioRoutingModule
+    StudioRoutingModule,
+    MaterialModule
   ]
 })
 export class StudioModule { }

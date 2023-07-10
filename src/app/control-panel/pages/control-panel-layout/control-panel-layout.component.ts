@@ -16,7 +16,7 @@ export class ControlPanelLayoutComponent {
     { label: 'Usuarios', icon: 'groups', url: '/panel-control/usuarios' },
     { label: 'Instructores', icon: 'person_book', url: '/panel-control/instructores' },
     { label: 'Subscripciones', icon: 'price_change', url: '/panel-control/subscripciones' },
-    { label: 'Dashboard', icon: 'school', url: '/dashboard' },
+    { label: 'Dashboard', icon: 'apps', url: '/dashboard' },
   ];
 
   private authService = inject(AuthService);
