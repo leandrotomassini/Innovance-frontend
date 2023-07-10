@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>{{ courseId ? 'Editar' : 'Agregar nuevo' }} curso</h2>
+
+<div mat-dialog-content>
+  <form (ngSubmit)="saveCourse()" [formGroup]="courseForm">
+
+    <mat-form-field class="full-width">
+      <mat-label>Título</mat-label>
+      <input matInput placeholder="Título del curso" formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput placeholder="Descripción del curso" formControlName="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Slug</mat-label>
+      <input matInput placeholder="Slug del curso" formControlName="slug">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>URL del logo</mat-label>
+      <input matInput placeholder="URL completa del logo" formControlName="logo">
+    </mat-form-field>
+
+    <div class="button-row">
+      <button mat-button color="primary" type="submit">{{ courseId ? 'Guardar' : 'Guardar nuevo' }}</button>
+      <button mat-button (click)="closeModal()" type="button">Cerrar</button>
+    </div>
+  </form>
+</div>

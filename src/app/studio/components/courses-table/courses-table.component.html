@@ -1,1 +1,34 @@
-<p>courses-table works!</p>
+<mat-form-field class="full-width">
+  <div class="search-input">
+    <input type="text" matInput placeholder="Buscar curso..." class="search-text" [(ngModel)]="filterValue" (input)="applyFilter()">
+    <button mat-icon-button class="search-icon" aria-label="Buscar">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+</mat-form-field>
+
+<button mat-stroked-button aria-label="Agregar nuevo curso" (click)="openCourseForm('')" class="mb-2">
+  <mat-icon>add</mat-icon> Crear nuevo curso
+</button>
+
+<table mat-table [dataSource]="filteredCourses" class="mat-elevation-z8">
+  <!-- Definición de columnas -->
+  <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+    <th mat-header-cell *matHeaderCellDef>{{ columnLabels[column] }}</th>
+    <td mat-cell *matCellDef="let course" (click)="openCourseForm(course.id)" class="row-hover">
+      <ng-container *ngIf="column === 'logo'">
+        <img [src]="course.logo" alt="Logo" class="logo-img-small">
+      </ng-container>
+      <ng-container *ngIf="column === 'description'">
+        <div>{{ course.description | slice:0:50 }}{{ course.description.length > 50 ? '...' : '' }}</div>
+      </ng-container>
+      <ng-container *ngIf="column !== 'logo' && column !== 'description'">
+        {{ course[column] }}
+      </ng-container>
+    </td>
+  </ng-container>
+
+  <!-- Filas de la tabla -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
