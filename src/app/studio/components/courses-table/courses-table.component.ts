@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+
 
 import { Course } from '../../interfaces';
 import { CoursesService } from '../../services/courses.service';
-import { CourseFormComponent } from '../course-form/course-form.component';
 
 @Component({
   selector: 'app-courses-table',
@@ -28,7 +27,7 @@ export class CoursesTableComponent implements OnInit {
 
   constructor(
     private coursesService: CoursesService,
-    private dialog: MatDialog
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -53,14 +52,11 @@ export class CoursesTableComponent implements OnInit {
     }
   }
 
-  openCourseForm(courseId: string): void {
-    const dialogRef = this.dialog.open(CourseFormComponent, {
-      width: '600px',
-      data: { courseId }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+  openCourseForm(courseSlug: string): void {
+    if (courseSlug == '') {
+      this.router.navigateByUrl(`/studio/cursos/nuevo-curso`);
+    } else {
+      this.router.navigateByUrl(`/studio/cursos/${courseSlug}`);
+    }
   }
 }

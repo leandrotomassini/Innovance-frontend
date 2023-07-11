@@ -1,31 +1,41 @@
-<h2 mat-dialog-title>{{ courseId ? 'Editar' : 'Agregar nuevo' }} curso</h2>
+<div class="title-course-container">
+  <img [src]="courseForm.get('logo')?.value" *ngIf="courseForm.get('logo')?.value !==''" alt="Foto" class="course-logo-img">
+  <h2 mat-dialog-title>
+    {{ courseForm.get('title')?.value ? courseForm.get('title')?.value : 'Nuevo curso' }}
+  </h2>
+</div>
 
 <div mat-dialog-content>
   <form (ngSubmit)="saveCourse()" [formGroup]="courseForm">
 
     <mat-form-field class="full-width">
-      <mat-label>Título</mat-label>
-      <input matInput placeholder="Título del curso" formControlName="title">
+      <mat-label>Título del curso:</mat-label>
+      <input matInput placeholder="Título para el curso..." formControlName="title">
+      <mat-error *ngIf="courseForm.get('title')?.invalid && courseForm.get('title')?.touched">Ingrese un título válido</mat-error>
     </mat-form-field>
 
     <mat-form-field class="full-width">
-      <mat-label>Descripción</mat-label>
-      <textarea matInput placeholder="Descripción del curso" formControlName="description"></textarea>
+      <mat-label>Breve descripción del curso:</mat-label>
+      <textarea matInput placeholder="Descripción para el curso..." formControlName="description"></textarea>
+      <mat-error *ngIf="courseForm.get('description')?.invalid && courseForm.get('description')?.touched">Ingrese una descripción válida</mat-error>
     </mat-form-field>
 
     <mat-form-field class="full-width">
-      <mat-label>Slug</mat-label>
-      <input matInput placeholder="Slug del curso" formControlName="slug">
+      <mat-label>Slug:</mat-label>
+      <input matInput placeholder="URL para el curso, sin la barra diagonal '/', por ejemplo: 'historia-dinero'." formControlName="slug">
+      <mat-error *ngIf="courseForm.get('slug')?.invalid && courseForm.get('slug')?.touched">Ingrese un slug válido</mat-error>
+      <mat-hint *ngIf="courseForm.get('slug')?.touched && !courseForm.get('slug')?.invalid">Use solo letras normales y guiones (-)</mat-hint>
     </mat-form-field>
 
     <mat-form-field class="full-width">
-      <mat-label>URL del logo</mat-label>
-      <input matInput placeholder="URL completa del logo" formControlName="logo">
+      <mat-label>Logo url:</mat-label>
+      <input matInput placeholder="Puedes subir el logo del curso en este enlace (<https://imgur.com/>)..." formControlName="logo">
+      <mat-error *ngIf="courseForm.get('logo')?.invalid && courseForm.get('logo')?.touched">Ingrese una URL válida</mat-error>
+      <mat-hint *ngIf="courseForm.get('logo')?.touched && !courseForm.get('logo')?.invalid">Ingrese una URL válida</mat-hint>
     </mat-form-field>
 
     <div class="button-row">
-      <button mat-button color="primary" type="submit">{{ courseId ? 'Guardar' : 'Guardar nuevo' }}</button>
-      <button mat-button (click)="closeModal()" type="button">Cerrar</button>
+      <button mat-button color="primary" type="submit" [disabled]="courseForm.invalid">{{ courseSlug === 'nuevo-curso' ? 'Crear curso' : 'Actualizar curso' }}</button>
     </div>
   </form>
 </div>

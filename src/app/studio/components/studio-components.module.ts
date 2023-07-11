@@ -8,6 +8,9 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { RoutesTableComponent } from './routes-table/routes-table.component';
 import { SchoolTableComponent } from './school-table/school-table.component';
 import { CourseFormComponent } from './course-form/course-form.component';
+import { CourseLayoutComponent } from './course-layout/course-layout.component';
+import { CourseInstructorsComponent } from './course-instructors/course-instructors.component';
+import { CourseSectionsComponent } from './course-sections/course-sections.component';
 
 
 
@@ -16,12 +19,16 @@ import { CourseFormComponent } from './course-form/course-form.component';
     CoursesTableComponent,
     RoutesTableComponent,
     SchoolTableComponent,
-    CourseFormComponent
+    CourseFormComponent,
+    CourseLayoutComponent,
+    CourseInstructorsComponent,
+    CourseSectionsComponent
   ],
   exports: [
     CoursesTableComponent,
     RoutesTableComponent,
-    SchoolTableComponent
+    SchoolTableComponent,
+    CourseFormComponent
   ],
   imports: [
     CommonModule,

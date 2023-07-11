@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { enviroment } from 'src/environments/environments';
+import { enviroment } from '../../../environments/environments';
 import { Course } from '../interfaces';
-
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +35,11 @@ export class CoursesService {
 
   findById(id: string) {
     const url = `${this.baseUrl}/course/${id}`;
+    return this.http.get<Course>(url);
+  }
+
+  findBySlug(slug: string) {
+    const url = `${this.baseUrl}/course/slug/${slug}`;
     return this.http.get<Course>(url);
   }
 

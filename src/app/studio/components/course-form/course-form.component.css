@@ -1,0 +1,17 @@
+.full-width {
+  width: 100%;
+}
+
+.course-logo-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-bottom: 5px;
+}
+
+.title-course-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+}

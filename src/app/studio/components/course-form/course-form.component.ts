@@ -1,10 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 
+import { CoursesService } from '../../services';
 import { Course } from '../../interfaces';
-import { CoursesService } from '../../services/courses.service';
 
 @Component({
   selector: 'app-course-form',
@@ -12,86 +11,47 @@ import { CoursesService } from '../../services/courses.service';
   styleUrls: ['./course-form.component.css']
 })
 export class CourseFormComponent implements OnInit {
-  courseId: string = '';
+
+  @Input() courseSlug: string = '';
+
   courseForm: FormGroup;
+  course!: Course;
 
   constructor(
-    public dialogRef: MatDialogRef<CourseFormComponent>,
-    private coursesService: CoursesService,
     private fb: FormBuilder,
-    private snackBar: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) public data: { courseId: string }
+    private courseService: CoursesService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
-    this.courseId = data.courseId;
     this.courseForm = this.fb.group({
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      slug: ['', [Validators.required]],
+      slug: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\\\\\\\\\\\\\\\\-]+$/)]],
       logo: ['', [Validators.required]]
     });
   }
 
   ngOnInit(): void {
-    if (this.courseId) {
-      this.coursesService.findById(this.courseId).subscribe((course: Course) => {
-        this.courseForm.patchValue(course);
-      });
+    if (this.courseSlug !== 'nuevo-curso') {
+      this.courseService.findBySlug(this.courseSlug)
+        .subscribe((course) => {
+          this.course = course;
+          this.courseForm.patchValue(course);
+        });
     }
   }
 
-  saveCourse(): void {
-    if (this.courseForm.invalid) {
-      return;
-    }
-
-    const formValue = this.courseForm.value;
-
-    let course: Course = {
-      title: formValue.title,
-      description: formValue.description,
-      slug: formValue.slug,
-      logo: formValue.logo
-    };
-
-    if (this.courseId) {
-      course.id = this.courseId;
-      this.coursesService.updateById(this.courseId, course).subscribe({
-        next: () => {
-          this.snackBar.open('Curso guardado', 'OK', {
-            duration: 3000
-          }).onAction().subscribe(() => {
-            this.dialogRef.close(true);
-          });
-          this.dialogRef.close(true);
-        },
-        error: (error) => {
-          console.error('Error al guardar el curso:', error);
-          this.snackBar.open('Error al guardar el curso', 'OK', {
-            duration: 3000
-          });
-        }
+  saveCourse() {
+    const courseData = this.courseForm.value;
+    if (this.courseSlug !== 'nuevo-curso') {
+      this.courseService.updateById(this.courseSlug, courseData).subscribe(() => {
+        this.router.navigateByUrl(`/studio/cursos/${this.courseSlug}`);
       });
     } else {
-      this.coursesService.create(course).subscribe({
-        next: () => {
-          this.snackBar.open('Curso guardado', 'OK', {
-            duration: 3000
-          }).onAction().subscribe(() => {
-            this.dialogRef.close(true);
-          });
-          this.dialogRef.close(true);
-        },
-        error: (error) => {
-          console.error('Error al guardar el curso:', error);
-          this.snackBar.open('Error al guardar el curso', 'OK', {
-            duration: 3000
-          });
-        }
+      this.courseService.create(courseData).subscribe((newCourse) => {
+        this.router.navigateByUrl(`/studio/cursos/${newCourse.slug}`);
       });
     }
   }
 
-  closeModal(): void {
-    this.dialogRef.close(false);
-  }
 }
