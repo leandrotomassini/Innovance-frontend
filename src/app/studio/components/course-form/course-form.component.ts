@@ -44,14 +44,22 @@ export class CourseFormComponent implements OnInit {
   saveCourse() {
     const courseData = this.courseForm.value;
     if (this.courseSlug !== 'nuevo-curso') {
-      this.courseService.updateById(this.courseSlug, courseData).subscribe(() => {
-        this.router.navigateByUrl(`/studio/cursos/${this.courseSlug}`);
-      });
+      this.courseService.updateById(this.courseSlug, courseData)
+        .subscribe(() => {
+          this.router.navigate([`/studio/cursos/${this.courseSlug}`]);
+        });
     } else {
-      this.courseService.create(courseData).subscribe((newCourse) => {
-        this.router.navigateByUrl(`/studio/cursos/${newCourse.slug}`);
-      });
+      this.courseService.create(courseData)
+        .subscribe((newCourse) => {
+          this.router.navigateByUrl(`/studio/cursos/${newCourse.slug}`)
+            .then(() => {
+              window.location.reload();
+            });
+        });
     }
   }
 
+
 }
+
+

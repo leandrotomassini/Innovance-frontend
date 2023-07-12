@@ -10,10 +10,17 @@ export class CourseLayoutComponent implements OnInit {
 
   courseSlug: string = '';
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.courseSlug = this.activatedRoute.snapshot.params['slug'];
+  }
+
+  arrowBack() {
+    this.router.navigate(['/studio/cursos/']);
   }
 
 }
