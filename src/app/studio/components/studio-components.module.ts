@@ -22,7 +22,7 @@ import { CourseSectionsComponent } from './course-sections/course-sections.compo
     CourseFormComponent,
     CourseLayoutComponent,
     CourseInstructorsComponent,
-    CourseSectionsComponent
+    CourseSectionsComponent,
   ],
   exports: [
     CoursesTableComponent,

@@ -1,4 +1,4 @@
-import { User } from 'src/app/auth/interfaces';
+
 
 export interface Instructor {
   idInstructor?: string;

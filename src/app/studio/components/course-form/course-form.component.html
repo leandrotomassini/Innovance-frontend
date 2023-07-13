@@ -1,6 +1,6 @@
 <div class="title-course-container">
   <img [src]="courseForm.get('logo')?.value" *ngIf="courseForm.get('logo')?.value !==''" alt="Foto" class="course-logo-img">
-  <h2 mat-dialog-title>
+  <h2 mat-dialog-title style="text-align: center;">
     {{ courseForm.get('title')?.value ? courseForm.get('title')?.value : 'Nuevo curso' }}
   </h2>
 </div>

@@ -16,7 +16,7 @@
     </mat-card>
   </div>
 
-  <div class="col-12 md:col-12 lg:col-6">
+  <div class="col-12 md:col-12 lg:col-6" *ngIf="this.courseSlug !== 'nuevo-curso'">
     <mat-card>
       <mat-card-header class="p-3 d-flex align-items-center justify-content-center">
         <div class="mr-2">
@@ -31,7 +31,7 @@
       </mat-card-content>
     </mat-card>
 
-    <div class="col-12 md:col-12 lg:col-6">
+    <div class="col-12 md:col-12 lg:col-6" *ngIf="this.courseSlug !== 'nuevo-curso'">
       <mat-card>
         <mat-card-header class="p-3 d-flex align-items-center justify-content-center">
           <div class="mr-2">
