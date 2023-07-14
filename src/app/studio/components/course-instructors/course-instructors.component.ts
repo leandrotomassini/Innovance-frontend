@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseInstructorService } from '../../services/course-instructor.service';
 import { CourseInstructor } from '../../interfaces/course-instructor.interface';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-course-instructors',
@@ -14,7 +16,9 @@ export class CourseInstructorsComponent implements OnInit {
 
   columnLabels: { [key: string]: string } = {
     imgUrl: 'Foto',
-    fullName: 'Nombre Completo'
+    fullName: 'Nombre Completo',
+    title: 'Título',
+    action: 'Quitar instructor'
   };
 
   displayedColumns: string[] = Object.keys(this.columnLabels);
@@ -24,19 +28,16 @@ export class CourseInstructorsComponent implements OnInit {
   ngOnInit(): void {
     this.courseInstructorService
       .findByCourseId('4287d02c-f54c-4ed1-be13-b5a315fd34d5')
-      .subscribe(
-        (courseInstructors: CourseInstructor[]) => {
+      .subscribe({
+        next: (courseInstructors: CourseInstructor[]) => {
           this.courseInstructors = courseInstructors;
           this.filteredCourseInstructors = courseInstructors;
-          console.log(this.courseInstructors); // Mostrar courseInstructors en la consola
         },
-        (error: any) => {
-          // Manejar el error aquí
+        error: (error: any) => {
           console.log(error);
         }
-      );
+      });
   }
-
 
   applyFilter(): void {
     const filterText = this.filterValue.trim().toLowerCase();
@@ -45,8 +46,48 @@ export class CourseInstructorsComponent implements OnInit {
     } else {
       this.filteredCourseInstructors = this.courseInstructors.filter(
         (courseInstructor: CourseInstructor) =>
-          courseInstructor.instructor.user.fullName.toLowerCase().includes(filterText)
+          courseInstructor.instructor.user.fullName.toLowerCase().includes(filterText) ||
+          courseInstructor.instructor.title.toLowerCase().includes(filterText)
       );
     }
   }
+
+
+  addInstructor() {
+
+  }
+
+  removeInstructor(idCourseInstructor: string, fullName: string) {
+    Swal.fire({
+      title: '¿Estás seguro de quitarlo de este curso?',
+      html: `Se quitará al instructor <strong>${fullName}</strong>. ¿Deseas continuar?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.courseInstructorService.removeById(idCourseInstructor)
+          .subscribe({
+            next: () => {
+              this.courseInstructorService.findByCourseId('4287d02c-f54c-4ed1-be13-b5a315fd34d5')
+                .subscribe({
+                  next: (courseInstructors: CourseInstructor[]) => {
+                    this.courseInstructors = courseInstructors;
+                    this.filteredCourseInstructors = courseInstructors;
+                  },
+                  error: (error: any) => {
+                    console.log(error);
+                  }
+                });
+            },
+            error: (error: any) => {
+              console.log(error);
+            }
+          });
+      }
+    });
+  }
+
+
 }

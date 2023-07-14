@@ -11,6 +11,7 @@ import { CourseFormComponent } from './course-form/course-form.component';
 import { CourseLayoutComponent } from './course-layout/course-layout.component';
 import { CourseInstructorsComponent } from './course-instructors/course-instructors.component';
 import { CourseSectionsComponent } from './course-sections/course-sections.component';
+import { InstructorsCourseListAddComponent } from './instructors-course-list-add/instructors-course-list-add.component';
 
 
 
@@ -23,6 +24,7 @@ import { CourseSectionsComponent } from './course-sections/course-sections.compo
     CourseLayoutComponent,
     CourseInstructorsComponent,
     CourseSectionsComponent,
+    InstructorsCourseListAddComponent,
   ],
   exports: [
     CoursesTableComponent,

@@ -36,9 +36,9 @@ export class CourseInstructorService {
     return this.http.get<CourseInstructor[]>(url);
   }
 
-  findByCourseId(id: string) {
-    const url = `${this.baseUrl}/course-instructor/${id}`;
-    return this.http.get<CourseInstructor[]>(url); // Modificar el tipo de retorno a CourseInstructor[]
+  findByCourseId(idCourse: string) {
+    const url = `${this.baseUrl}/course-instructor/${idCourse}`;
+    return this.http.get<CourseInstructor[]>(url); 
   }
 
   findBySlug(slug: string) {
@@ -52,14 +52,14 @@ export class CourseInstructorService {
     return this.http.post<CourseInstructor>(url, newCourse, { headers });
   }
 
-  updateById(id: string, updateCourse: CourseInstructor) {
-    const url = `${this.baseUrl}/course-instructor/${id}`;
+  updateById(idCourseInstructor: string, updateCourse: CourseInstructor) {
+    const url = `${this.baseUrl}/course-instructor/${idCourseInstructor}`;
     const headers = this.getHeaders();
     return this.http.patch<CourseInstructor>(url, updateCourse, { headers });
   }
 
-  removeById(id: string) {
-    const url = `${this.baseUrl}/course-instructor/${id}`;
+  removeById(idCourseInstructor: string) {
+    const url = `${this.baseUrl}/course-instructor/${idCourseInstructor}`;
     const headers = this.getHeaders();
     return this.http.delete(url, { headers });
   }

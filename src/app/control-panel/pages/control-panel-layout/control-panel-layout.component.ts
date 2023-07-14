@@ -1,7 +1,5 @@
 import { Component, computed, effect, inject } from '@angular/core';
-import { Router } from '@angular/router';
 
-import { AuthStatus } from 'src/app/auth/interfaces';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({

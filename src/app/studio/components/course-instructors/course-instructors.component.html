@@ -1,9 +1,13 @@
 <mat-form-field class="full-width">
   <div class="search-input">
-    <input type="text" matInput placeholder="Buscar instructor..." class="search-text" [(ngModel)]="filterValue" (input)="applyFilter()">
+    <input type="text" matInput placeholder="Buscar instructores de este curso..." class="search-text" [(ngModel)]="filterValue"
+      (input)="applyFilter()">
     <button mat-icon-button class="search-icon" aria-label="Buscar">
       <mat-icon>search</mat-icon>
     </button>
+    <mat-icon [fontSet]="'material-icons-outlined'" (click)="addInstructor()" class="addButton">
+      add_circle
+    </mat-icon>
   </div>
 </mat-form-field>
 
@@ -16,7 +20,13 @@
         <img [src]="courseInstructor.instructor.imgUrl" alt="Foto" class="profile-img">
       </ng-container>
       <ng-container *ngIf="column === 'fullName'">
-        {{ courseInstructor.instructor.fullName }}
+        {{ courseInstructor.instructor.user.fullName }}
+      </ng-container>
+      <ng-container *ngIf="column === 'title'">
+        {{ courseInstructor.instructor.title }}
+      </ng-container>
+      <ng-container *ngIf="column === 'action'">
+        <mat-icon [fontSet]="'material-icons-outlined'" (click)="removeInstructor(courseInstructor.idCourseInstructor,  courseInstructor.instructor.user.fullName )">do_not_disturb_on</mat-icon>
       </ng-container>
     </td>
   </ng-container>
