@@ -38,7 +38,7 @@ export class CourseInstructorService {
 
   findByCourseId(idCourse: string) {
     const url = `${this.baseUrl}/course-instructor/${idCourse}`;
-    return this.http.get<CourseInstructor[]>(url); 
+    return this.http.get<CourseInstructor[]>(url);
   }
 
   findBySlug(slug: string) {
@@ -46,10 +46,16 @@ export class CourseInstructorService {
     return this.http.get<CourseInstructor>(url);
   }
 
-  create(newCourse: CourseInstructor) {
+  create(idCourse: string, idInstructor: string) {
     const url = `${this.baseUrl}/course-instructor`;
     const headers = this.getHeaders();
-    return this.http.post<CourseInstructor>(url, newCourse, { headers });
+
+    const body = {
+      course: idCourse,
+      instructor: idInstructor
+    };
+
+    return this.http.post<CourseInstructor>(url, body, { headers });
   }
 
   updateById(idCourseInstructor: string, updateCourse: CourseInstructor) {

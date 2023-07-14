@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs';
+
+import { CoursesService } from '../../services';
+
 
 @Component({
   selector: 'app-course-layout',
@@ -9,14 +13,26 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 export class CourseLayoutComponent implements OnInit {
 
   courseSlug: string = '';
+  idCourse: string = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private courseService: CoursesService
   ) { }
 
   ngOnInit(): void {
     this.courseSlug = this.activatedRoute.snapshot.params['slug'];
+
+    if (this.courseSlug !== 'nuevo-curso') {
+      this.courseService.findBySlug(this.courseSlug)
+        .pipe(
+          map(course => course.idCourse)
+        )
+        .subscribe(idCourse => {
+          this.idCourse = idCourse!;
+        });
+    }
   }
 
   arrowBack() {

@@ -1,11 +1,11 @@
 <mat-form-field class="full-width">
   <div class="search-input">
-    <input type="text" matInput placeholder="Buscar instructores de este curso..." class="search-text" [(ngModel)]="filterValue"
-      (input)="applyFilter()">
+    <input type="text" matInput placeholder="Buscar instructores de este curso..." class="search-text"
+      [(ngModel)]="filterValue" (input)="applyFilter()">
     <button mat-icon-button class="search-icon" aria-label="Buscar">
       <mat-icon>search</mat-icon>
     </button>
-    <mat-icon [fontSet]="'material-icons-outlined'" (click)="addInstructor()" class="addButton">
+    <mat-icon [fontSet]="'material-icons-outlined'" (click)="addInstructor(idCourse)" class="addButton">
       add_circle
     </mat-icon>
   </div>
@@ -13,7 +13,7 @@
 
 <table mat-table [dataSource]="filteredCourseInstructors" class="mat-elevation-z8">
   <!-- Definición de columnas -->
-  <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+  <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column" >
     <th mat-header-cell *matHeaderCellDef>{{ columnLabels[column] }}</th>
     <td mat-cell *matCellDef="let courseInstructor" class="row-hover">
       <ng-container *ngIf="column === 'imgUrl'">
@@ -26,7 +26,15 @@
         {{ courseInstructor.instructor.title }}
       </ng-container>
       <ng-container *ngIf="column === 'action'">
-        <mat-icon [fontSet]="'material-icons-outlined'" (click)="removeInstructor(courseInstructor.idCourseInstructor,  courseInstructor.instructor.user.fullName )">do_not_disturb_on</mat-icon>
+        <div class="icon-remove-container">
+          <mat-icon [fontSet]="'material-icons-outlined'"
+            (click)="removeInstructor(courseInstructor.idCourseInstructor,  courseInstructor.instructor.user.fullName )">
+            do_not_disturb_on
+          </mat-icon>
+          <span>
+            Quitar
+          </span>
+        </div>
       </ng-container>
     </td>
   </ng-container>

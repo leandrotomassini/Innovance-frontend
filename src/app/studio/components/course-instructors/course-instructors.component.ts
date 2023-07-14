@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { CourseInstructorService } from '../../services/course-instructor.service';
-import { CourseInstructor } from '../../interfaces/course-instructor.interface';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 
+import { CourseInstructorService } from '../../services/course-instructor.service';
+import { CourseInstructor } from '../../interfaces/course-instructor.interface';
+import { InstructorsCourseListAddComponent } from '../instructors-course-list-add/instructors-course-list-add.component';
 
 @Component({
   selector: 'app-course-instructors',
   templateUrl: './course-instructors.component.html',
   styleUrls: ['./course-instructors.component.css']
 })
-export class CourseInstructorsComponent implements OnInit {
+export class CourseInstructorsComponent implements OnInit, OnChanges {
+  @Input() idCourse: string = '';
   courseInstructors: CourseInstructor[] = [];
   filteredCourseInstructors: CourseInstructor[] = [];
   filterValue: string = '';
@@ -23,20 +26,33 @@ export class CourseInstructorsComponent implements OnInit {
 
   displayedColumns: string[] = Object.keys(this.columnLabels);
 
-  constructor(private courseInstructorService: CourseInstructorService) { }
+  constructor(
+    private courseInstructorService: CourseInstructorService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
-    this.courseInstructorService
-      .findByCourseId('4287d02c-f54c-4ed1-be13-b5a315fd34d5')
-      .subscribe({
-        next: (courseInstructors: CourseInstructor[]) => {
-          this.courseInstructors = courseInstructors;
-          this.filteredCourseInstructors = courseInstructors;
-        },
-        error: (error: any) => {
-          console.log(error);
-        }
-      });
+    this.loadData();
+  }
+
+  ngOnChanges(): void {
+    this.loadData();
+  }
+
+  loadData(): void {
+    if (this.idCourse) {
+      this.courseInstructorService
+        .findByCourseId(this.idCourse)
+        .subscribe({
+          next: (courseInstructors: CourseInstructor[]) => {
+            this.courseInstructors = courseInstructors;
+            this.filteredCourseInstructors = courseInstructors;
+          },
+          error: (error: any) => {
+            console.log(error);
+          }
+        });
+    }
   }
 
   applyFilter(): void {
@@ -52,9 +68,12 @@ export class CourseInstructorsComponent implements OnInit {
     }
   }
 
-
-  addInstructor() {
-
+  addInstructor(idCourse: string) {
+    this.dialog.open(InstructorsCourseListAddComponent, {
+      data: {
+        idCourse: idCourse
+      }
+    });
   }
 
   removeInstructor(idCourseInstructor: string, fullName: string) {
@@ -67,19 +86,11 @@ export class CourseInstructorsComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.courseInstructorService.removeById(idCourseInstructor)
+        this.courseInstructorService
+          .removeById(idCourseInstructor)
           .subscribe({
             next: () => {
-              this.courseInstructorService.findByCourseId('4287d02c-f54c-4ed1-be13-b5a315fd34d5')
-                .subscribe({
-                  next: (courseInstructors: CourseInstructor[]) => {
-                    this.courseInstructors = courseInstructors;
-                    this.filteredCourseInstructors = courseInstructors;
-                  },
-                  error: (error: any) => {
-                    console.log(error);
-                  }
-                });
+              this.loadData();
             },
             error: (error: any) => {
               console.log(error);
@@ -88,6 +99,4 @@ export class CourseInstructorsComponent implements OnInit {
       }
     });
   }
-
-
 }

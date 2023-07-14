@@ -32,4 +32,12 @@
   cursor: pointer;
 }
 
+.icon-remove-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.icon-remove-container span{
+  margin-left: 3px;
+}
