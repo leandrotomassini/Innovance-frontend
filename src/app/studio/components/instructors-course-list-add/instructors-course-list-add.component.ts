@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 
 import { InstructorService } from '../../../control-panel/services/instructor.service';
@@ -33,6 +34,7 @@ export class InstructorsCourseListAddComponent implements OnInit {
   constructor(
     private instructorService: InstructorService,
     private courseInstructorService: CourseInstructorService,
+    private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: { idCourse: string }
   ) { }
 
@@ -78,10 +80,21 @@ export class InstructorsCourseListAddComponent implements OnInit {
   }
 
   addInstructor(instructor: Instructor): void {
+    if (instructor.isSelected) {
+      return;
+    }
+
     const courseId = this.data.idCourse;
     this.courseInstructorService.create(courseId, instructor.idInstructor!)
       .subscribe(() => {
         instructor.isSelected = true;
+        this.showSnackBar('Instructor agregado al curso');
       });
+  }
+
+  showSnackBar(message: string): void {
+    this.snackBar.open(message, 'OK', {
+      duration: 3000
+    });
   }
 }

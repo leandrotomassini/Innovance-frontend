@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 
 import { CourseInstructorService } from '../../services/course-instructor.service';
@@ -69,10 +69,14 @@ export class CourseInstructorsComponent implements OnInit, OnChanges {
   }
 
   addInstructor(idCourse: string) {
-    this.dialog.open(InstructorsCourseListAddComponent, {
+    const dialogRef: MatDialogRef<InstructorsCourseListAddComponent> = this.dialog.open(InstructorsCourseListAddComponent, {
       data: {
         idCourse: idCourse
       }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.loadData();
     });
   }
 
