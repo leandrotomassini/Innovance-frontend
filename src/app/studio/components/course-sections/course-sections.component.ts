@@ -9,4 +9,8 @@ export class CourseSectionsComponent {
 
   panelOpenState = false;
 
+  constructor(
+    
+  ) { }
+
 }

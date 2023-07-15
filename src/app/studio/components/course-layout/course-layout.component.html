@@ -1,73 +1,77 @@
-<div class="grid p-3">
+<div class="container">
 
-  <div class="col-12 md:col-12 lg:col-6">
-    <mat-card>
-      <mat-card-header class="p-3 d-flex">
-        <div class="mr-2 arrow-back" (click)="arrowBack()">
-          <mat-icon matListItemIcon [fontSet]="'material-icons-outlined'">
-            arrow_back
-          </mat-icon>
-          Ver todos los cursos
-        </div>
-      </mat-card-header>
-      <mat-card-content>
-        <app-course-form [courseSlug]="courseSlug"></app-course-form>
-      </mat-card-content>
-    </mat-card>
-  </div>
+  <div class="grid p-3">
 
-  <div class="col-12 md:col-12 lg:col-6" *ngIf="this.courseSlug !== 'nuevo-curso'">
-    <mat-card>
-      <mat-card-header class="p-3 d-flex align-items-center justify-content-center">
-        <div class="mr-2">
-          <mat-icon matListItemIcon [fontSet]="'material-icons-outlined'">price_change</mat-icon>
-        </div>
-        <div>
-          <mat-card-title>Instructores del curso:</mat-card-title>
-        </div>
-      </mat-card-header>
-      <mat-card-content>
-        <app-course-instructors [idCourse]="idCourse"></app-course-instructors>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div>
+    <div class="col-12 md:col-12 lg:col-6">
+      <mat-card>
+        <mat-card-header class="p-3 d-flex">
+          <div class="mr-2 arrow-back" (click)="arrowBack()">
+            <mat-icon matListItemIcon [fontSet]="'material-icons-outlined'">
+              arrow_back
+            </mat-icon>
+            Ver todos los cursos
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          <app-course-form [courseSlug]="courseSlug"></app-course-form>
+        </mat-card-content>
+      </mat-card>
+    </div>
 
-
-
-<div class="grid p-3">
-
-  <div class="col-12 md:col-6 lg:col-6" *ngIf="this.courseSlug !== 'nuevo-curso'">
-    <mat-card>
-      <mat-card-header class="p-3 d-flex align-items-center justify-content-center">
-        <div class="mr-2">
-          <mat-icon matListItemIcon [fontSet]="'material-icons-outlined'">price_change</mat-icon>
-        </div>
-        <div>
-          <mat-card-title>Secciones:</mat-card-title>
-        </div>
-      </mat-card-header>
-      <mat-card-content>
-        <app-course-sections></app-course-sections>
-      </mat-card-content>
-    </mat-card>
+    <div class="col-12 md:col-12 lg:col-6" *ngIf="this.courseSlug !== 'nuevo-curso'">
+      <mat-card>
+        <mat-card-header class="p-3 d-flex align-items-center justify-content-center">
+          <div class="mr-2">
+            <mat-icon matListItemIcon [fontSet]="'material-icons-outlined'" class="icon-title">price_change</mat-icon>
+          </div>
+          <div>
+            <mat-card-title>Instructores del curso:</mat-card-title>
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          <app-course-instructors [idCourse]="idCourse"></app-course-instructors>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 
 
-  <div class=" col-12 md:col-6 lg:col-6" *ngIf="this.courseSlug !== 'nuevo-curso'">
-    <mat-card>
-      <mat-card-header class="p-3 d-flex align-items-center justify-content-center">
-        <div class="mr-2">
-          <mat-icon matListItemIcon [fontSet]="'material-icons-outlined'">price_change</mat-icon>
-        </div>
-        <div>
-          <mat-card-title>Vista previa:</mat-card-title>
-        </div>
-      </mat-card-header>
-      <mat-card-content>
-        <app-video-preview></app-video-preview>
-      </mat-card-content>
-    </mat-card>
+
+  <div class="grid p-3">
+
+    <div class="col-12 md:col-6 lg:col-6" *ngIf="this.courseSlug !== 'nuevo-curso'">
+      <mat-card>
+        <mat-card-header class="p-3 d-flex align-items-center justify-content-center">
+          <div class="mr-2">
+            <mat-icon matListItemIcon [fontSet]="'material-icons-outlined'" class="icon-title">list_alt</mat-icon>
+          </div>
+          <div>
+            <mat-card-title>Secciones:</mat-card-title>
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          <app-course-sections></app-course-sections>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+
+    <div class=" col-12 md:col-6 lg:col-6" *ngIf="this.courseSlug !== 'nuevo-curso'">
+      <mat-card>
+        <mat-card-header class="p-3 d-flex align-items-center justify-content-center">
+          <div class="mr-2">
+            <mat-icon matListItemIcon [fontSet]="'material-icons-outlined'" style="padding-top: 2.4px">play_circle</mat-icon>
+          </div>
+          <div>
+            <mat-card-title>Vista previa:</mat-card-title>
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          <app-video-preview></app-video-preview>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
   </div>
 
 </div>

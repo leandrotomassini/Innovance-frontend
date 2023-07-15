@@ -1,6 +1,14 @@
-.arrow-back{
+.arrow-back {
   display: flex;
   align-items: center;
   justify-content: left;
   cursor: pointer;
+}
+
+.container {
+  background-color: #121F3D;
+}
+
+.icon-title {
+  padding-top: 3px;
 }
