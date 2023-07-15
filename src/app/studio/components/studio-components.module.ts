@@ -12,6 +12,7 @@ import { CourseLayoutComponent } from './course-layout/course-layout.component';
 import { CourseInstructorsComponent } from './course-instructors/course-instructors.component';
 import { CourseSectionsComponent } from './course-sections/course-sections.component';
 import { InstructorsCourseListAddComponent } from './instructors-course-list-add/instructors-course-list-add.component';
+import { VideoPreviewComponent } from './video-preview/video-preview.component';
 
 
 
@@ -25,6 +26,7 @@ import { InstructorsCourseListAddComponent } from './instructors-course-list-add
     CourseInstructorsComponent,
     CourseSectionsComponent,
     InstructorsCourseListAddComponent,
+    VideoPreviewComponent,
   ],
   exports: [
     CoursesTableComponent,

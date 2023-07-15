@@ -31,9 +31,13 @@
       </mat-card-content>
     </mat-card>
   </div>
+</div>
 
 
-  <div class=" col-12 md:col-12 lg:col-12" *ngIf="this.courseSlug !== 'nuevo-curso'">
+
+<div class="grid p-3">
+
+  <div class="col-12 md:col-6 lg:col-6" *ngIf="this.courseSlug !== 'nuevo-curso'">
     <mat-card>
       <mat-card-header class="p-3 d-flex align-items-center justify-content-center">
         <div class="mr-2">
@@ -48,4 +52,22 @@
       </mat-card-content>
     </mat-card>
   </div>
+
+
+  <div class=" col-12 md:col-6 lg:col-6" *ngIf="this.courseSlug !== 'nuevo-curso'">
+    <mat-card>
+      <mat-card-header class="p-3 d-flex align-items-center justify-content-center">
+        <div class="mr-2">
+          <mat-icon matListItemIcon [fontSet]="'material-icons-outlined'">price_change</mat-icon>
+        </div>
+        <div>
+          <mat-card-title>Vista previa:</mat-card-title>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <app-video-preview></app-video-preview>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
 </div>
