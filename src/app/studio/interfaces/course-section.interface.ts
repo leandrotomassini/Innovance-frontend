@@ -1,5 +1,8 @@
 export interface CourseSection {
-  idSectionCourseVideo: string;
+  sectionCourseId: string;
+  sectionNumber: string;
+  title: string;
+  difficultyLevel: string;
   status: boolean;
-  updatedAt: Date;
+  panelOpenState: boolean;
 }

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { CoursesService } from '../../services';
-
 
 @Component({
   selector: 'app-course-layout',
@@ -38,5 +37,4 @@ export class CourseLayoutComponent implements OnInit {
   arrowBack() {
     this.router.navigate(['/studio/cursos/']);
   }
-
 }
