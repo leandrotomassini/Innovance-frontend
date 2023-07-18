@@ -1,4 +1,21 @@
-<mat-list-item>
-  1- Introducción
+<mat-list-item (click)="addVideo()">
+  <div class="btn-add-video">
+    <mat-icon>add</mat-icon>
+    <mat-card-subtitle>
+      Agregar un nuevo video
+    </mat-card-subtitle>
+  </div>
 </mat-list-item>
-<mat-divider></mat-divider>
+
+<div *ngFor="let video of videosSection">
+
+  <mat-list-item class="mat-list-item-container">
+    <div matListItemTitle>{{video.number}} - {{video.title}}</div>
+    <button mat-icon-button (click)="removeVideo()" matListItemMeta>
+      <mat-icon>do_not_disturb_on</mat-icon>
+    </button>
+  </mat-list-item>
+
+  <mat-divider></mat-divider>
+
+</div>

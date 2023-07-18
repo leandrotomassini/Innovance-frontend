@@ -1,0 +1,12 @@
+.mat-list-item-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.btn-add-video{
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

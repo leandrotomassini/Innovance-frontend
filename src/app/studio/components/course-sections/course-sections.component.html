@@ -5,13 +5,16 @@
       <mat-panel-title>
         {{ sectionCourse.sectionNumber}} - {{ sectionCourse.title}}
       </mat-panel-title>
-      <mat-panel-description>
+      <mat-panel-description class="panel-description-container">
         {{ sectionCourse.difficultyLevel}}
+        <div style="display: flex;align-items: center;" (click)="removeSection()">
+          <mat-icon>do_not_disturb_on</mat-icon>
+        </div>
       </mat-panel-description>
       <mat-divider></mat-divider>
     </mat-expansion-panel-header>
     <mat-list>
-      <app-course-video-list></app-course-video-list>
+      <app-course-video-list [sectionId]="sectionCourse.sectionCourseId"></app-course-video-list>
     </mat-list>
   </mat-expansion-panel>
 

@@ -37,7 +37,10 @@ export class CourseSectionsComponent implements OnInit, OnChanges {
           };
         });
         this.sectionsCourse.sort((a, b) => a.sectionNumber.localeCompare(b.sectionNumber));
-        console.log('Secciones del curso:', this.sectionsCourse);
       });
+  }
+
+  removeSection(){
+    console.log('borrar seccion')
   }
 }

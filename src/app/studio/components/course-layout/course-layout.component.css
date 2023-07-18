@@ -12,3 +12,11 @@
 .icon-title {
   padding-top: 3px;
 }
+
+.subtitle-container{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  justify-content: center;
+  margin-bottom: 1em;
+}

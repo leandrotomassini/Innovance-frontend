@@ -38,7 +38,7 @@ export class CourseVideoSectionService {
   }
 
   findBySectionId(sectionId: string) {
-    const url = `${this.baseUrl}/section-course-video/by-course-id/${sectionId}`;
+    const url = `${this.baseUrl}/section-course-video/by-section-id/${sectionId}`;
     return this.http.get<CourseVideoSection[]>(url);
   }
 
