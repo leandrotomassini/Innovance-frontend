@@ -1,3 +1,46 @@
-<p>
-  Section Form Component
-</p>
+<mat-card>
+  <mat-card-content>
+
+    <div class="title-course-container">
+      <h2 mat-dialog-title style="text-align: center;">
+        Nueva sección:
+      </h2>
+    </div>
+
+    <div mat-dialog-content>
+      <form (ngSubmit)="saveSection()" [formGroup]="sectionForm">
+
+        <mat-form-field>
+          <mat-label>Título de la sección:</mat-label>
+          <input matInput placeholder="Título de la sección..." formControlName="title">
+          <mat-error *ngIf="sectionForm.get('title')?.invalid && sectionForm.get('title')?.touched">Ingrese un título
+            válido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Número de sección:</mat-label>
+          <input matInput placeholder="Número de la sección..." formControlName="sectionNumber">
+          <mat-error
+            *ngIf="sectionForm.get('sectionNumber')?.invalid && sectionForm.get('sectionNumber')?.touched">Ingrese un
+            número válido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Nivel de dificultad:</mat-label>
+          <input matInput placeholder="Nivel de dificultad..." formControlName="difficultyLevel">
+          <mat-error
+            *ngIf="sectionForm.get('difficultyLevel')?.invalid && sectionForm.get('difficultyLevel')?.touched">Ingrese
+            un nivel de dificultad válido</mat-error>
+        </mat-form-field>
+
+
+        <div class="button-row">
+          <button mat-button color="primary" type="submit" [disabled]="sectionForm.invalid">
+            Guardar nueva sección
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>

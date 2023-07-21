@@ -16,31 +16,32 @@ export class CourseSectionsComponent implements OnInit, OnChanges {
   constructor(private courseSectionService: CourseSectionService) { }
 
   ngOnInit(): void {
-    if (this.courseId) {
-      this.fetchSectionsByCourseId();
-    }
+    this.fetchSectionsByCourseId(); // Actualizar las secciones al iniciar el componente
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['courseId'] && !changes['courseId'].isFirstChange()) {
-      this.fetchSectionsByCourseId();
+      this.fetchSectionsByCourseId(); // Actualizar la lista de secciones al cambiar el courseId
     }
   }
 
   fetchSectionsByCourseId(): void {
-    this.courseSectionService.findByCourseId(this.courseId)
-      .subscribe((sectionsCourse) => {
-        this.sectionsCourse = sectionsCourse.map((section) => {
-          return {
-            ...section,
-            panelOpenState: true
-          };
+    if (this.courseId !== '') {
+
+      this.courseSectionService.findByCourseId(this.courseId)
+        .subscribe((sectionsCourse) => {
+          this.sectionsCourse = sectionsCourse.map((section) => {
+            return {
+              ...section,
+              panelOpenState: true
+            };
+          });
+          this.sectionsCourse.sort((a, b) => a.sectionNumber.localeCompare(b.sectionNumber));
         });
-        this.sectionsCourse.sort((a, b) => a.sectionNumber.localeCompare(b.sectionNumber));
-      });
+    }
   }
 
-  removeSection(){
-    console.log('borrar seccion')
+  removeSection() {
+    console.log('borrar seccion');
   }
 }

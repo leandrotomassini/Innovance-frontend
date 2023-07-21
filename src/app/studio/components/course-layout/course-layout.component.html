@@ -35,8 +35,6 @@
     </div>
   </div>
 
-
-
   <div class="grid p-3">
 
     <div class="col-12 md:col-6 lg:col-6" *ngIf="this.courseSlug !== 'nuevo-curso'">
@@ -56,11 +54,10 @@
               Agregar una nueva sección
             </mat-card-subtitle>
           </div>
-          <app-course-sections [courseId]="idCourse"></app-course-sections>
+          <app-course-sections [courseId]="idCourse" #courseSections></app-course-sections>
         </mat-card-content>
       </mat-card>
     </div>
-
 
     <div class=" col-12 md:col-6 lg:col-6" *ngIf="this.courseSlug !== 'nuevo-curso'">
       <mat-card>
@@ -80,5 +77,4 @@
     </div>
 
   </div>
-
 </div>

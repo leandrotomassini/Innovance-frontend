@@ -43,10 +43,10 @@ export class CourseSectionService {
     return this.http.get<CourseSection[]>(url);
   }
 
-  create(newCourse: CourseSection) {
+  create(newCourseSection: CourseSection) {
     const url = `${this.baseUrl}/section-course`;
     const headers = this.getHeaders();
-    return this.http.post<CourseSection>(url, newCourse, { headers });
+    return this.http.post<CourseSection>(url, newCourseSection, { headers });
   }
 
   updateById(id: string, updateSectionCourse: CourseSection) {
