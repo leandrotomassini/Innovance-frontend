@@ -39,23 +39,7 @@
 
     <div class="col-12 md:col-6 lg:col-6" *ngIf="this.courseSlug !== 'nuevo-curso'">
       <mat-card>
-        <mat-card-header class="p-3 d-flex align-items-center justify-content-center">
-          <div class="mr-2">
-            <mat-icon matListItemIcon [fontSet]="'material-icons-outlined'" class="icon-title">list_alt</mat-icon>
-          </div>
-          <div>
-            <mat-card-title>Secciones:</mat-card-title>
-          </div>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="subtitle-container" (click)="addSection()">
-            <mat-icon>add</mat-icon>
-            <mat-card-subtitle>
-              Agregar una nueva sección
-            </mat-card-subtitle>
-          </div>
-          <app-course-sections [courseId]="idCourse" #courseSections></app-course-sections>
-        </mat-card-content>
+        <app-course-sections [courseId]="idCourse" #courseSections></app-course-sections>
       </mat-card>
     </div>
 

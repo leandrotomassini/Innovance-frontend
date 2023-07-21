@@ -1,21 +1,37 @@
-<mat-accordion [multi]="true">
-  <mat-expansion-panel *ngFor="let sectionCourse of sectionsCourse" [expanded]="sectionCourse.panelOpenState"
-    (opened)="sectionCourse.panelOpenState = true" (closed)="sectionCourse.panelOpenState = false">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{ sectionCourse.sectionNumber}} - {{ sectionCourse.title}}
-      </mat-panel-title>
-      <mat-panel-description class="panel-description-container">
-        {{ sectionCourse.difficultyLevel}}
-        <div style="display: flex;align-items: center;" (click)="removeSection()">
-          <mat-icon>do_not_disturb_on</mat-icon>
-        </div>
-      </mat-panel-description>
-      <mat-divider></mat-divider>
-    </mat-expansion-panel-header>
-    <mat-list>
-      <app-course-video-list [sectionId]="sectionCourse.sectionCourseId!"></app-course-video-list>
-    </mat-list>
-  </mat-expansion-panel>
+<mat-card-header class="p-3 d-flex align-items-center justify-content-center">
+  <div class="mr-2">
+    <mat-icon matListItemIcon [fontSet]="'material-icons-outlined'" class="icon-title">list_alt</mat-icon>
+  </div>
+  <div>
+    <mat-card-title>Secciones:</mat-card-title>
+  </div>
+</mat-card-header>
+<mat-card-content>
+  <div class="subtitle-container" (click)="addSection()">
+    <mat-icon>add</mat-icon>
+    <mat-card-subtitle>
+      Agregar una nueva sección
+    </mat-card-subtitle>
+  </div>
+  <mat-accordion [multi]="true">
+    <mat-expansion-panel *ngFor="let sectionCourse of sectionsCourse" [expanded]="sectionCourse.panelOpenState"
+      (opened)="sectionCourse.panelOpenState = true" (closed)="sectionCourse.panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ sectionCourse.sectionNumber}} - {{ sectionCourse.title}}
+        </mat-panel-title>
+        <mat-panel-description class="panel-description-container">
+          {{ sectionCourse.difficultyLevel}}
+          <div style="display: flex;align-items: center;" (click)="removeSection(sectionCourse.sectionCourseId!)">
+            <mat-icon>do_not_disturb_on</mat-icon>
+          </div>
+        </mat-panel-description>
+        <mat-divider></mat-divider>
+      </mat-expansion-panel-header>
+      <mat-list>
+        <app-course-video-list [sectionId]="sectionCourse.sectionCourseId!"></app-course-video-list>
+      </mat-list>
+    </mat-expansion-panel>
 
-</mat-accordion>
+  </mat-accordion>
+</mat-card-content>

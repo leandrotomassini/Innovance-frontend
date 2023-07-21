@@ -19,12 +19,12 @@ export class SectionFormComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { isNewSection: boolean, idCourse: string },
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<SectionFormComponent>, 
+    private dialogRef: MatDialogRef<SectionFormComponent>,
     private courseSectionService: CourseSectionService,
     private snackBar: MatSnackBar
   ) {
     this.sectionForm = this.fb.group({
-      sectionNumber: ['', [Validators.required]],
+      sectionNumber: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
       title: ['', [Validators.required]],
       difficultyLevel: ['', [Validators.required]]
     });

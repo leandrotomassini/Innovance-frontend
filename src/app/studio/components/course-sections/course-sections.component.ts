@@ -1,7 +1,10 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { CourseSectionService } from '../../services';
 import { CourseSection } from '../../interfaces';
+import { SectionFormComponent } from '../section-form/section-form.component';
 
 @Component({
   selector: 'app-course-sections',
@@ -13,21 +16,24 @@ export class CourseSectionsComponent implements OnInit, OnChanges {
   @Input() courseId: string = '';
   sectionsCourse: CourseSection[] = [];
 
-  constructor(private courseSectionService: CourseSectionService) { }
+  constructor(
+    private courseSectionService: CourseSectionService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
+  ) { }
 
   ngOnInit(): void {
-    this.fetchSectionsByCourseId(); // Actualizar las secciones al iniciar el componente
+    this.fetchSectionsByCourseId();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['courseId'] && !changes['courseId'].isFirstChange()) {
-      this.fetchSectionsByCourseId(); // Actualizar la lista de secciones al cambiar el courseId
+      this.fetchSectionsByCourseId();
     }
   }
 
   fetchSectionsByCourseId(): void {
     if (this.courseId !== '') {
-
       this.courseSectionService.findByCourseId(this.courseId)
         .subscribe((sectionsCourse) => {
           this.sectionsCourse = sectionsCourse.map((section) => {
@@ -41,7 +47,36 @@ export class CourseSectionsComponent implements OnInit, OnChanges {
     }
   }
 
-  removeSection() {
-    console.log('borrar seccion');
+  removeSection(idSecition: string) {
+    this.courseSectionService.removeById(idSecition)
+      .subscribe(resp => {
+        this.fetchSectionsByCourseId();
+        this.showSuccessToast('Sección borrada correctamente.');
+      });
+  }
+
+  addSection() {
+    const dialogRef = this.dialog.open(SectionFormComponent, {
+      data: {
+        isNewSection: true,
+        idCourse: this.courseId
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      this.fetchSectionsByCourseId();
+
+      if (result) {
+        this.showSuccessToast('Sección creada con éxito');
+      }
+
+    });
+  }
+
+  private showSuccessToast(message: string) {
+    this.snackBar.open(message, 'OK', {
+      duration: 3000
+    });
   }
 }

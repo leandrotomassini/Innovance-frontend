@@ -11,19 +11,20 @@
       <form (ngSubmit)="saveSection()" [formGroup]="sectionForm">
 
         <mat-form-field>
+          <mat-label>Número de sección:</mat-label>
+          <input matInput placeholder="Número de la sección..." formControlName="sectionNumber" >
+          <mat-error
+            *ngIf="sectionForm.get('sectionNumber')?.invalid && sectionForm.get('sectionNumber')?.touched">Ingrese un
+            número válido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
           <mat-label>Título de la sección:</mat-label>
           <input matInput placeholder="Título de la sección..." formControlName="title">
           <mat-error *ngIf="sectionForm.get('title')?.invalid && sectionForm.get('title')?.touched">Ingrese un título
             válido</mat-error>
         </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>Número de sección:</mat-label>
-          <input matInput placeholder="Número de la sección..." formControlName="sectionNumber">
-          <mat-error
-            *ngIf="sectionForm.get('sectionNumber')?.invalid && sectionForm.get('sectionNumber')?.touched">Ingrese un
-            número válido</mat-error>
-        </mat-form-field>
 
         <mat-form-field>
           <mat-label>Nivel de dificultad:</mat-label>

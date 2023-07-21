@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
 import { map } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { SectionFormComponent } from '../section-form/section-form.component';
 import { CoursesService } from '../../services';
 
 @Component({
@@ -21,8 +18,6 @@ export class CourseLayoutComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private courseService: CoursesService,
-    private dialog: MatDialog,
-    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -43,24 +38,5 @@ export class CourseLayoutComponent implements OnInit {
     this.router.navigate(['/studio/cursos/']);
   }
 
-  addSection() {
-    const dialogRef = this.dialog.open(SectionFormComponent, {
-      data: {
-        isNewSection: true,
-        idCourse: this.idCourse
-      }
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.showSuccessToast('Sección creada con éxito');
-      }
-    });
-  }
-
-  private showSuccessToast(message: string) {
-    this.snackBar.open(message, 'OK', {
-      duration: 3000
-    });
-  }
 }
