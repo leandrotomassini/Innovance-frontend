@@ -1,7 +1,7 @@
 export interface CourseVideo {
-  idVideo: string;
+  idVideo?: string;
   title: string;
   number: string;
   url: string;
-  status: boolean;
+  status?: boolean;
 }

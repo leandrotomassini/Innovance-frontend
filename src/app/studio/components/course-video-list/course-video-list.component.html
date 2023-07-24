@@ -10,7 +10,7 @@
 <div *ngFor="let video of videosSection">
 
   <mat-list-item class="mat-list-item-container">
-    <div matListItemTitle>{{video.number}} - {{video.title}}</div>
+    <div matListItemTitle>{{video.number}} - {{video.title | titlecase}}</div>
     <button mat-icon-button (click)="removeVideo()" matListItemMeta>
       <mat-icon>do_not_disturb_on</mat-icon>
     </button>

@@ -18,7 +18,7 @@
       (opened)="sectionCourse.panelOpenState = true" (closed)="sectionCourse.panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{ sectionCourse.sectionNumber}} - {{ sectionCourse.title}}
+          {{ sectionCourse.sectionNumber}} - {{ sectionCourse.title | titlecase}}
         </mat-panel-title>
         <mat-panel-description class="panel-description-container">
           {{ sectionCourse.difficultyLevel}}

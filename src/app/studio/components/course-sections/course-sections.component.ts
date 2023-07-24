@@ -56,7 +56,8 @@ export class CourseSectionsComponent implements OnInit, OnChanges {
   }
 
   addSection() {
-    const dialogRef = this.dialog.open(SectionFormComponent, {
+    const dialogRef = this.dialog.open(
+      SectionFormComponent, {
       data: {
         isNewSection: true,
         idCourse: this.courseId

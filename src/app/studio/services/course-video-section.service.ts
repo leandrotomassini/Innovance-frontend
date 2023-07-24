@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { enviroment } from 'src/environments/environments';
-import { CourseVideoSection } from '../interfaces';
+import { CourseVideoSection, CourseVideoSectionCreate } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +42,7 @@ export class CourseVideoSectionService {
     return this.http.get<CourseVideoSection[]>(url);
   }
 
-  create(newCourse: CourseVideoSection) {
+  create(newCourse: CourseVideoSectionCreate) {
     const url = `${this.baseUrl}/section-course-video`;
     const headers = this.getHeaders();
     return this.http.post<CourseVideoSection>(url, newCourse, { headers });

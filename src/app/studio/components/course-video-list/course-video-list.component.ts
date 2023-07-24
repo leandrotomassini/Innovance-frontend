@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { CourseVideoSectionService } from '../../services';
 import { CourseVideo, CourseVideoSection } from '../../interfaces';
+import { VideoFormComponent } from '../video-form/video-form.component';
 
 @Component({
   selector: 'app-course-video-list',
@@ -13,7 +16,11 @@ export class CourseVideoListComponent implements OnInit {
   @Input() sectionId: string = '';
   videosSection: CourseVideo[] = [];
 
-  constructor(private courseVideoSectionService: CourseVideoSectionService) { }
+  constructor(
+    private courseVideoSectionService: CourseVideoSectionService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar // Inyectamos el MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     this.fetchVideosBySectionId();
@@ -28,10 +35,23 @@ export class CourseVideoListComponent implements OnInit {
   }
 
   removeVideo() {
-    console.log('borrar video')
+    console.log('borrar video');
   }
 
   addVideo() {
-    console.log('nuevo video')
+    const dialogRef = this.dialog.open(
+      VideoFormComponent, {
+      data: {
+        isNewVideo: true,
+        idSection: this.sectionId
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.fetchVideosBySectionId();
+      this.snackBar.open('Video creado correctamente', 'OK', {
+        duration: 3000, 
+      });
+    });
   }
 }

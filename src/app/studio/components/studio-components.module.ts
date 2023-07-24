@@ -15,6 +15,7 @@ import { InstructorsCourseListAddComponent } from './instructors-course-list-add
 import { VideoPreviewComponent } from './video-preview/video-preview.component';
 import { CourseVideoListComponent } from './course-video-list/course-video-list.component';
 import { SectionFormComponent } from './section-form/section-form.component';
+import { VideoFormComponent } from './video-form/video-form.component';
 
 
 
@@ -31,6 +32,7 @@ import { SectionFormComponent } from './section-form/section-form.component';
     VideoPreviewComponent,
     CourseVideoListComponent,
     SectionFormComponent,
+    VideoFormComponent,
   ],
   exports: [
     CoursesTableComponent,
