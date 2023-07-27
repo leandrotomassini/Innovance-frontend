@@ -7,3 +7,9 @@
   justify-content: space-around;
   align-items: center;
 }
+
+.subtitle-container{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}

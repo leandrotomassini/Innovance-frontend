@@ -16,8 +16,7 @@ import { VideoPreviewComponent } from './video-preview/video-preview.component';
 import { CourseVideoListComponent } from './course-video-list/course-video-list.component';
 import { SectionFormComponent } from './section-form/section-form.component';
 import { VideoFormComponent } from './video-form/video-form.component';
-
-
+import { VideoPreviewService } from '../services';
 
 @NgModule({
   declarations: [
@@ -46,6 +45,7 @@ import { VideoFormComponent } from './video-form/video-form.component';
     RouterModule,
     ReactiveFormsModule,
     FormsModule
-  ]
+  ],
+  providers: [VideoPreviewService]
 })
 export class StudioComponentsModule { }

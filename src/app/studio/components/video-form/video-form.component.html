@@ -26,6 +26,22 @@
       </mat-error>
     </mat-form-field>
 
+    <mat-form-field>
+      <mat-label>Link:</mat-label>
+      <input matInput placeholder="Link del servidor del video..." formControlName="link">
+      <mat-error *ngIf="videoForm.get('difficultyLevel')?.invalid && videoForm.get('difficultyLevel')?.touched">
+        Ingrese un link válido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Descripción del video:</mat-label>
+      <textarea matInput placeholder="Breve descripción para el video..." formControlName="description"></textarea>
+      <mat-error *ngIf="videoForm.get('difficultyLevel')?.invalid && videoForm.get('difficultyLevel')?.touched">
+        Ingrese una descripción válida
+      </mat-error>
+    </mat-form-field>
+
 
     <div class="button-row">
       <button mat-button color="primary" type="submit" [disabled]="videoForm.invalid">
