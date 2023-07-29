@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import Swal from 'sweetalert2';
 
 import { CourseVideoSectionService } from '../../services';
 import { CourseVideo, CourseVideoSection } from '../../interfaces';
@@ -38,7 +39,31 @@ export class CourseVideoListComponent implements OnInit {
   }
 
   removeVideo(idVideo: string, number: string, title: string) {
-   
+    Swal.fire({
+      title: `¿Está seguro de borrar el video ${number} - ${title}?`,
+      text: 'Esta acción es irreversible.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, borrar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.courseVideoSectionService
+          .findBySectionId(this.sectionId)
+          .subscribe((videos: CourseVideoSection[]) => {
+            const videoInSection = videos.find((v) => v.videoCourse.idVideo === idVideo);
+            if (videoInSection) {
+              this.courseVideoSectionService.removeById(videoInSection.idSectionCourseVideo!)
+                .subscribe(() => {
+                  this.fetchVideosBySectionId();
+                  this.snackBar.open(`Video ${number} - ${title} removido de la sección correctamente.`, 'OK', {
+                    duration: 3000
+                  });
+                });
+            }
+          });
+      }
+    });
   }
 
   addVideo() {

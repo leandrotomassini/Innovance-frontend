@@ -21,7 +21,7 @@
           {{ sectionCourse.sectionNumber}} - {{ sectionCourse.title | titlecase}}
         </mat-panel-title>
         <mat-panel-description class="panel-description-container">
-          {{ sectionCourse.difficultyLevel}}
+          {{ sectionCourse.difficultyLevel | titlecase}}
           <div style="display: flex;align-items: center;"
             (click)="removeSection(sectionCourse.sectionCourseId!,sectionCourse.title, sectionCourse.sectionNumber)">
             <mat-icon>do_not_disturb_on</mat-icon>
