@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import Swal from 'sweetalert2';
 
 import { CourseSectionService } from '../../services';
 import { CourseSection } from '../../interfaces';
@@ -47,17 +48,27 @@ export class CourseSectionsComponent implements OnInit, OnChanges {
     }
   }
 
-  removeSection(idSecition: string) {
-    this.courseSectionService.removeById(idSecition)
-      .subscribe(resp => {
-        this.fetchSectionsByCourseId();
-        this.showSuccessToast('Sección borrada correctamente.');
-      });
+  removeSection(idSection: string, title: string, number: string) {
+    Swal.fire({
+      title: `¿Está seguro de borrar la sección ${number} - ${title}?`,
+      text: 'Esta acción no se puede deshacer.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.courseSectionService.removeById(idSection)
+          .subscribe(resp => {
+            this.fetchSectionsByCourseId();
+            this.showSuccessToast('Sección borrada correctamente.');
+          });
+      }
+    });
   }
 
   addSection() {
-    const dialogRef = this.dialog.open(
-      SectionFormComponent, {
+    const dialogRef = this.dialog.open(SectionFormComponent, {
       data: {
         isNewSection: true,
         idCourse: this.courseId
@@ -65,13 +76,11 @@ export class CourseSectionsComponent implements OnInit, OnChanges {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
       this.fetchSectionsByCourseId();
 
       if (result) {
         this.showSuccessToast('Sección creada con éxito');
       }
-
     });
   }
 

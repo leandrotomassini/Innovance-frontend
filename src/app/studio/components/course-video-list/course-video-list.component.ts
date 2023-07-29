@@ -20,8 +20,8 @@ export class CourseVideoListComponent implements OnInit {
     private courseVideoSectionService: CourseVideoSectionService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private videoPreviewService: VideoPreviewService
-  ) {}
+    private videoPreviewService: VideoPreviewService,
+  ) { }
 
   ngOnInit(): void {
     this.fetchVideosBySectionId();
@@ -37,8 +37,8 @@ export class CourseVideoListComponent implements OnInit {
       });
   }
 
-  removeVideo() {
-    console.log('borrar video');
+  removeVideo(idVideo: string, number: string, title: string) {
+   
   }
 
   addVideo() {
@@ -58,6 +58,6 @@ export class CourseVideoListComponent implements OnInit {
   }
 
   onVideoClick(videoId: string) {
-    this.videoPreviewService.videoPreviewClicked(videoId); 
+    this.videoPreviewService.videoPreviewClicked(videoId);
   }
 }

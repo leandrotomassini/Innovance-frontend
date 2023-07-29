@@ -22,7 +22,8 @@
         </mat-panel-title>
         <mat-panel-description class="panel-description-container">
           {{ sectionCourse.difficultyLevel}}
-          <div style="display: flex;align-items: center;" (click)="removeSection(sectionCourse.sectionCourseId!)">
+          <div style="display: flex;align-items: center;"
+            (click)="removeSection(sectionCourse.sectionCourseId!,sectionCourse.title, sectionCourse.sectionNumber)">
             <mat-icon>do_not_disturb_on</mat-icon>
           </div>
         </mat-panel-description>
