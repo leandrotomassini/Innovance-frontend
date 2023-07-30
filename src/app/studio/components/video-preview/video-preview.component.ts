@@ -45,12 +45,12 @@ export class VideoPreviewComponent implements OnDestroy {
   }
 
   editVideo(idVideo: string = '') {
-    console.log('edit video ' + idVideo + ' section id: ' + this.sectionId);
 
     const dialogRef = this.dialog.open(VideoFormComponent, {
       data: {
         isNewVideo: idVideo === '',
-        idSection: this.sectionId
+        idSection: this.sectionId,
+        idVideo: idVideo
       }
     });
 

@@ -21,7 +21,7 @@
     <mat-form-field>
       <mat-label>Titulo del video:</mat-label>
       <input matInput placeholder="Titulo para el video..." formControlName="title">
-      <mat-error *ngIf="videoForm.get('difficultyLevel')?.invalid && videoForm.get('difficultyLevel')?.touched">
+      <mat-error *ngIf="videoForm.get('title')?.invalid && videoForm.get('title')?.touched">
         Ingrese un titulo válido
       </mat-error>
     </mat-form-field>
@@ -29,7 +29,7 @@
     <mat-form-field>
       <mat-label>Link:</mat-label>
       <input matInput placeholder="Link del servidor del video..." formControlName="link">
-      <mat-error *ngIf="videoForm.get('difficultyLevel')?.invalid && videoForm.get('difficultyLevel')?.touched">
+      <mat-error *ngIf="videoForm.get('link')?.invalid && videoForm.get('link')?.touched">
         Ingrese un link válido
       </mat-error>
     </mat-form-field>
@@ -37,15 +37,16 @@
     <mat-form-field>
       <mat-label>Descripción del video:</mat-label>
       <textarea matInput placeholder="Breve descripción para el video..." formControlName="description"></textarea>
-      <mat-error *ngIf="videoForm.get('difficultyLevel')?.invalid && videoForm.get('difficultyLevel')?.touched">
+      <mat-error *ngIf="videoForm.get('description')?.invalid && videoForm.get('description')?.touched">
         Ingrese una descripción válida
       </mat-error>
     </mat-form-field>
 
 
     <div class="button-row">
+      <!-- Mostrar diferentes textos en el botón según si es un video nuevo o no -->
       <button mat-button color="primary" type="submit" [disabled]="videoForm.invalid">
-        Guardar nueva video
+        {{ data.isNewVideo ? 'Guardar nueva video' : 'Guardar cambios' }}
       </button>
     </div>
 
