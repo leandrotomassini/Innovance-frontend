@@ -3,3 +3,10 @@
   justify-content: center;
   align-items: center;
 }
+
+
+.editVideo{
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}

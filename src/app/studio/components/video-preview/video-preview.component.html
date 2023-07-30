@@ -6,7 +6,7 @@
       loading="lazy" style="border: none; width: 100%; height: 400px;" allowfullscreen="true"
       allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;">
     </iframe>
-    <mat-card-title>{{video.title | titlecase}}</mat-card-title>
+    <mat-card-title (click)="editVideo(video.idVideo)" class="editVideo">{{video.title | titlecase}} - <mat-icon>edit</mat-icon> Editar video</mat-card-title>
     <p>
      {{video.description}}
     </p>

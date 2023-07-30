@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { VideoPreviewService, CourseVideoService } from '../../services';
-import { CourseVideo } from '../../interfaces';
+import { CourseVideo, Data } from '../../interfaces';
 
 @Component({
   selector: 'app-video-preview',
@@ -10,8 +10,11 @@ import { CourseVideo } from '../../interfaces';
   styleUrls: ['./video-preview.component.css']
 })
 export class VideoPreviewComponent implements OnDestroy {
+
   private subscription: Subscription;
   videoId: string = '';
+  sectionId: string = '';
+
   video: CourseVideo = {
     number: '0',
     title: '',
@@ -26,15 +29,20 @@ export class VideoPreviewComponent implements OnDestroy {
     private courseVideoService: CourseVideoService
   ) {
     this.subscription = this.videoPreviewService.videoClicked$
-      .subscribe((videoId: string) => {
-        console.log('Video clicked in CourseVideoListComponent');
-        this.videoId = videoId;
-        this.courseVideoService.findById(videoId)
+      .subscribe((data: Data) => {
+        const { idVideo, idSection } = data;
+        this.videoId = idVideo;
+        this.sectionId = idSection;
+        this.courseVideoService.findById(idVideo)
           .subscribe(video => this.video = video);
       });
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  editVideo(idVideo: string = '') {
+    console.log('editar video ' + idVideo + ' section id: ' + this.sectionId);
   }
 }

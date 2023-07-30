@@ -1,3 +1,4 @@
+export { Data } from './data.interface';
 export { CourseVideoSection, CourseVideoSectionCreate } from './course-video-section.interface';
 export { CourseSection } from './course-section.interface';
 export { CourseVideo } from './course-video.interface';

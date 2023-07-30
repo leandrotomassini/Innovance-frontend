@@ -83,6 +83,6 @@ export class CourseVideoListComponent implements OnInit {
   }
 
   onVideoClick(videoId: string) {
-    this.videoPreviewService.videoPreviewClicked(videoId);
+    this.videoPreviewService.videoPreviewClicked(videoId, this.sectionId);
   }
 }
