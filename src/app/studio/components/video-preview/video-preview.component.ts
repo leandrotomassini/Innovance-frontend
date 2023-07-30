@@ -55,7 +55,8 @@ export class VideoPreviewComponent implements OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog closed:', result);
+      this.courseVideoService.findById(idVideo)
+        .subscribe(video => this.video = video);
     });
   }
 }
