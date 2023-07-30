@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Observer } from 'rxjs';
 
-import { CourseVideo, CourseVideoSection, CourseVideoSectionCreate } from '../../interfaces';
-import { CourseVideoSectionService, CourseVideoService } from '../../services';
+import { CourseVideo, CourseVideoSectionCreate } from '../../interfaces';
+import { CourseVideoService, CourseVideoSectionService } from '../../services';
 
 @Component({
   selector: 'app-video-form',
@@ -12,7 +12,6 @@ import { CourseVideoSectionService, CourseVideoService } from '../../services';
   styleUrls: ['./video-form.component.css']
 })
 export class VideoFormComponent {
-
   videoForm: FormGroup;
 
   videoCourse: CourseVideo = {
@@ -40,7 +39,6 @@ export class VideoFormComponent {
     private videoCourseSectionService: CourseVideoSectionService,
     private dialogRef: MatDialogRef<VideoFormComponent>
   ) {
-
     this.videoForm = this.fb.group({
       number: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
       url: ['', [Validators.required]],
@@ -48,7 +46,6 @@ export class VideoFormComponent {
       link: ['', [Validators.required]],
       description: ['', [Validators.required]],
     });
-
   }
 
   saveVideo() {
@@ -71,7 +68,6 @@ export class VideoFormComponent {
 
       this.videoCourseService.create(this.videoCourse)
         .subscribe(video => {
-
           this.courseVideoSectionCreate = {
             sectionCourse: this.data.idSection,
             videoCourse: video.idVideo!
@@ -85,6 +81,3 @@ export class VideoFormComponent {
     }
   }
 }
-
-
-

@@ -1,8 +1,10 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 
 import { VideoPreviewService, CourseVideoService } from '../../services';
 import { CourseVideo, Data } from '../../interfaces';
+import { VideoFormComponent } from '../video-form/video-form.component';
 
 @Component({
   selector: 'app-video-preview',
@@ -10,7 +12,6 @@ import { CourseVideo, Data } from '../../interfaces';
   styleUrls: ['./video-preview.component.css']
 })
 export class VideoPreviewComponent implements OnDestroy {
-
   private subscription: Subscription;
   videoId: string = '';
   sectionId: string = '';
@@ -26,7 +27,8 @@ export class VideoPreviewComponent implements OnDestroy {
 
   constructor(
     private videoPreviewService: VideoPreviewService,
-    private courseVideoService: CourseVideoService
+    private courseVideoService: CourseVideoService,
+    private dialog: MatDialog
   ) {
     this.subscription = this.videoPreviewService.videoClicked$
       .subscribe((data: Data) => {
@@ -43,6 +45,17 @@ export class VideoPreviewComponent implements OnDestroy {
   }
 
   editVideo(idVideo: string = '') {
-    console.log('editar video ' + idVideo + ' section id: ' + this.sectionId);
+    console.log('edit video ' + idVideo + ' section id: ' + this.sectionId);
+
+    const dialogRef = this.dialog.open(VideoFormComponent, {
+      data: {
+        isNewVideo: idVideo === '',
+        idSection: this.sectionId
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog closed:', result);
+    });
   }
 }
