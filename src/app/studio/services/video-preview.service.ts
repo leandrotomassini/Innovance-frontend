@@ -8,10 +8,10 @@ import { Data } from '../interfaces';
 export class VideoPreviewService {
 
   private videoClickedSubject = new Subject<Data>();
-  private videoEditCompletedSubject = new Subject<void>(); // Agregar un Subject para indicar que la edición se ha completado
+  private videoEditCompletedSubject = new Subject<void>(); 
 
   videoClicked$ = this.videoClickedSubject.asObservable();
-  videoEditCompleted$ = this.videoEditCompletedSubject.asObservable(); // Exponer el Observable para que otros componentes lo puedan escuchar
+  videoEditCompleted$ = this.videoEditCompletedSubject.asObservable(); 
 
   videoPreviewClicked(idVideo: string = '', idSection = '') {
     const data: Data = { idVideo, idSection };

@@ -10,9 +10,9 @@ import { CoursesService } from '../../services';
   styleUrls: ['./course-layout.component.css']
 })
 export class CourseLayoutComponent implements OnInit {
-
   courseSlug: string = '';
   idCourse: string = '';
+  refreshCourseVideos: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -38,5 +38,7 @@ export class CourseLayoutComponent implements OnInit {
     this.router.navigate(['/studio/cursos/']);
   }
 
-
+  onVideoUpdated() {
+    this.refreshCourseVideos = !this.refreshCourseVideos;
+  }
 }

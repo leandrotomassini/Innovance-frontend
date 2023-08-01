@@ -89,4 +89,8 @@ export class CourseSectionsComponent implements OnInit, OnChanges {
       duration: 3000
     });
   }
+
+  refreshVideos(){
+    this.fetchSectionsByCourseId();
+  }
 }

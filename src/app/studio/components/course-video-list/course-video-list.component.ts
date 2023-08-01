@@ -3,10 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
 
-import { CourseVideoSectionService } from '../../services';
+import { CourseVideoSectionService, VideoPreviewService } from '../../services';
 import { CourseVideo, CourseVideoSection } from '../../interfaces';
 import { VideoFormComponent } from '../video-form/video-form.component';
-import { VideoPreviewService } from '../../services';
 
 @Component({
   selector: 'app-course-video-list',
@@ -74,15 +73,17 @@ export class CourseVideoListComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      this.fetchVideosBySectionId();
-      this.snackBar.open('Video creado correctamente', 'OK', {
-        duration: 3000
+    dialogRef.afterClosed()
+      .subscribe(() => {
+        this.fetchVideosBySectionId();
+        this.snackBar.open('Video creado correctamente', 'OK', {
+          duration: 3000
+        });
       });
-    });
   }
 
   onVideoClick(videoId: string) {
     this.videoPreviewService.videoPreviewClicked(videoId, this.sectionId);
   }
+
 }

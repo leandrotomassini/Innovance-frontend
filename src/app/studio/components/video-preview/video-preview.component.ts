@@ -1,6 +1,6 @@
-import { Component, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 import { VideoPreviewService, CourseVideoService } from '../../services';
 import { CourseVideo, Data } from '../../interfaces';
@@ -12,6 +12,9 @@ import { VideoFormComponent } from '../video-form/video-form.component';
   styleUrls: ['./video-preview.component.css']
 })
 export class VideoPreviewComponent implements OnDestroy {
+  @Output() videoUpdated = new EventEmitter<void>();
+  @Output() mensajeClicked = new EventEmitter<void>();
+
   private subscription: Subscription;
   videoId: string = '';
   sectionId: string = '';
@@ -54,9 +57,18 @@ export class VideoPreviewComponent implements OnDestroy {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.courseVideoService.findById(idVideo)
-        .subscribe(video => this.video = video);
-    });
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        this.courseVideoService.findById(idVideo)
+          .subscribe(video => {
+            this.video = video;
+            this.videoUpdated.emit();
+          });
+      });
   }
+
+  addFile() {
+
+  }
+
 }

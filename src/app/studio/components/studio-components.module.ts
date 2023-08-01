@@ -17,6 +17,7 @@ import { CourseVideoListComponent } from './course-video-list/course-video-list.
 import { SectionFormComponent } from './section-form/section-form.component';
 import { VideoFormComponent } from './video-form/video-form.component';
 import { VideoPreviewService } from '../services';
+import { AttachedMaterialFormComponent } from './attached-material-form/attached-material-form.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { VideoPreviewService } from '../services';
     CourseVideoListComponent,
     SectionFormComponent,
     VideoFormComponent,
+    AttachedMaterialFormComponent,
   ],
   exports: [
     CoursesTableComponent,

@@ -2,35 +2,39 @@
 
   <mat-card>
     <mat-card-content class="preserve-line-breaks">
-    <iframe src="https://iframe.mediadelivery.net/embed/138804/7d5776e1-8fff-4e8a-8831-48a237fa823e?autoplay=true"
-      loading="lazy" style="border: none; width: 100%; height: 400px;" allowfullscreen="true"
-      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;">
-    </iframe>
-    <mat-card-title (click)="editVideo(video.idVideo)" class="editVideo">{{video.title | titlecase}} - <mat-icon>edit</mat-icon> Editar video</mat-card-title>
-    <p>
-     {{video.description}}
-    </p>
-  </mat-card-content>
-</mat-card>
+      <iframe src="https://iframe.mediadelivery.net/embed/138804/7d5776e1-8fff-4e8a-8831-48a237fa823e?autoplay=true"
+        loading="lazy" style="border: none; width: 100%; height: 400px;" allowfullscreen="true"
+        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;">
+      </iframe>
+      <mat-card-title (click)="editVideo(video.idVideo)" class="editVideo">{{video.title | titlecase}} -
+        <mat-icon>edit</mat-icon> Editar video</mat-card-title>
+      <p>
+        {{video.description}}
+      </p>
+    </mat-card-content>
+  </mat-card>
 
-<mat-card>
-  <mat-card-title>Material adjunto:</mat-card-title>
-  <mat-card-content>
-    <mat-list role="list">
-      <mat-list-item role="listitem">
-        <mat-icon>attach_file</mat-icon>
-        <a href="http://google.com" target="_blank">Archivo 1</a>
-      </mat-list-item>
-      <mat-list-item role="listitem">
-        <mat-icon>attach_file</mat-icon>
-        <a href="http://google.com" target="_blank">Archivo 2</a>
-      </mat-list-item>
-      <mat-list-item role="listitem">
-        <mat-icon>attach_file</mat-icon>
-        <a href="http://google.com" target="_blank">Archivo 3</a>
-      </mat-list-item>
-    </mat-list>
-  </mat-card-content>
-</mat-card>
-
+  <mat-card style="margin-top: .5em;">
+    <mat-card-header>
+      <mat-card-title>Material adjunto:</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list role="list">
+        <mat-list-item (click)="addFile()">
+          <div class="btn-add-file">
+            <mat-icon>add</mat-icon>
+            <mat-card-subtitle>
+              Agregar material adjunto
+            </mat-card-subtitle>
+          </div>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <div class="file-item">
+            <mat-icon>attach_file</mat-icon>
+            <a href="http://google.com" target="_blank">Archivo 1</a>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
 </div>

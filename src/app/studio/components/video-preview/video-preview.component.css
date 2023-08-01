@@ -10,3 +10,15 @@
   display: flex;
   align-items: center;
 }
+
+.file-item{
+  display: flex;
+  align-items: center;
+}
+
+.btn-add-file{
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
