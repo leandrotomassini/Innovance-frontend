@@ -18,12 +18,12 @@
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <span>Innovance</span>
+    <span (click)="goDashboard()" class="logo">Innovance</span>
     <span class="spacer"></span>
     <button mat-icon-button aria-label="Mensajes" [routerLink]="'/panel-control'">
       <mat-icon matBadgeColor="warn">timeline</mat-icon>
     </button>
-    <button mat-icon-button [routerLink]="'/dashboard'">
+    <button mat-icon-button [routerLink]="'/clases'">
       <mat-icon>apps</mat-icon>
     </button>
     <button mat-icon-button>

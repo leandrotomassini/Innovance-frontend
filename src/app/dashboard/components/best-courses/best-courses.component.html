@@ -1,13 +1,15 @@
-<h1>Los mejores cursos</h1>
+<h1>Cursos recomendados</h1>
 
 <div class="grid p-1">
 
 
-  <div class="col-12 md:col-4 lg:col-3">
+  <div class="col-12 md:col-4 lg:col-3" *ngFor="let course of courses">
     <mat-card class="card">
-      <img [src]="urlImg[0]" alt="Imagen de la tarjeta">
+      <img src="https://vz-dbd4257a-23a.b-cdn.net/734487cf-9186-4f00-a7fd-ff1b97a3ab2f/thumbnail.jpg?v=1693160984" alt="Imagen de la tarjeta">
       <mat-card-content>
         <div class="container-card">
+
+          <img [src]="course.logo" class="container-card__img" alt="course.title">
 
           <div class="subtitle">Subtítulo de la tarjeta</div>
 
@@ -20,56 +22,6 @@
     </mat-card>
   </div>
 
-  <div class="col-12 md:col-4 lg:col-3">
-    <mat-card class="card">
-      <img [src]="urlImg[2]" alt="Imagen de la tarjeta">
-      <mat-card-content>
-        <div class="container-card">
-
-          <div class="subtitle">Configuración y buenas prácticas de</div>
-
-          <button mat-icon-button class="button">
-            <mat-icon>play_arrow</mat-icon>
-          </button>
-        </div>
-
-      </mat-card-content>
-    </mat-card>
-  </div>
-
-  <div class="col-12 md:col-4 lg:col-3">
-    <mat-card class="card">
-      <img [src]="urlImg[0]" alt="Imagen de la tarjeta">
-      <mat-card-content>
-        <div class="container-card">
-
-          <div class="subtitle">Subtítulo de la tarjeta</div>
-
-          <button mat-icon-button class="button">
-            <mat-icon>play_arrow</mat-icon>
-          </button>
-        </div>
-
-      </mat-card-content>
-    </mat-card>
-  </div>
-
-  <div class="col-12 md:col-4 lg:col-3">
-    <mat-card class="card">
-      <img [src]="urlImg[1]" alt="Imagen de la tarjeta">
-      <mat-card-content>
-        <div class="container-card">
-
-          <div class="subtitle">Subtítulo de la tarjeta</div>
-
-          <button mat-icon-button class="button">
-            <mat-icon>play_arrow</mat-icon>
-          </button>
-        </div>
-
-      </mat-card-content>
-    </mat-card>
-  </div>
 
 
 </div>

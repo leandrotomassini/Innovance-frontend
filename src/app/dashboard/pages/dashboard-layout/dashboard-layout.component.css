@@ -5,7 +5,7 @@
 }
 
 .mat-toolbar {
-  background-color: #121F3D;
+  background-color: #141b1f;
   color: white;
   position: fixed;
   z-index: 2;
@@ -13,8 +13,8 @@
 }
 
 .container {
-  padding: 2%;
-  padding-top: 8%;
-  background-color: #121F3D;
+  height: auto;
+  padding-top: 80px;
+  background-color: #141b1f;
   color: white;
 }

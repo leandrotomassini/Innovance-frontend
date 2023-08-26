@@ -8,6 +8,7 @@ import { BestCoursesComponent } from './best-courses/best-courses.component';
 import { CoursesTakenComponent } from './courses-taken/courses-taken.component';
 import { MyRoutesComponent } from './my-routes/my-routes.component';
 import { SchoolsComponent } from './schools/schools.component';
+import { CourseVideoSeeComponent } from './course-video-see/course-video-see.component';
 
 
 
@@ -17,6 +18,7 @@ import { SchoolsComponent } from './schools/schools.component';
     MyRoutesComponent,
     BestCoursesComponent,
     SchoolsComponent,
+    CourseVideoSeeComponent,
   ],
   exports:[
     CoursesTakenComponent,

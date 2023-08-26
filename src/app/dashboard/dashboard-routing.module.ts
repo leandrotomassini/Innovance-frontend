@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardLayoutComponent } from './pages/dashboard-layout/dashboard-layout.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { CourseVideoSeeComponent } from './components/course-video-see/course-video-see.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
       {
         path: '',
         component: DashboardComponent
+      },
+      {
+        path: ':slug',
+        component: CourseVideoSeeComponent
       },
       {
         path: '**',

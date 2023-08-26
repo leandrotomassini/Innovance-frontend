@@ -1,5 +1,5 @@
 .card {
-  background-color: #24385B;
+  background-color: #212e36;
   color: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -12,7 +12,7 @@
 
 .card:hover {
   cursor: pointer;
-  background-color: #40587C;
+  background-color: #04599c;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
 }
 

@@ -18,6 +18,7 @@ export class VideoPreviewComponent implements OnDestroy {
   private subscription: Subscription;
   videoId: string = '';
   sectionId: string = '';
+  videoUrl: string = ``;
 
   video: CourseVideo = {
     number: '0',

@@ -2,10 +2,11 @@
 
   <mat-card>
     <mat-card-content class="preserve-line-breaks">
-      <iframe src="https://iframe.mediadelivery.net/embed/138804/7d5776e1-8fff-4e8a-8831-48a237fa823e?autoplay=true"
-        loading="lazy" style="border: none; width: 100%; height: 400px;" allowfullscreen="true"
-        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;">
-      </iframe>
+      <div style="position:relative;padding-top:56.25%;"><iframe
+          src="https://iframe.mediadelivery.net/embed/143477/d6be247f-e1fa-46fa-8806-e4a723da0732?autoplay=true&loop=false&muted=false&preload=true"
+          loading="lazy" style="border:none;position:absolute;top:0;height:100%;width:100%;"
+          allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe>
+      </div>
       <mat-card-title (click)="editVideo(video.idVideo)" class="editVideo">{{video.title | titlecase}} -
         <mat-icon>edit</mat-icon> Editar video</mat-card-title>
       <p>
