@@ -5,22 +5,14 @@
 }
 
 .mat-toolbar {
-  background-color: #141b1f;
+  background-color: #121F3D;
   color: white;
-  position: fixed;
-  z-index: 2;
+  border-bottom: 1px solid black;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .container {
   padding: 2%;
   padding-top: 8%;
-  background-color: #141b1f;
-  color: white;
-  height: 120%;
-}
-
-
-.logo{
-  cursor: pointer;
+  background-color: #121F3D;
 }

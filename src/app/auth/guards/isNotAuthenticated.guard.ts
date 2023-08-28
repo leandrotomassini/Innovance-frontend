@@ -9,7 +9,7 @@ export const isNotAuthenticatedGuard: CanActivateFn = async (route, state) => {
   const token = localStorage.getItem('token'); // Obtener el token del local storage
 
   if (token) {
-    router.navigate(['/clases']); // Redireccionar a /dashboard si hay un token
+    router.navigate(['/dashboard']); // Redireccionar a /dashboard si hay un token
     return false;
   } else {
     return true; // Permitir la navegación si no hay un token

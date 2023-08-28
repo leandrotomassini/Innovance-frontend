@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
@@ -10,21 +9,14 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 export class StudioLayoutComponent {
   public sidebarItems = [
     { label: 'Cursos', icon: 'subscriptions', url: '/studio/cursos' },
-    // { label: 'Escuelas', icon: 'school', url: '/studio/escuelas' },
-    // { label: 'Rutas', icon: 'route', url: '/studio/rutas' },
-    { label: 'Dashboard', icon: 'apps', url: '/clases' },
+    { label: 'Escuelas', icon: 'school', url: '/studio/escuelas' },
+    { label: 'Rutas', icon: 'route', url: '/studio/rutas' },
+    { label: 'Dashboard', icon: 'apps', url: '/dashboard' },
   ];
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) { }
+  constructor(private authService: AuthService) { }
 
   logout() {
     this.authService.logout();
-  }
-
-  goDashboard() {
-    this.router.navigate(['/clases']);
   }
 }

@@ -25,7 +25,7 @@ const routes: Routes = [
     loadChildren: () => import('./studio/studio.module').then(m => m.StudioModule)
   },
   {
-    path: 'clases',
+    path: 'dashboard',
     canActivate: [isAuthenticatedGuard],
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },
