@@ -29,7 +29,7 @@ export class LoginComponent {
 
     this.authService.login(email, password)
       .subscribe({
-        next: () => this.router.navigateByUrl('/dashboard'),
+        next: () => this.router.navigateByUrl('/clases'),
         error: (message) => {Swal.fire('Error', message, 'error');}
       });
   }
