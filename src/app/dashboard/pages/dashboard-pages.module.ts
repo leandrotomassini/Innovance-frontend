@@ -9,6 +9,7 @@ import { DashboardComponentsModule } from '../components/dashboard-components.mo
 import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SearchComponent } from './search/search.component';
+import { ViewCourseVideoComponent } from './view-course-video/view-course-video.component';
 
 
 
@@ -16,7 +17,8 @@ import { SearchComponent } from './search/search.component';
   declarations: [
     DashboardLayoutComponent,
     SearchComponent,
-    DashboardComponent
+    DashboardComponent,
+    ViewCourseVideoComponent
   ],
   exports: [
     DashboardLayoutComponent,
