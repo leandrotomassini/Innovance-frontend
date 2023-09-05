@@ -1,78 +1,149 @@
+/* Estilos para el slide-menu */
 .slide-menu {
+  align-items: center;
   background-color: #212E36;
-  height: 100%;
-  width: 50px;
-  padding: 20px;
-  position: fixed;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 100%;
+  padding: 20px;
   padding-top: 25px;
+  position: fixed;
+  width: 50px;
 }
 
 .slide-menu:hover {
-  width: 250px;
   align-items: start;
   padding-left: 10px;
+  width: 250px;
 }
 
-.slide-menu nav ul li {
-  list-style: none;
-  border-radius: 100%;
-  background-color: black;
-  width: 30px;
-  height: 30px;
-  margin-bottom: 1em;
-  display: flex;
+.slide-menu__icon {
+  color: white;
+}
+
+.slide-menu__item {
   align-items: center;
+  background-color: black;
+  border-radius: 100%;
+  display: flex;
+  height: 30px;
   justify-content: center;
+  margin-bottom: 1em;
+  width: 30px;
 }
 
+.slide-menu__item--active {
+  background-color: #8BC34A;
+}
 
+.slide-menu__nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.slide-menu__list {
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilos para container-view-course */
 .container-view-course {
   display: flex;
-  width: 100%;
   margin-top: 2em;
+  width: 100%;
 }
 
+/* Estilos para video-container */
 .video-container {
-  width: 70%;
   margin-left: 50px;
   padding-left: 20px;
   padding-right: 20px;
+  width: 70%;
 }
 
+/* Estilos para comentarios */
 .comments {
-  background-color: blueviolet;
-  width: 30%;
   padding: 20px;
+  width: 30%;
 }
 
-.video-description {
-  padding-top: 25px;
+.text-area-container {
+  margin-bottom: 20px;
 }
 
-.logo-course {
-  width: 55px;
-  height: 55px;
+.text-area-container textarea {
+  background-color: #03091E;
+  border-radius: 5px;
+  color: lightgray;
+  height: 100px;
+  width: 100%;
+}
+
+/* Estilos para header-video */
+.header-description {
+  display: flex;
+  flex-direction: column;
+  height: 50px;
+  justify-content: center;
+}
+
+.instructor-name-container {
+  display: flex;
+  align-items: center;
+}
+
+.instructor-name-container img {
+  width: 25px;
+  height: 25px;
   border-radius: 100%;
   margin-right: 10px;
 }
 
+.header-description h2,
+.header-description h3 {
+  margin: 0;
+}
 
 .header-video {
-  display: flex;
   align-items: center;
+  display: flex;
   padding-top: 15px;
 }
 
-.header-description{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 50px;
+.header-video__logo {
+  border-radius: 100%;
+  height: 55px;
+  margin-right: 10px;
+  width: 55px;
 }
 
-.header-description h2, h3{
+/* Estilos para instructor-name-container */
+.instructor-name-container {
+  align-items: center;
+  display: flex;
+}
+
+.instructor-name-container__img {
+  border-radius: 100%;
+  height: 25px;
+  margin-right: 10px;
+  width: 25px;
+}
+
+.instructor-name-container__name {
   margin: 0;
+}
+
+/* Estilos para card-comment */
+.card-comment {
+  background-color: #212E36;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  padding: 10px;
+  width: 100%;
+}
+
+/* Estilos para video-description */
+.video-description {
+  padding-top: 25px;
 }
