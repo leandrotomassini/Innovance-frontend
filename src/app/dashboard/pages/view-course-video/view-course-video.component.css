@@ -8,13 +8,8 @@
   padding: 20px;
   padding-top: 25px;
   position: fixed;
-  width: 50px;
-}
-
-.slide-menu:hover {
-  align-items: start;
-  padding-left: 10px;
-  width: 250px;
+  width: 70px;
+  transition: width 0.3s;
 }
 
 .slide-menu__icon {
@@ -44,6 +39,10 @@
 .slide-menu__list {
   margin: 0;
   padding: 0;
+}
+
+.slide-menu.expanded {
+  width: 250px;
 }
 
 /* Estilos para container-view-course */
@@ -119,13 +118,18 @@
 
 /* Estilos para video-description */
 .video-description {
+  margin-top: 20px;
   padding-top: 25px;
+  max-height: 300px;
+  overflow: auto;
 }
 
 /* Estilos para comentarios */
 .comments {
   padding: 20px;
   width: 30%;
+  max-height: 100vh;
+  overflow: auto;
 }
 
 .comments .text-area-container {

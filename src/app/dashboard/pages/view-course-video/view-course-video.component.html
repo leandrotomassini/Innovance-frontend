@@ -1,4 +1,5 @@
-<div class="slide-menu">
+<div class="slide-menu" [ngClass]="{'expanded': isMenuOpen}" (click)="closeSidenav()">
+  <button mat-button (click)="toggleSidenav($event)">Toggle Menu</button>
   <nav class="slide-menu__nav">
     <ul class="slide-menu__list">
       <li class="slide-menu__item slide-menu__item--active" style="background-color: #8BC34A;">1</li>
@@ -7,42 +8,11 @@
       <li class="slide-menu__item slide-menu__item--active" style="background-color: #8BC34A;">
         <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
       </li>
-      <li class="slide-menu__item slide-menu__item--active" style="background-color: #8BC34A;">4</li>
-      <li class="slide-menu__item">5</li>
-      <li class="slide-menu__item">6</li>
-      <li class="slide-menu__item">
-        <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
-      </li>
-      <li class="slide-menu__item">7</li>
-      <li class="slide-menu__item">8</li>
-      <li class="slide-menu__item">9</li>
-      <li class="slide-menu__item">
-        <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
-      </li>
-      <li class="slide-menu__item">7</li>
-      <li class="slide-menu__item">8</li>
-      <li class="slide-menu__item">9</li>
-      <li class="slide-menu__item">
-        <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
-      </li>
-      <li class="slide-menu__item">7</li>
-      <li class="slide-menu__item">8</li>
-      <li class="slide-menu__item">9</li>
-      <li class="slide-menu__item">
-        <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
-      </li>
-      <li class="slide-menu__item">7</li>
-      <li class="slide-menu__item">8</li>
-      <li class="slide-menu__item">9</li>
-      <li class="slide-menu__item">
-        <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
-      </li>
     </ul>
   </nav>
 </div>
 
-<div class="container-view-course">
-
+<div class="container-view-course" (click)="closeSidenav()">
   <div class="video-container">
     <div class="video-iframe">
       <video autoplay loop muted style="border: none; width: 100%;">
@@ -51,11 +21,9 @@
       </video>
     </div>
     <div class="header-video">
-
       <img
         src="https://static.platzi.com/cdn-cgi/image/width=768,quality=85,format=auto/media/achievements/badge-planeacion-financiera-01bfc531-c444-4af7-8cc7-a5935e91e8d2.png"
         class="header-video__logo" alt="">
-
       <div class="header-description">
         <h3>Nombre del curso</h3>
         <div class="instructor-name-container">
@@ -78,51 +46,67 @@
         atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
         atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>FIN Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>FIN Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>FIN Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>FIN Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>FIN Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
         atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
         atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>FIN Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>FIN Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>FIN Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>FIN Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>FIN Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
         atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
         atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>FIN Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>FIN Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>FIN Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>FIN Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>FIN Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
         atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
         atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>FIN Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
         atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>FIN Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
         atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>FIN Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
         atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>FIN Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
         atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>MUCHO FIN Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
+        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
         atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
 
     </div>
@@ -133,37 +117,42 @@
       <textarea></textarea>
     </div>
     <div class="comments-container">
-
       <div class="card-comment">
         <p>Complementario a el canvas de la propuesta de valor propuesto en el curso. Les recomiendo mucho ver el Scope
           Canvas. Platzi tiene un curso llamado Lean UX</p>
       </div>
-
       <div class="card-comment">
         <p>Complementario a el canvas de la propuesta de valor propuesto en el curso. Les recomiendo mucho ver el Scope
           Canvas. Platzi tiene un curso llamado Lean UX</p>
       </div>
-
       <div class="card-comment">
         <p>Complementario a el canvas de la propuesta de valor propuesto en el curso. Les recomiendo mucho ver el Scope
           Canvas. Platzi tiene un curso llamado Lean UX</p>
       </div>
-
       <div class="card-comment">
         <p>Complementario a el canvas de la propuesta de valor propuesto en el curso. Les recomiendo mucho ver el Scope
           Canvas. Platzi tiene un curso llamado Lean UX</p>
       </div>
-
       <div class="card-comment">
         <p>Complementario a el canvas de la propuesta de valor propuesto en el curso. Les recomiendo mucho ver el Scope
           Canvas. Platzi tiene un curso llamado Lean UX</p>
       </div>
-
       <div class="card-comment">
         <p>Complementario a el canvas de la propuesta de valor propuesto en el curso. Les recomiendo mucho ver el Scope
           Canvas. Platzi tiene un curso llamado Lean UX</p>
       </div>
-
+      <div class="card-comment">
+        <p>Complementario a el canvas de la propuesta de valor propuesto en el curso. Les recomiendo mucho ver el Scope
+          Canvas. Platzi tiene un curso llamado Lean UX</p>
+      </div>
+      <div class="card-comment">
+        <p>Complementario a el canvas de la propuesta de valor propuesto en el curso. Les recomiendo mucho ver el Scope
+          Canvas. Platzi tiene un curso llamado Lean UX</p>
+      </div>
+      <div class="card-comment">
+        <p>Complementario a el canvas de la propuesta de valor propuesto en el curso. Les recomiendo mucho ver el Scope
+          Canvas. Platzi tiene un curso llamado Lean UX</p>
+      </div>
       <div class="card-comment">
         <p>Complementario a el canvas de la propuesta de valor propuesto en el curso. Les recomiendo mucho ver el Scope
           Canvas. Platzi tiene un curso llamado Lean UX</p>
@@ -171,5 +160,4 @@
 
     </div>
   </div>
-
 </div>
