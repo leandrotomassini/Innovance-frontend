@@ -51,6 +51,7 @@
   display: flex;
   margin-top: 2em;
   width: 100%;
+  background-color: #141B1F;
 }
 
 /* Estilos para video-container */
@@ -59,24 +60,6 @@
   padding-left: 20px;
   padding-right: 20px;
   width: 70%;
-}
-
-/* Estilos para comentarios */
-.comments {
-  padding: 20px;
-  width: 30%;
-}
-
-.text-area-container {
-  margin-bottom: 20px;
-}
-
-.text-area-container textarea {
-  background-color: #03091E;
-  border-radius: 5px;
-  color: lightgray;
-  height: 100px;
-  width: 100%;
 }
 
 /* Estilos para header-video */
@@ -134,16 +117,33 @@
   margin: 0;
 }
 
-/* Estilos para card-comment */
-.card-comment {
+/* Estilos para video-description */
+.video-description {
+  padding-top: 25px;
+}
+
+/* Estilos para comentarios */
+.comments {
+  padding: 20px;
+  width: 30%;
+}
+
+.comments .text-area-container {
+  margin-bottom: 20px;
+}
+
+.comments .text-area-container textarea {
+  background-color: #03091E;
+  border-radius: 5px;
+  color: lightgray;
+  height: 100px;
+  width: 100%;
+}
+
+.comments .card-comment {
   background-color: #212E36;
   border-radius: 5px;
   margin-bottom: 30px;
   padding: 10px;
   width: 100%;
-}
-
-/* Estilos para video-description */
-.video-description {
-  padding-top: 25px;
 }
