@@ -1,5 +1,5 @@
 <mat-sidenav-container fullscreen>
-  <mat-sidenav #sidenav mode="push" [ngStyle]="{width: '250px'}">
+  <mat-sidenav #sidenav mode="push" [ngStyle]="{ width: '250px' }">
     <mat-toolbar>
       <span>Menú</span>
       <span class="spacer"></span>
@@ -9,8 +9,8 @@
     </mat-toolbar>
     <mat-nav-list>
       <mat-list-item *ngFor="let item of sidebarItems" [routerLink]="item.url" (click)="sidenav.toggle()">
-        <mat-icon matListItemIcon>{{item.icon}}</mat-icon>
-        {{item.label}}
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        {{ item.label }}
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
@@ -30,15 +30,15 @@
     </button>
 
     <button mat-icon-button aria-label="Mensajes" [routerLink]="'/panel-control'">
-      <mat-icon matBadgeColor="warn">timeline</mat-icon>
+      <mat-icon [matBadge]="messagesCount" matBadgeColor="warn" aria-hidden="false">timeline</mat-icon>
     </button>
 
     <button mat-icon-button aria-label="Mensajes">
-      <mat-icon  matBadge="4" matBadgeColor="warn">chat</mat-icon>
+      <mat-icon [matBadge]="chatCount" matBadgeColor="warn" aria-hidden="false">chat</mat-icon>
     </button>
 
     <button mat-icon-button aria-label="Notificaciones">
-      <mat-icon  matBadge="15" matBadgeColor="warn">notifications</mat-icon>
+      <mat-icon [matBadge]="notificationsCount" matBadgeColor="warn" aria-hidden="false">notifications</mat-icon>
     </button>
 
     <button mat-icon-button aria-label="Cerrar sesión" (click)="logout()">

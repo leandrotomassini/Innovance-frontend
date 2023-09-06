@@ -1,4 +1,12 @@
 .mat-toolbar {
-  background-color: #121F3D;
+  background-color: #141B1F;
   color: white;
+}
+
+
+.container {
+  padding: 2%;
+  padding-top: 8%;
+  background-color: #141B1F;
+  height: 100%;
 }

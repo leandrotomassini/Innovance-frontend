@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable } from 'rxjs';
 
 import { InstructorService } from '../../../control-panel/services/instructor.service';
 import { Instructor } from 'src/app/control-panel/interfaces';

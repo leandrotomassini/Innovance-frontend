@@ -181,3 +181,39 @@
   padding: 10px;
   width: 100%;
 }
+
+
+/* Media query para tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container-view-course{
+    flex-direction: column;
+  }
+
+  .video-container {
+    width: 95%;
+  }
+
+  .comments {
+    width: 95%;
+    padding-left: 10%;
+  }
+}
+
+/* Media query para pantallas pequeñas (celulares) */
+@media (max-width: 768px) {
+  .container-view-course{
+    flex-direction: column;
+  }
+
+  .video-container {
+    width: 90%;
+  }
+
+  .comments {
+    width: 93%;
+    padding-left: 25%;
+  }
+
+}
+
+
