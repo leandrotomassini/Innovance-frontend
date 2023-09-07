@@ -18,7 +18,9 @@ export class VideoFormComponent implements OnInit {
     title: '',
     link: '',
     description: '',
-    url: ''
+    url: '',
+    thumbnailUrl: '',
+    previewAnimation: ''
   };
   newVideoId: string = '';
 
@@ -26,7 +28,7 @@ export class VideoFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: {
       isNewVideo: boolean,
       idSection: string,
-      idVideo?: string // Make the idVideo optional here
+      idVideo?: string
     },
     private fb: FormBuilder,
     private videoCourseService: CourseVideoService,
@@ -40,6 +42,8 @@ export class VideoFormComponent implements OnInit {
       url: ['', [Validators.required]],
       title: ['', [Validators.required]],
       link: ['', [Validators.required]],
+      thumbnailUrl: ['', [Validators.required]],
+      previewAnimation: ['', [Validators.required]],
       description: ['', [Validators.required]]
     });
 
@@ -58,7 +62,9 @@ export class VideoFormComponent implements OnInit {
       title: this.videoCourse.title,
       url: this.videoCourse.url,
       link: this.videoCourse.link,
-      description: this.videoCourse.description
+      description: this.videoCourse.description,
+      thumbnailUrl: this.videoCourse.thumbnailUrl,
+      previewAnimation: this.videoCourse.previewAnimation
     });
   }
 

@@ -5,5 +5,7 @@ export interface CourseVideo {
   link: string;
   number: string;
   url: string;
+  thumbnailUrl: string;
+  previewAnimation: string;
   status?: boolean;
 }

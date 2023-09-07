@@ -35,12 +35,29 @@
     </mat-form-field>
 
     <mat-form-field>
+      <mat-label>Thumbnail link:</mat-label>
+      <input matInput placeholder="Link del Thumbnail del video..." formControlName="thumbnailUrl">
+      <mat-error *ngIf="videoForm.get('thumbnailUrl')?.invalid && videoForm.get('thumbnailUrl')?.touched">
+        Ingrese un link válido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Preview Animation link:</mat-label>
+      <input matInput placeholder="Link del Preview Animation del video..." formControlName="previewAnimation">
+      <mat-error *ngIf="videoForm.get('previewAnimation')?.invalid && videoForm.get('previewAnimation')?.touched">
+        Ingrese un link válido
+      </mat-error>
+    </mat-form-field>
+    
+    <mat-form-field>
       <mat-label>Descripción del video:</mat-label>
       <textarea matInput placeholder="Breve descripción para el video..." formControlName="description"></textarea>
       <mat-error *ngIf="videoForm.get('description')?.invalid && videoForm.get('description')?.touched">
         Ingrese una descripción válida
       </mat-error>
     </mat-form-field>
+
 
 
     <div class="button-row">

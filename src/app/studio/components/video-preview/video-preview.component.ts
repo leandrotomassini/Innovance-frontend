@@ -25,6 +25,8 @@ export class VideoPreviewComponent implements OnDestroy {
     url: '',
     link: '',
     description: '',
+    thumbnailUrl: '',
+    previewAnimation: '',
     status: false
   };
 
