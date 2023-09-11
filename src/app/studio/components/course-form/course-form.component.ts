@@ -29,7 +29,8 @@ export class CourseFormComponent implements OnInit {
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
       slug: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\\\\-]+$/)]],
-      logo: ['', [Validators.required]]
+      logo: ['', [Validators.required]],
+      frontPage: ['', [Validators.required]],
     });
   }
 

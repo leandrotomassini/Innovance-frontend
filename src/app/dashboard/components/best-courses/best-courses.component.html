@@ -3,13 +3,13 @@
 <div class="grid p-1">
 
 
-  <div class="col-12 md:col-4 lg:col-3">
+  <div class="col-12 md:col-4 lg:col-3" *ngFor="let course of courses">
     <mat-card class="card">
-      <img [src]="urlImg[0]" alt="Imagen de la tarjeta">
+      <img [src]="course.frontPage" alt="Imagen de la tarjeta">
       <mat-card-content>
         <div class="container-card">
 
-          <div class="subtitle">Subtítulo de la tarjeta</div>
+          <div class="subtitle">{{course.title}}</div>
 
           <button mat-icon-button class="button">
             <mat-icon>play_arrow</mat-icon>
@@ -20,6 +20,6 @@
     </mat-card>
   </div>
 
- 
+
 
 </div>

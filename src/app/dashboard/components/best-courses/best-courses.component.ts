@@ -1,16 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { CoursesService } from 'src/app/studio/services';
+import { Course } from 'src/app/studio/interfaces';
 
 @Component({
   selector: 'app-best-courses',
   templateUrl: './best-courses.component.html',
   styleUrls: ['./best-courses.component.css']
 })
-export class BestCoursesComponent {
+export class BestCoursesComponent implements OnInit {
 
-  urlImg: string[] = [
-    'https://static.platzi.com/cdn-cgi/image/width=768,quality=85,format=auto/https://mdstrm.com/thumbs/512e13acaca1ebcd2f000279/thumb_6008a32717f06b06ea1cbc9a_6008a32717f06b06ea1cbca6_93s.jpg',
-    'https://static.platzi.com/cdn-cgi/image/width=768,quality=85,format=auto/https://thumbs.cdn.mdstrm.com/thumbs/512e13acaca1ebcd2f000279/thumb_64106bc48e6d8708cb846241_64106bc48e6d8708cb84624c_44s.jpg',
-    'https://static.platzi.com/cdn-cgi/image/width=768,quality=85,format=auto/https://mdstrm.com/thumbs/512e13acaca1ebcd2f000279/thumb_5fecddef685ffb24261260a0_5fecddef685ffb24261260ad_51s.jpg',
-  ];
+  courses: Course[] = [];
+
+  constructor(private courseService: CoursesService) { }
+
+  ngOnInit(): void {
+    this.courseService.findAll()
+      .subscribe(courses => this.courses = courses);
+      
+  }
+
+
 
 }

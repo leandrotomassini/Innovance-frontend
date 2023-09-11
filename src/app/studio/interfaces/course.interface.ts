@@ -4,4 +4,5 @@ export interface Course {
   description: string;
   slug: string;
   logo: string;
+  frontPage: string;
 }
