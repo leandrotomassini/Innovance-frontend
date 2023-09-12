@@ -12,14 +12,20 @@ export class BestCoursesComponent implements OnInit {
 
   courses: Course[] = [];
 
-  constructor(private courseService: CoursesService) { }
+  constructor(
+    private courseService: CoursesService,
+    
+  ) { }
 
   ngOnInit(): void {
     this.courseService.findAll()
       .subscribe(courses => this.courses = courses);
-      
+
   }
 
+  viewCourse(slug: string, video: string) {
+    console.log('ver curso: /' + slug + '/' + video)
+  }
 
 
 }

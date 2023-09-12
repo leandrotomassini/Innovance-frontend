@@ -3,12 +3,12 @@
 <div class="grid p-1">
 
 
-  <div class="col-12 md:col-4 lg:col-3" *ngFor="let course of courses">
+  <div class="col-12 md:col-4 lg:col-3" *ngFor="let course of courses" (click)="viewCourse(course.slug, 'video')">
     <mat-card class="card">
       <img [src]="course.frontPage" alt="Imagen de la tarjeta">
       <mat-card-content>
         <div class="container-card">
-
+          <img [src]="course.logo" class="logo">
           <div class="subtitle">{{course.title}}</div>
 
           <button mat-icon-button class="button">

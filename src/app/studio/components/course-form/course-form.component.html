@@ -46,7 +46,7 @@
     <mat-form-field class="full-width">
       <mat-label>Link de la portada del curso:</mat-label>
       <input matInput placeholder="Puedes subir la portada del curso en este enlace (<https://imgur.com/>)..."
-        formControlName="logo">
+        formControlName="frontPage">
       <mat-error *ngIf="courseForm.get('frontPage')?.invalid && courseForm.get('frontPage')?.touched">Ingrese una URL
         válida</mat-error>
       <mat-hint *ngIf="courseForm.get('frontPage')?.touched && !courseForm.get('frontPage')?.invalid">Ingrese una URL

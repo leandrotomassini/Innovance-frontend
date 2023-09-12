@@ -61,6 +61,13 @@
   justify-content: space-around;
 }
 
+.logo{
+  width: 40px !important;
+  height: 40px !important;
+  margin-top: 13px;
+  margin-right: 10px;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
