@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Course } from 'src/app/studio/interfaces';
-import { CoursesService } from 'src/app/studio/services';
+import { Course, CourseSection } from 'src/app/studio/interfaces';
+import { CourseSectionService, CoursesService } from 'src/app/studio/services';
 
 @Component({
   selector: 'app-view-course-video',
   templateUrl: './view-course-video.component.html',
-  styleUrls: ['./view-course-video.component.css']
+  styleUrls: ['./view-course-video.component.css'],
 })
 export class ViewCourseVideoComponent implements OnInit {
-
   isMenuOpen = false;
   cursoSlug: string = '';
   slugVideo: string = '';
@@ -21,13 +20,16 @@ export class ViewCourseVideoComponent implements OnInit {
     logo: '',
     slug: '',
     title: '',
-    idCourse: ''
+    idCourse: '',
   };
+
+  sectionsCourse: CourseSection[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private coursesService: CoursesService
-  ) { }
+    private coursesService: CoursesService,
+    private sectionService: CourseSectionService
+  ) {}
 
   ngOnInit(): void {
     this.getInfoCourse();
@@ -49,10 +51,14 @@ export class ViewCourseVideoComponent implements OnInit {
       this.cursoSlug = params['slugCurso'];
       this.slugVideo = params['slugVideo'];
 
-      this.coursesService.findBySlug(this.cursoSlug)
-        .subscribe((course) => {
-          this.course = course;
-        });
+      this.coursesService.findBySlug(this.cursoSlug).subscribe((course) => {
+        this.course = course;
+        this.sectionService
+          .findByCourseId(course.idCourse!)
+          .subscribe((sections) => {
+            this.sectionsCourse = sections;
+          });
+      });
 
       console.log('Video:', this.slugVideo);
     });

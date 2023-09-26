@@ -2,72 +2,15 @@
   <button mat-button (click)="toggleSidenav($event)" class="slide-menu__button">Toggle Menu</button>
   <nav class="slide-menu__nav">
     <ul class="slide-menu__list">
-      <li class="slide-menu__item slide-menu__item--active" style="background-color: #8BC34A;">1</li>
-      <li class="slide-menu__item slide-menu__item--active" style="background-color: #8BC34A;">2</li>
-      <li class="slide-menu__item slide-menu__item--active" style="background-color: #8BC34A;">3</li>
-      <li class="slide-menu__item slide-menu__item--active" style="background-color: #8BC34A;">
-        <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
-      </li>
-      <li class="slide-menu__item slide-menu__item">1</li>
-      <li class="slide-menu__item slide-menu__item">2</li>
-      <li class="slide-menu__item slide-menu__item">3</li>
-      <li class="slide-menu__item slide-menu__item">
-        <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
-      </li>
-      <li class="slide-menu__item slide-menu__item">1</li>
-      <li class="slide-menu__item slide-menu__item">2</li>
-      <li class="slide-menu__item slide-menu__item">3</li>
-      <li class="slide-menu__item slide-menu__item">
-        <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
-      </li>
-      <li class="slide-menu__item slide-menu__item">1</li>
-      <li class="slide-menu__item slide-menu__item">2</li>
-      <li class="slide-menu__item slide-menu__item">3</li>
-      <li class="slide-menu__item slide-menu__item">
-        <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
-      </li>
-      <li class="slide-menu__item slide-menu__item">1</li>
-      <li class="slide-menu__item slide-menu__item">2</li>
-      <li class="slide-menu__item slide-menu__item">3</li>
-      <li class="slide-menu__item slide-menu__item">
-        <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
-      </li>
-      <li class="slide-menu__item slide-menu__item">1</li>
-      <li class="slide-menu__item slide-menu__item">2</li>
-      <li class="slide-menu__item slide-menu__item">3</li>
-      <li class="slide-menu__item slide-menu__item">
-        <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
-      </li>
-      <li class="slide-menu__item slide-menu__item">1</li>
-      <li class="slide-menu__item slide-menu__item">2</li>
-      <li class="slide-menu__item slide-menu__item">3</li>
-      <li class="slide-menu__item slide-menu__item">
-        <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
-      </li>
-      <li class="slide-menu__item slide-menu__item">1</li>
-      <li class="slide-menu__item slide-menu__item">2</li>
-      <li class="slide-menu__item slide-menu__item">3</li>
-      <li class="slide-menu__item slide-menu__item">
-        <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
-      </li>
-      <li class="slide-menu__item slide-menu__item">1</li>
-      <li class="slide-menu__item slide-menu__item">2</li>
-      <li class="slide-menu__item slide-menu__item">3</li>
-      <li class="slide-menu__item slide-menu__item">
-        <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
-      </li>
-      <li class="slide-menu__item slide-menu__item">1</li>
-      <li class="slide-menu__item slide-menu__item">2</li>
-      <li class="slide-menu__item slide-menu__item">3</li>
-      <li class="slide-menu__item slide-menu__item">
-        <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
-      </li>
-      <li class="slide-menu__item slide-menu__item">1</li>
-      <li class="slide-menu__item slide-menu__item">2</li>
-      <li class="slide-menu__item slide-menu__item">3</li>
-      <li class="slide-menu__item slide-menu__item">
-        <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
-      </li>
+      <div *ngFor="let section of sectionsCourse">
+        <li class="slide-menu__item slide-menu__item">
+          <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
+          <h4 class="title-section" *ngIf="isMenuOpen">{{section.title}}</h4>
+        </li>
+        <li class="slide-menu__item slide-menu__item">Video 1</li>
+        <li class="slide-menu__item slide-menu__item">Video 2</li>
+        <li class="slide-menu__item slide-menu__item">Video 3</li>
+      </div>
     </ul>
   </nav>
 </div>
@@ -81,9 +24,7 @@
       </video>
     </div>
     <div class="header-video">
-      <img
-        [src]="course.logo"
-        class="header-video__logo" alt="">
+      <img [src]="course.logo" class="header-video__logo" alt="">
       <div class="header-description">
         <h3>{{course.title}}</h3>
         <div class="instructor-name-container">
