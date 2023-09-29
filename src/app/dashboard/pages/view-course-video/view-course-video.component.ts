@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import {
@@ -21,7 +21,7 @@ import {
   templateUrl: './view-course-video.component.html',
   styleUrls: ['./view-course-video.component.css'],
 })
-export class ViewCourseVideoComponent implements OnInit {
+export class ViewCourseVideoComponent implements OnInit, AfterViewInit {
   isMenuOpen = false;
   cursoSlug: string = '';
   slugVideo: string = '';
@@ -51,16 +51,37 @@ export class ViewCourseVideoComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private coursesService: CoursesService,
     private sectionService: CourseSectionService,
     private videoSectionService: CourseVideoSectionService,
-    private courseVideoService: CourseVideoService,
     private instructorsCourse: CourseInstructorService,
     private sanitizer: DomSanitizer
   ) {}
 
-  ngOnInit(): void {
-    this.getInfoCourse();
+  ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.cursoSlug = params['slugCurso'];
+      this.slugVideo = params['slugVideo'];
+
+      this.coursesService.findBySlug(this.cursoSlug).subscribe((course) => {
+        this.course = course;
+        this.getInstructorsCourse();
+        this.sectionService
+          .findByCourseId(course.idCourse!)
+          .subscribe((sections) => {
+            this.sectionsCourse = sections;
+            this.loadVideosForSections();
+          });
+      });
+    });
+  }
+
+  ngAfterViewInit() {
+    // Llama a findFirstVideoBySlug después de cargar las secciones y videos
+    setTimeout(() => {
+      this.findFirstVideoBySlug(this.slugVideo);
+    }, 1000); // Ajusta el tiempo de espera según sea necesario
   }
 
   toggleSidenav(event: Event) {
@@ -74,26 +95,6 @@ export class ViewCourseVideoComponent implements OnInit {
     }
   }
 
-  getInfoCourse() {
-    this.route.params.subscribe((params) => {
-      this.cursoSlug = params['slugCurso'];
-      this.slugVideo = params['slugVideo'];
-
-      this.coursesService.findBySlug(this.cursoSlug).subscribe((course) => {
-        this.course = course;
-        this.sectionService
-          .findByCourseId(course.idCourse!)
-          .subscribe((sections) => {
-            this.sectionsCourse = sections;
-            this.loadVideosForSections();
-          });
-        this.getInstructorsCourse();
-      });
-
-      console.log('Video:', this.slugVideo);
-    });
-  }
-
   loadVideosForSections() {
     for (const section of this.sectionsCourse) {
       this.videoSectionService
@@ -104,10 +105,43 @@ export class ViewCourseVideoComponent implements OnInit {
     }
   }
 
-  viewVideo(idVideo: string) {
-    this.courseVideoService.findById(idVideo).subscribe((video) => {
-      this.courseVideo = video;
-    });
+  findVideoBySlug(slug: string) {
+    let routeCourse: string = '/clases/' + this.course.slug + '/' + slug;
+    this.router.navigateByUrl(routeCourse);
+
+    for (const section of this.sectionsCourse) {
+      if (section.videos) {
+        const foundVideo = section.videos.find((video) => video.url === slug);
+
+        if (foundVideo) {
+          this.courseVideo = foundVideo;
+          break;
+        }
+      }
+    }
+  }
+
+  findFirstVideoBySlug(slug: string) {
+    console.log('SECCIONES: ' + this.sectionsCourse);
+    const checkVideos = () => {
+      for (const section of this.sectionsCourse) {
+        console.log('VIDEOS: ' + section.videos);
+        if (section.videos) {
+          const foundVideo = section.videos.find((video) => video.url === slug);
+
+          if (foundVideo) {
+            this.courseVideo = foundVideo;
+            break;
+          }
+        }
+      }
+
+      if (!this.courseVideo) {
+        setTimeout(checkVideos, 1000);
+      }
+    };
+
+    checkVideos();
   }
 
   getInstructorsCourse() {

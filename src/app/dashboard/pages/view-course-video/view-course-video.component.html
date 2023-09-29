@@ -10,12 +10,12 @@
         <li *ngIf="section.videos && section.videos.length > 0">
           <div *ngFor="let video of section.videos">
             <ng-container *ngIf="isMenuOpen">
-              <div class="video-title-container" (click)="viewVideo(video.idVideo!)">
+              <div class="video-title-container" (click)="findVideoBySlug(video.url)">
                 {{video.number}} - {{video.title}}
               </div>
             </ng-container>
             <ng-container *ngIf="!isMenuOpen">
-              <div class="number-video slide-menu__icon" (click)="viewVideo(video.idVideo!)">
+              <div class="number-video slide-menu__icon" (click)="findVideoBySlug(video.url)">
                 {{video.number}}
               </div>
             </ng-container>
