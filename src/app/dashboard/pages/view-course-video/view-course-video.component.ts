@@ -78,7 +78,7 @@ export class ViewCourseVideoComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // Llama a findFirstVideoBySlug después de cargar las secciones y videos
+
     setTimeout(() => {
       this.findFirstVideoBySlug(this.slugVideo);
     }, 1000); // Ajusta el tiempo de espera según sea necesario
@@ -122,10 +122,8 @@ export class ViewCourseVideoComponent implements OnInit, AfterViewInit {
   }
 
   findFirstVideoBySlug(slug: string) {
-    console.log('SECCIONES: ' + this.sectionsCourse);
     const checkVideos = () => {
       for (const section of this.sectionsCourse) {
-        console.log('VIDEOS: ' + section.videos);
         if (section.videos) {
           const foundVideo = section.videos.find((video) => video.url === slug);
 
