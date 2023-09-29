@@ -1,10 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
-import { Course, CourseSection, CourseVideo } from 'src/app/studio/interfaces';
 import {
+  Course,
+  CourseInstructor,
+  CourseSection,
+  CourseVideo,
+} from 'src/app/studio/interfaces';
+import {
+  CourseInstructorService,
   CourseSectionService,
   CourseVideoSectionService,
+  CourseVideoService,
   CoursesService,
 } from 'src/app/studio/services';
 
@@ -18,6 +26,17 @@ export class ViewCourseVideoComponent implements OnInit {
   cursoSlug: string = '';
   slugVideo: string = '';
   videosList: CourseVideo[] = [];
+  instructorsCourseList: CourseInstructor[] = [];
+
+  courseVideo: CourseVideo = {
+    description: '',
+    link: '',
+    number: '',
+    previewAnimation: '',
+    thumbnailUrl: '',
+    title: '',
+    url: '',
+  };
 
   course: Course = {
     description: '',
@@ -34,7 +53,10 @@ export class ViewCourseVideoComponent implements OnInit {
     private route: ActivatedRoute,
     private coursesService: CoursesService,
     private sectionService: CourseSectionService,
-    private videoSectionService: CourseVideoSectionService
+    private videoSectionService: CourseVideoSectionService,
+    private courseVideoService: CourseVideoService,
+    private instructorsCourse: CourseInstructorService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -65,6 +87,7 @@ export class ViewCourseVideoComponent implements OnInit {
             this.sectionsCourse = sections;
             this.loadVideosForSections();
           });
+        this.getInstructorsCourse();
       });
 
       console.log('Video:', this.slugVideo);
@@ -79,5 +102,23 @@ export class ViewCourseVideoComponent implements OnInit {
           section.videos = videos.map((video) => video.videoCourse);
         });
     }
+  }
+
+  viewVideo(idVideo: string) {
+    this.courseVideoService.findById(idVideo).subscribe((video) => {
+      this.courseVideo = video;
+    });
+  }
+
+  getInstructorsCourse() {
+    this.instructorsCourse
+      .findByCourseId(this.course.idCourse!)
+      .subscribe((instructors) => {
+        this.instructorsCourseList = instructors;
+      });
+  }
+
+  getSafeHTMLContent(): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(this.courseVideo.link);
   }
 }

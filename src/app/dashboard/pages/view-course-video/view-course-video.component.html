@@ -10,12 +10,12 @@
         <li *ngIf="section.videos && section.videos.length > 0">
           <div *ngFor="let video of section.videos">
             <ng-container *ngIf="isMenuOpen">
-              <div class="video-title-container">
+              <div class="video-title-container" (click)="viewVideo(video.idVideo!)">
                 {{video.number}} - {{video.title}}
               </div>
             </ng-container>
             <ng-container *ngIf="!isMenuOpen">
-              <div class="number-video slide-menu__icon">
+              <div class="number-video slide-menu__icon" (click)="viewVideo(video.idVideo!)">
                 {{video.number}}
               </div>
             </ng-container>
@@ -29,28 +29,22 @@
 
 <div class="container-view-course" (click)="closeSidenav()">
   <div class="video-container">
-    <div class="video-iframe">
-      <video autoplay loop muted style="border: none; width: 100%;">
-        <source src="https://vz-29d20bbd-ca8.b-cdn.net/fe37c4d7-966c-41cf-bd93-901f7e9243c5/play_720p.mp4"
-          type="video/mp4">
-      </video>
-    </div>
+    <div [innerHTML]="getSafeHTMLContent()"></div>
     <div class="header-video">
       <img [src]="course.logo" class="header-video__logo" alt="">
       <div class="header-description">
         <h3>{{course.title}}</h3>
-        <div class="instructor-name-container">
-          <img
-            src="https://static.platzi.com/media/avatars/avatars/isisconvelo_e0c5509b-c68e-42ae-8b28-7c8744b4ba62.PNG"
-            alt="">
-          <h3>Isis García</h3>
+        <div class="instructors-container">
+          <div class="instructor-name-container" *ngFor="let instructor of instructorsCourseList">
+            <img [src]="instructor.instructor.imgUrl" alt="">
+            <h3>{{instructor.instructor.user.fullName}}</h3>
+          </div>
         </div>
       </div>
     </div>
     <div class="video-description">
-      <h1>Titulo de la descripcion</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
+      <h1>{{courseVideo.title}}</h1>
+      {{courseVideo.description}}
     </div>
   </div>
 

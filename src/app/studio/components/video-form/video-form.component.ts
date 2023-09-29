@@ -9,7 +9,7 @@ import { CourseVideoService, CourseVideoSectionService } from '../../services';
 @Component({
   selector: 'app-video-form',
   templateUrl: './video-form.component.html',
-  styleUrls: ['./video-form.component.css']
+  styleUrls: ['./video-form.component.css'],
 })
 export class VideoFormComponent implements OnInit {
   videoForm!: FormGroup;
@@ -20,21 +20,22 @@ export class VideoFormComponent implements OnInit {
     description: '',
     url: '',
     thumbnailUrl: '',
-    previewAnimation: ''
+    previewAnimation: '',
   };
   newVideoId: string = '';
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: {
-      isNewVideo: boolean,
-      idSection: string,
-      idVideo?: string
+    @Inject(MAT_DIALOG_DATA)
+    public data: {
+      isNewVideo: boolean;
+      idSection: string;
+      idVideo?: string;
     },
     private fb: FormBuilder,
     private videoCourseService: CourseVideoService,
     private videoCourseSectionService: CourseVideoSectionService,
     private dialogRef: MatDialogRef<VideoFormComponent>
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.videoForm = this.fb.group({
@@ -44,15 +45,14 @@ export class VideoFormComponent implements OnInit {
       link: ['', [Validators.required]],
       thumbnailUrl: ['', [Validators.required]],
       previewAnimation: ['', [Validators.required]],
-      description: ['', [Validators.required]]
+      description: ['', [Validators.required]],
     });
 
     if (!this.data.isNewVideo && this.data.idVideo) {
-      this.videoCourseService.findById(this.data.idVideo)
-        .subscribe((video) => {
-          this.videoCourse = video;
-          this.populateFormWithVideoData();
-        });
+      this.videoCourseService.findById(this.data.idVideo).subscribe((video) => {
+        this.videoCourse = video;
+        this.populateFormWithVideoData();
+      });
     }
   }
 
@@ -64,7 +64,7 @@ export class VideoFormComponent implements OnInit {
       link: this.videoCourse.link,
       description: this.videoCourse.description,
       thumbnailUrl: this.videoCourse.thumbnailUrl,
-      previewAnimation: this.videoCourse.previewAnimation
+      previewAnimation: this.videoCourse.previewAnimation,
     });
   }
 
@@ -72,15 +72,17 @@ export class VideoFormComponent implements OnInit {
     if (this.videoForm.valid) {
       const videoData = {
         ...this.videoCourse,
-        idVideo: undefined, // Eliminar la propiedad idVideo
-        status: undefined, // Eliminar la propiedad status
+        idVideo: undefined,
+        status: undefined,
       };
 
       videoData.number = this.videoForm.value.number;
       videoData.title = this.videoForm.value.title;
       videoData.url = this.videoForm.value.url;
       videoData.description = this.videoForm.value.description;
-      videoData.link = `https://iframe.mediadelivery.net/embed/138804/7d5776e1-8fff-4e8a-8831-48a237fa823e?autoplay=true`;
+      videoData.link = this.videoForm.value.link;
+      videoData.thumbnailUrl = this.videoForm.value.thumbnailUrl;
+      videoData.previewAnimation = this.videoForm.value.previewAnimation;
 
       const observer: Observer<CourseVideo> = {
         next: (updatedVideo: CourseVideo) => {
@@ -89,22 +91,25 @@ export class VideoFormComponent implements OnInit {
         error: (error: any) => {
           console.error('Error updating video:', error);
         },
-        complete: () => { }
+        complete: () => {},
       };
 
       if (this.data.isNewVideo) {
         this.videoCourseService.create(videoData).subscribe((video) => {
           const courseVideoSectionCreate: CourseVideoSectionCreate = {
             sectionCourse: this.data.idSection,
-            videoCourse: video.idVideo!
+            videoCourse: video.idVideo!,
           };
 
-          this.videoCourseSectionService.create(courseVideoSectionCreate).subscribe(() => {
-            this.dialogRef.close();
-          });
+          this.videoCourseSectionService
+            .create(courseVideoSectionCreate)
+            .subscribe(() => {
+              this.dialogRef.close();
+            });
         });
       } else {
-        this.videoCourseService.updateById(this.data.idVideo!, videoData)
+        this.videoCourseService
+          .updateById(this.data.idVideo!, videoData)
           .subscribe(() => {
             this.dialogRef.close();
           });

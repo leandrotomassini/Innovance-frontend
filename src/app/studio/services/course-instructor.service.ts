@@ -5,20 +5,13 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { enviroment } from 'src/environments/environments';
 import { CourseInstructor } from '../interfaces/course-instructor.interface';
 
-
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CourseInstructorService {
-
   private readonly baseUrl: string = enviroment.baseUrl;
 
-  constructor(
-    private http: HttpClient,
-    private authService: AuthService
-  ) { }
-
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
@@ -52,7 +45,7 @@ export class CourseInstructorService {
 
     const body = {
       course: idCourse,
-      instructor: idInstructor
+      instructor: idInstructor,
     };
 
     return this.http.post<CourseInstructor>(url, body, { headers });
@@ -69,5 +62,4 @@ export class CourseInstructorService {
     const headers = this.getHeaders();
     return this.http.delete(url, { headers });
   }
-
 }
