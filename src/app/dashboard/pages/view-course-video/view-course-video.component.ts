@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Course, CourseSection } from 'src/app/studio/interfaces';
-import { CourseSectionService, CoursesService } from 'src/app/studio/services';
+import { Course, CourseSection, CourseVideo } from 'src/app/studio/interfaces';
+import {
+  CourseSectionService,
+  CourseVideoSectionService,
+  CoursesService,
+} from 'src/app/studio/services';
 
 @Component({
   selector: 'app-view-course-video',
@@ -13,6 +17,7 @@ export class ViewCourseVideoComponent implements OnInit {
   isMenuOpen = false;
   cursoSlug: string = '';
   slugVideo: string = '';
+  videosList: CourseVideo[] = [];
 
   course: Course = {
     description: '',
@@ -28,7 +33,8 @@ export class ViewCourseVideoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private coursesService: CoursesService,
-    private sectionService: CourseSectionService
+    private sectionService: CourseSectionService,
+    private videoSectionService: CourseVideoSectionService
   ) {}
 
   ngOnInit(): void {
@@ -57,10 +63,21 @@ export class ViewCourseVideoComponent implements OnInit {
           .findByCourseId(course.idCourse!)
           .subscribe((sections) => {
             this.sectionsCourse = sections;
+            this.loadVideosForSections();
           });
       });
 
       console.log('Video:', this.slugVideo);
     });
+  }
+
+  loadVideosForSections() {
+    for (const section of this.sectionsCourse) {
+      this.videoSectionService
+        .findBySectionId(section.sectionCourseId!)
+        .subscribe((videos) => {
+          section.videos = videos.map((video) => video.videoCourse);
+        });
+    }
   }
 }

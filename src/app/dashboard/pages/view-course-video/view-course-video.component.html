@@ -3,17 +3,29 @@
   <nav class="slide-menu__nav">
     <ul class="slide-menu__list">
       <div *ngFor="let section of sectionsCourse">
-        <li class="slide-menu__item slide-menu__item">
+        <li class="title-section-container">
           <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
-          <h4 class="title-section" *ngIf="isMenuOpen">{{section.title}}</h4>
+          <h4 class="title-section" *ngIf="isMenuOpen" style="text-align: center;padding: 5px;">{{section.title}}</h4>
         </li>
-        <li class="slide-menu__item slide-menu__item">Video 1</li>
-        <li class="slide-menu__item slide-menu__item">Video 2</li>
-        <li class="slide-menu__item slide-menu__item">Video 3</li>
+        <li *ngIf="section.videos && section.videos.length > 0">
+          <div *ngFor="let video of section.videos">
+            <ng-container *ngIf="isMenuOpen">
+              <div class="video-title-container">
+                {{video.number}} - {{video.title}}
+              </div>
+            </ng-container>
+            <ng-container *ngIf="!isMenuOpen">
+              <div class="number-video slide-menu__icon">
+                {{video.number}}
+              </div>
+            </ng-container>
+          </div>
+        </li>
       </div>
     </ul>
   </nav>
 </div>
+
 
 <div class="container-view-course" (click)="closeSidenav()">
   <div class="video-container">
@@ -39,77 +51,6 @@
       <h1>Titulo de la descripcion</h1>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
         atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius numquam culpa nam velit quam cumque vero maxime
-        atque molestias delectus voluptates nisi optio dolores ad quod iure, ea obcaecati quisquam?</p>
-
     </div>
   </div>
 

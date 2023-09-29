@@ -1,4 +1,5 @@
-import { Course } from './course.interface';
+import { CourseVideo } from './course-video.interface';
+
 
 export interface CourseSection {
   sectionCourseId?: string;
@@ -8,4 +9,5 @@ export interface CourseSection {
   status?: boolean;
   panelOpenState?: boolean;
   course: string;
+  videos?: CourseVideo[];
 }

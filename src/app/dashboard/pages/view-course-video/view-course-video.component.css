@@ -20,7 +20,7 @@
 /* Estilos para el slide-menu */
 .slide-menu {
   align-items: center;
-  background-color: #212E36;
+  background-color: #212e36;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -55,12 +55,13 @@
 
 .slide-menu__item {
   display: flex;
-  width: 100%;
   justify-content: center;
+  flex-direction: column;
+  width: 100%;
 }
 
 .slide-menu__item--active {
-  background-color: #8BC34A;
+  background-color: #8bc34a;
 }
 
 .slide-menu__nav {
@@ -81,12 +82,28 @@
   width: 250px;
 }
 
+.title-section-container {
+  display: flex;
+  align-items: center;
+}
+
+.video-title-container {
+  padding: 15px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid white;
+  cursor: pointer;
+}
+
+.video-title-container:hover {
+  background-color: #344a57;
+}
+
 /* Estilos para container-view-course */
 .container-view-course {
   display: flex;
   margin-top: 2em;
   width: 100%;
-  background-color: #141B1F;
+  background-color: #141b1f;
 }
 
 /* Estilos para video-container */
@@ -173,7 +190,7 @@
 }
 
 .comments .text-area-container textarea {
-  background-color: #03091E;
+  background-color: #03091e;
   border-radius: 5px;
   color: lightgray;
   height: 100px;
@@ -181,17 +198,16 @@
 }
 
 .comments .card-comment {
-  background-color: #212E36;
+  background-color: #212e36;
   border-radius: 5px;
   margin-bottom: 30px;
   padding: 10px;
   width: 100%;
 }
 
-
 /* Media query para tablets */
 @media (min-width: 769px) and (max-width: 1024px) {
-  .container-view-course{
+  .container-view-course {
     flex-direction: column;
   }
 
@@ -207,7 +223,7 @@
 
 /* Media query para pantallas pequeñas (celulares) */
 @media (max-width: 768px) {
-  .container-view-course{
+  .container-view-course {
     flex-direction: column;
   }
 
@@ -219,7 +235,4 @@
     width: 93%;
     padding-left: 25%;
   }
-
 }
-
-
