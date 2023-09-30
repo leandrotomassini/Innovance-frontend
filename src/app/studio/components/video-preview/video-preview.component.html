@@ -2,10 +2,7 @@
 
   <mat-card>
     <mat-card-content class="preserve-line-breaks">
-      <iframe src="https://iframe.mediadelivery.net/play/154081/3f34315c-ec5a-4ea8-8372-d27ff6ad8dab"
-        loading="lazy" style="border: none; width: 100%; height: 400px;" allowfullscreen="true"
-        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;">
-      </iframe>
+      <div [innerHTML]="getSafeHTMLContent()"></div>
       <mat-card-title (click)="editVideo(video.idVideo)" class="editVideo">{{video.title | titlecase}} -
         <mat-icon>edit</mat-icon> Editar video</mat-card-title>
       <p>

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 
 import { VideoPreviewService, CourseVideoService } from '../../services';
@@ -9,7 +10,7 @@ import { VideoFormComponent } from '../video-form/video-form.component';
 @Component({
   selector: 'app-video-preview',
   templateUrl: './video-preview.component.html',
-  styleUrls: ['./video-preview.component.css']
+  styleUrls: ['./video-preview.component.css'],
 })
 export class VideoPreviewComponent implements OnDestroy {
   @Output() videoUpdated = new EventEmitter<void>();
@@ -27,22 +28,25 @@ export class VideoPreviewComponent implements OnDestroy {
     description: '',
     thumbnailUrl: '',
     previewAnimation: '',
-    status: false
+    status: false,
   };
 
   constructor(
     private videoPreviewService: VideoPreviewService,
     private courseVideoService: CourseVideoService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private sanitizer: DomSanitizer
   ) {
-    this.subscription = this.videoPreviewService.videoClicked$
-      .subscribe((data: Data) => {
+    this.subscription = this.videoPreviewService.videoClicked$.subscribe(
+      (data: Data) => {
         const { idVideo, idSection } = data;
         this.videoId = idVideo;
         this.sectionId = idSection;
-        this.courseVideoService.findById(idVideo)
-          .subscribe(video => this.video = video);
-      });
+        this.courseVideoService
+          .findById(idVideo)
+          .subscribe((video) => (this.video = video));
+      }
+    );
   }
 
   ngOnDestroy(): void {
@@ -50,27 +54,25 @@ export class VideoPreviewComponent implements OnDestroy {
   }
 
   editVideo(idVideo: string = '') {
-
     const dialogRef = this.dialog.open(VideoFormComponent, {
       data: {
         isNewVideo: idVideo === '',
         idSection: this.sectionId,
-        idVideo: idVideo
-      }
+        idVideo: idVideo,
+      },
     });
 
-    dialogRef.afterClosed()
-      .subscribe(result => {
-        this.courseVideoService.findById(idVideo)
-          .subscribe(video => {
-            this.video = video;
-            this.videoUpdated.emit();
-          });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.courseVideoService.findById(idVideo).subscribe((video) => {
+        this.video = video;
+        this.videoUpdated.emit();
       });
+    });
   }
 
-  addFile() {
+  addFile() {}
 
+  getSafeHTMLContent(): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(this.video.link);
   }
-
 }

@@ -78,20 +78,22 @@ export class ViewCourseVideoComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-
     setTimeout(() => {
       this.findFirstVideoBySlug(this.slugVideo);
-    }, 1000); // Ajusta el tiempo de espera según sea necesario
+    }, 1000);
   }
 
   toggleSidenav(event: Event) {
     this.isMenuOpen = !this.isMenuOpen;
-    event.stopPropagation();
+    if (this.isMenuOpen) {
+      event.stopPropagation();
+    }
   }
 
-  closeSidenav() {
+  closeSidenav(event: Event) {
     if (this.isMenuOpen) {
       this.isMenuOpen = false;
+      event.stopPropagation();
     }
   }
 

@@ -1,4 +1,4 @@
-<div class="slide-menu" [ngClass]="{'expanded': isMenuOpen}" (click)="closeSidenav()">
+<div class="slide-menu" [ngClass]="{'expanded': isMenuOpen}" (click)="closeSidenav($event)">
   <button mat-button (click)="toggleSidenav($event)" class="slide-menu__button">Toggle Menu</button>
   <nav class="slide-menu__nav">
     <ul class="slide-menu__list">
@@ -27,7 +27,7 @@
 </div>
 
 
-<div class="container-view-course" (click)="closeSidenav()">
+<div class="container-view-course" (click)="closeSidenav($event)">
   <div class="video-container">
     <div [innerHTML]="getSafeHTMLContent()"></div>
     <div class="header-video">
