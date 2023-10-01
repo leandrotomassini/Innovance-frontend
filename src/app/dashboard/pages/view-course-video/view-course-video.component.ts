@@ -9,6 +9,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class ViewCourseVideoComponent implements OnInit {
   id: string = 'cb6b4cd5-24c9-48f6-82e6-b0b306a55dbb';
   link: SafeResourceUrl = '';
+  mostrar = false;
 
   constructor(private sanitizer: DomSanitizer) {}
 
@@ -20,5 +21,6 @@ export class ViewCourseVideoComponent implements OnInit {
 
   saludar() {
     console.log('Hola: ' + this.link);
+    this.mostrar = !this.mostrar;
   }
 }
