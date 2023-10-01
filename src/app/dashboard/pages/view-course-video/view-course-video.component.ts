@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml, SafeResourceUrl } from '@angular/platform-browser';
 
 import {
   Course,
@@ -27,6 +27,7 @@ export class ViewCourseVideoComponent implements OnInit, AfterViewInit {
   slugVideo: string = '';
   videosList: CourseVideo[] = [];
   instructorsCourseList: CourseInstructor[] = [];
+  videoLink: string = '';
 
   courseVideo: CourseVideo = {
     description: '',
@@ -72,6 +73,8 @@ export class ViewCourseVideoComponent implements OnInit, AfterViewInit {
           .subscribe((sections) => {
             this.sectionsCourse = sections;
             this.loadVideosForSections();
+            this.videoLink = `https://iframe.mediadelivery.net/embed/159263/${this.courseVideo.link}?autoplay=true&loop=false&muted=false&preload=true`;
+            console.log(this.videoLink);
           });
       });
     });
@@ -152,7 +155,7 @@ export class ViewCourseVideoComponent implements OnInit, AfterViewInit {
       });
   }
 
-  getSafeHTMLContent(): SafeHtml {
-    return this.sanitizer.bypassSecurityTrustHtml(this.courseVideo.link);
+  getSafeVideoLink(): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.videoLink);
   }
 }
