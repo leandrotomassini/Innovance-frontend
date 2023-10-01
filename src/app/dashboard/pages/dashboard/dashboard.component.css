@@ -1,0 +1,9 @@
+.dashboard-container{
+  padding: 20px;
+  background-color: #141B1F;
+}
+
+.dashboard-container li{
+  margin-bottom: 5%;
+  list-style: none;
+}

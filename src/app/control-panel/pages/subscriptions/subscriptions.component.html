@@ -1,0 +1,20 @@
+
+
+<div class="grid p-3">
+  <div class="col-12 md:col-12 lg:col-6">
+    <mat-card>
+      <mat-card-header
+        class="p-3 d-flex align-items-center justify-content-center">
+        <div class="mr-2">
+          <mat-icon matListItemIcon [fontSet]="'material-icons-outlined'">price_change</mat-icon>
+        </div>
+        <div>
+          <mat-card-title>Subscripciones</mat-card-title>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <app-subscriptions-table [subscriptionsPlan]="subscriptionsPlan"></app-subscriptions-table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

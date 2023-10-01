@@ -1,0 +1,57 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { enviroment } from 'src/environments/environments';
+import { CourseVideo } from '../interfaces';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CourseVideoService {
+  private readonly baseUrl: string = enviroment.baseUrl;
+
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) { }
+
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      this.authService.logout();
+      throw new Error('Token not found');
+    }
+
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  }
+
+  findAll() {
+    const url = `${this.baseUrl}/video-course`;
+    return this.http.get<CourseVideo[]>(url);
+  }
+
+  findById(id: string) {
+    const url = `${this.baseUrl}/video-course/${id}`;
+    return this.http.get<CourseVideo>(url);
+  }
+
+  create(newCourse: CourseVideo) {
+    const url = `${this.baseUrl}/video-course`;
+    const headers = this.getHeaders();
+    return this.http.post<CourseVideo>(url, newCourse, { headers });
+  }
+
+  updateById(id: string, updateSectionCourse: CourseVideo) {
+    const url = `${this.baseUrl}/video-course/${id}`;
+    const headers = this.getHeaders();
+    return this.http.patch<CourseVideo>(url, updateSectionCourse, { headers });
+  }
+
+  removeById(id: string) {
+    const url = `${this.baseUrl}/video-course/${id}`;
+    const headers = this.getHeaders();
+    return this.http.delete(url, { headers });
+  }
+}

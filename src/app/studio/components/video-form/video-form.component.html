@@ -1,0 +1,71 @@
+<div mat-dialog-content>
+  <form (ngSubmit)="saveVideo()" [formGroup]="videoForm">
+
+    <mat-form-field>
+      <mat-label>Número del video:</mat-label>
+      <input matInput placeholder="Número del video..." formControlName="number">
+      <mat-error *ngIf="videoForm.get('number')?.invalid && videoForm.get('number')?.touched">
+        Ingrese un número válido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Url del video:</mat-label>
+      <input matInput placeholder="Url del video..." formControlName="url">
+      <mat-error *ngIf="videoForm.get('url')?.invalid && videoForm.get('url')?.touched">
+        Ingrese una URL válida
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <mat-label>Titulo del video:</mat-label>
+      <input matInput placeholder="Titulo para el video..." formControlName="title">
+      <mat-error *ngIf="videoForm.get('title')?.invalid && videoForm.get('title')?.touched">
+        Ingrese un titulo válido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Link:</mat-label>
+      <input matInput placeholder="Link del servidor del video..." formControlName="link">
+      <mat-error *ngIf="videoForm.get('link')?.invalid && videoForm.get('link')?.touched">
+        Ingrese un link válido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Thumbnail link:</mat-label>
+      <input matInput placeholder="Link del Thumbnail del video..." formControlName="thumbnailUrl">
+      <mat-error *ngIf="videoForm.get('thumbnailUrl')?.invalid && videoForm.get('thumbnailUrl')?.touched">
+        Ingrese un link válido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Preview Animation link:</mat-label>
+      <input matInput placeholder="Link del Preview Animation del video..." formControlName="previewAnimation">
+      <mat-error *ngIf="videoForm.get('previewAnimation')?.invalid && videoForm.get('previewAnimation')?.touched">
+        Ingrese un link válido
+      </mat-error>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Descripción del video:</mat-label>
+      <textarea matInput placeholder="Breve descripción para el video..." formControlName="description"></textarea>
+      <mat-error *ngIf="videoForm.get('description')?.invalid && videoForm.get('description')?.touched">
+        Ingrese una descripción válida
+      </mat-error>
+    </mat-form-field>
+
+
+
+    <div class="button-row">
+      <!-- Mostrar diferentes textos en el botón según si es un video nuevo o no -->
+      <button mat-button color="primary" type="submit" [disabled]="videoForm.invalid">
+        {{ data.isNewVideo ? 'Guardar nuevo video' : 'Guardar cambios' }}
+      </button>
+    </div>
+
+  </form>
+</div>

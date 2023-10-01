@@ -1,0 +1,267 @@
+/* Estilos para scrollbars */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #333;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #212121;
+  border-radius: 10px;
+}
+
+/* Estilos para el slide-menu */
+.slide-menu {
+  align-items: center;
+  background-color: #212e36;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-top: 25px;
+  position: fixed;
+  width: 60px;
+  max-height: 100%;
+  overflow: auto;
+  transition: width 0.3s;
+  z-index: 3;
+}
+
+.slide-menu__button {
+  position: fixed;
+  z-index: 2;
+}
+
+.slide-menu__icon {
+  color: white;
+  align-items: center;
+  background-color: black;
+  border-radius: 100%;
+  display: flex;
+  min-height: 30px;
+  justify-content: center;
+  margin-bottom: 1em;
+  min-width: 30px;
+  margin-right: 8px;
+  margin-top: 8px;
+  margin-left: 5px;
+}
+
+.slide-menu__item {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.slide-menu__item--active {
+  background-color: #8bc34a;
+}
+
+.slide-menu__nav {
+  padding-top: 45px;
+}
+
+.slide-menu__nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.slide-menu__list {
+  margin: 0;
+  padding-left: 0;
+}
+
+.slide-menu.expanded {
+  width: 250px;
+}
+
+.title-section-container {
+  display: flex;
+  align-items: center;
+}
+
+.video-title-container {
+  padding: 15px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid white;
+  cursor: pointer;
+}
+
+.video-title-container:hover {
+  background-color: #344a57;
+}
+
+.number-video {
+  cursor: pointer;
+}
+
+.instructors-container {
+  display: flex;
+}
+/* Estilos para container-view-course */
+.container-view-course {
+  display: flex;
+  margin-top: 2em;
+  width: 100%;
+  background-color: #141b1f;
+}
+
+/* Estilos para video-container */
+.video-container {
+  padding-right: 20px;
+  padding-left: 10px;
+  width: 60%;
+}
+
+/* Estilos para header-video */
+.header-description {
+  display: flex;
+  flex-direction: column;
+  height: 50px;
+  justify-content: center;
+}
+
+.instructor-name-container {
+  display: flex;
+  align-items: center;
+  margin-right: 0.5em;
+}
+
+.instructor-name-container img {
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+
+.header-description h2,
+.header-description h3 {
+  margin: 0;
+}
+
+.header-video {
+  align-items: center;
+  display: flex;
+  padding-top: 15px;
+}
+
+.header-video__logo {
+  border-radius: 100%;
+  height: 55px;
+  margin-right: 10px;
+  width: 55px;
+}
+
+/* Estilos para instructor-name-container */
+.instructor-name-container {
+  align-items: center;
+  display: flex;
+}
+
+.instructor-name-container__img {
+  border-radius: 100%;
+  height: 25px;
+  margin-right: 10px;
+  width: 25px;
+}
+
+.instructor-name-container__name {
+  margin: 0;
+}
+
+/* Estilos para video-description */
+.video-description {
+  margin-top: 20px;
+  padding-top: 25px;
+  max-height: 400px;
+  overflow: auto;
+}
+
+/* Estilos para comentarios */
+.comments {
+  padding: 20px;
+  width: 40%;
+  max-height: 180vh;
+  overflow: auto;
+}
+
+.comments .text-area-container {
+  margin-bottom: 20px;
+}
+
+.comments .text-area-container textarea {
+  background-color: #03091e;
+  border-radius: 5px;
+  color: lightgray;
+  height: 100px;
+  width: 100%;
+}
+
+.comments .card-comment {
+  background-color: #212e36;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  padding: 10px;
+  width: 100%;
+}
+
+.container-menu-video ul {
+  padding: 15px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.container-menu-video ul li {
+  list-style: none;
+  border-bottom: 1px solid white;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1.3em;
+}
+
+.hiddenTab{
+  display: none;
+}
+
+.showTab{
+  display: block;
+}
+
+/* Media query para tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container-view-course {
+    flex-direction: column;
+  }
+
+  .video-container {
+    width: 95%;
+  }
+
+  .comments {
+    width: 95%;
+    padding-left: 10%;
+  }
+}
+
+/* Media query para pantallas pequeñas (celulares) */
+@media (max-width: 768px) {
+  .container-view-course {
+    flex-direction: column;
+  }
+
+  .video-container {
+    width: 90%;
+  }
+
+  .comments {
+    width: 93%;
+    padding-left: 25%;
+  }
+}

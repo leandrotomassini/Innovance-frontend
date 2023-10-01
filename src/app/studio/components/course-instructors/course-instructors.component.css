@@ -1,0 +1,43 @@
+.full-width {
+  width: 100%;
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+}
+
+.search-text {
+  flex: 1;
+  border: none;
+  box-shadow: none;
+}
+
+.search-icon {
+  margin-left: 8px;
+}
+
+.row-hover:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+.profile-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.addButton{
+  cursor: pointer;
+}
+
+.icon-remove-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-remove-container span{
+  margin-left: 3px;
+}

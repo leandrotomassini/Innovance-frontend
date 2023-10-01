@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Editar usuario</h2>
+
+<div mat-dialog-content>
+<form class="example-form" (ngSubmit)="saveUser()" autocomplete="off" [formGroup]="userForm">
+
+<mat-form-field class="full-width">
+  <mat-label>Correo</mat-label>
+  <input matInput placeholder="Correo electrónico" formControlName="email">
+</mat-form-field>
+
+<mat-form-field class="full-width">
+  <mat-label>Nombre completo</mat-label>
+  <input matInput placeholder="Nombre completo" formControlName="fullName">
+</mat-form-field>
+
+<mat-form-field class="full-width">
+  <mat-label>Estado del usuario</mat-label>
+  <select matNativeControl required formControlName="isActive">
+    <option value="true">Activo</option>
+    <option value="false">Bloqueado</option>
+  </select>
+</mat-form-field>
+
+<mat-checkbox formControlName="instructor" [checked]="user.roles.includes('instructor')">Instructor</mat-checkbox>
+<mat-checkbox formControlName="user" [checked]="user.roles.includes('user')">Usuario</mat-checkbox>
+<mat-checkbox formControlName="admin" [checked]="user.roles.includes('admin')">Administrador</mat-checkbox>
+
+<div class="button-row">
+  <button mat-button color="primary" type="submit">Guardar</button>
+  <button mat-button (click)="closeModal()" type="button">Cerrar</button>
+</div>
+
+
+
+</form>
+</div>

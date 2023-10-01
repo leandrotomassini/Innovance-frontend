@@ -1,0 +1,19 @@
+@media (min-width: 960px) {
+  .hide-on-desktop {
+    display: none;
+  }
+}
+
+.mat-toolbar {
+  background-color: #141B1F;
+  color: white;
+  border-bottom: 1px solid black;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  padding: 2%;
+  padding-top: 8%;
+  background-color: #141B1F;
+  padding-bottom: 100%;
+}

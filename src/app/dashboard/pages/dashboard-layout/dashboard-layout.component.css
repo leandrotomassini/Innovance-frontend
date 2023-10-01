@@ -1,0 +1,24 @@
+@media (min-width: 960px) {
+  .hide-on-desktop {
+    display: none;
+  }
+}
+
+.mat-toolbar {
+  background-color: #141B1F;
+  color: white;
+  position: fixed;
+  z-index: 4;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  padding-top: 5%;
+  background-color: #141B1F;
+  color: white;
+  height: 100%;
+}
+
+.logoMenu:hover{
+  cursor: pointer;
+}
