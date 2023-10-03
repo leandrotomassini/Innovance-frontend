@@ -19,6 +19,18 @@ export class ViewCourseVideoComponent implements OnInit {
     );
   }
 
+  isMenuOpen = false;
+
+  toggleSidenav(event: Event) {
+    this.isMenuOpen = !this.isMenuOpen;
+    event.stopPropagation();
+  }
+
+  closeSidenav() {
+    if (this.isMenuOpen) {
+      this.isMenuOpen = false;
+    }
+  }
   saludar() {
     console.log('Hola: ' + this.link);
     this.mostrar = !this.mostrar;
