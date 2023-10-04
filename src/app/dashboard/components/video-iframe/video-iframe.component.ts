@@ -7,6 +7,4 @@ import { Component, Input } from '@angular/core';
 })
 export class VideoIframeComponent {
   @Input() link:any = undefined;
-
-
 }

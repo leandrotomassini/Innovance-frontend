@@ -1,5 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
+
+import {
+  Course,
+  CourseInstructor,
+  CourseSection,
+  CourseVideo,
+} from 'src/app/studio/interfaces';
+
+import {
+  CourseInstructorService,
+  CourseSectionService,
+  CourseVideoSectionService,
+  CoursesService,
+} from 'src/app/studio/services';
 
 @Component({
   selector: 'app-view-course-video',
@@ -9,14 +25,59 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class ViewCourseVideoComponent implements OnInit {
   id: string = 'cb6b4cd5-24c9-48f6-82e6-b0b306a55dbb';
   link: SafeResourceUrl = '';
-  mostrar = false;
+  cursoSlug: string = '';
+  slugVideo: string = '';
+  videosList: CourseVideo[] = [];
+  instructorsCourseList: CourseInstructor[] = [];
 
-  constructor(private sanitizer: DomSanitizer) {}
+  course: Course = {
+    description: '',
+    frontPage: '',
+    logo: '',
+    slug: '',
+    title: '',
+    idCourse: '',
+  };
+
+  sectionsCourse: CourseSection[] = [];
+
+  courseVideo: CourseVideo = {
+    description: '',
+    link: '',
+    number: '',
+    previewAnimation: '',
+    thumbnailUrl: '',
+    title: '',
+    url: '',
+  };
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private coursesService: CoursesService,
+    private sectionService: CourseSectionService,
+    private videoSectionService: CourseVideoSectionService,
+    private instructorsCourse: CourseInstructorService,
+    private sanitizer: DomSanitizer
+  ) {}
 
   ngOnInit(): void {
-    this.link = this.sanitizer.bypassSecurityTrustResourceUrl(
-      `https://iframe.mediadelivery.net/embed/159263/${this.id}?autoplay=true&loop=false&muted=false&preload=true`
-    );
+    this.route.params.subscribe((params) => {
+      this.cursoSlug = params['slugCurso'];
+      this.slugVideo = params['slugVideo'];
+
+      this.coursesService.findBySlug(this.cursoSlug).subscribe((course) => {
+        this.course = course;
+        this.getInstructorsCourse();
+        this.sectionService
+          .findByCourseId(course.idCourse!)
+          .subscribe((sections) => {
+            this.sectionsCourse = sections;
+            this.loadVideosForSections();
+            this.findFirstVideoBySlug(this.slugVideo);
+          });
+      });
+    });
+    this.findFirstVideoBySlug(this.slugVideo);
   }
 
   isMenuOpen = false;
@@ -31,8 +92,79 @@ export class ViewCourseVideoComponent implements OnInit {
       this.isMenuOpen = false;
     }
   }
-  saludar() {
-    console.log('Hola: ' + this.link);
-    this.mostrar = !this.mostrar;
+
+  getInfoCourse() {
+    this.route.params.subscribe((params) => {
+      this.cursoSlug = params['slugCurso'];
+      this.slugVideo = params['slugVideo'];
+
+      this.coursesService.findBySlug(this.cursoSlug).subscribe((course) => {
+        this.course = course;
+      });
+    });
+  }
+
+  loadVideosForSections() {
+    for (const section of this.sectionsCourse) {
+      this.videoSectionService
+        .findBySectionId(section.sectionCourseId!)
+        .subscribe((videos) => {
+          section.videos = videos.map((video) => video.videoCourse);
+        });
+    }
+  }
+
+  findVideoBySlug(slug: string) {
+    let routeCourse: string = '/clases/' + this.course.slug + '/' + slug;
+    this.router.navigateByUrl(routeCourse);
+
+    for (const section of this.sectionsCourse) {
+      if (section.videos) {
+        const foundVideo = section.videos.find((video) => video.url === slug);
+
+        if (foundVideo) {
+          this.courseVideo = foundVideo;
+          this.link = this.sanitizer.bypassSecurityTrustResourceUrl(
+            `https://iframe.mediadelivery.net/embed/159263/${this.courseVideo.link}?autoplay=true&loop=false&muted=false&preload=true`
+          );
+
+          break;
+        }
+      }
+    }
+  }
+
+  async findFirstVideoBySlug(slug: string) {
+    for (const section of this.sectionsCourse) {
+      try {
+        const videos = await firstValueFrom(
+          this.videoSectionService.findBySectionId(section.sectionCourseId!)
+        );
+
+        if (videos && videos.length > 0) {
+          section.videos = videos.map((video) => video.videoCourse);
+
+          const foundVideo = section.videos.find((video) => video.url === slug);
+
+          if (foundVideo) {
+            this.courseVideo = foundVideo;
+            this.link = this.sanitizer.bypassSecurityTrustResourceUrl(
+              `https://iframe.mediadelivery.net/embed/159263/${this.courseVideo.link}?autoplay=true&loop=false&muted=false&preload=true`
+            );
+            break;
+          } else {
+          }
+        } else {
+        }
+      } catch (error) {}
+    }
+  }
+
+  getInstructorsCourse() {
+    this.instructorsCourse
+      .findByCourseId(this.course.idCourse!)
+      .subscribe((instructors) => {
+        this.instructorsCourseList = instructors;
+      });
   }
 }
