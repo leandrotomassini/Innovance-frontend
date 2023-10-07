@@ -130,15 +130,25 @@
   cursor: pointer;
 }
 
+.container-slide-menu:hover {
+  cursor: pointer;
+  background-color: #2e404a;
+  border-radius: 4px;
+}
+
+.slide-menu__button{
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
 .slide-menu__button:hover {
   background-color: #2e404a;
   cursor: pointer;
 }
 
-.container-slide-menu-label:hover {
-  cursor: pointer;
-  background-color: #2e404a;
-}
 
 /* Estilos para container-view-course */
 .container-view-course {
