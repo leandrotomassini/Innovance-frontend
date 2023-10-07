@@ -1,11 +1,30 @@
 <div class="slide-menu" [ngClass]="{'expanded': isMenuOpen}" (click)="closeSidenav()">
-  <button mat-button (click)="toggleSidenav($event)" class="slide-menu__button">Toggle Menu</button>
   <nav class="slide-menu__nav">
     <ul class="slide-menu__list">
+      <mat-icon (click)="toggleSidenav($event)" class="slide-menu__button" *ngIf="!isMenuOpen">
+        arrow_forward_ios
+      </mat-icon>
+      <div (click)="toggleSidenav($event)" *ngIf="isMenuOpen" class="container-slide-menu">
+        <mat-icon class="slide-menu__button">
+          arrow_back_ios
+        </mat-icon>
+        <label class="container-slide-menu-label">
+          Cerrar menú
+        </label>
+      </div>
       <div *ngFor="let section of sectionsCourse">
-        <li class="title-section-container">
-          <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
-          <h4 class="title-section" *ngIf="isMenuOpen" style="text-align: center;padding: 5px;">{{section.title}}</h4>
+        <li class="title-section-container-icon" *ngIf="!isMenuOpen">
+          <div class="icon-mat">
+            <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
+          </div>
+        </li>
+        <li class="title-section-container" *ngIf="isMenuOpen">
+          <div class="icon-mat">
+            <mat-icon class="slide-menu__icon">emoji_flags</mat-icon>
+          </div>
+          <h4 class="title-section" style="text-align: center;padding: 5px;">
+            {{section.title}}
+          </h4>
         </li>
         <li *ngIf="section.videos && section.videos.length > 0">
           <div *ngFor="let video of section.videos">

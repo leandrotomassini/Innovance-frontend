@@ -24,7 +24,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 20px;
+  padding: 5px;
   padding-top: 25px;
   position: fixed;
   width: 60px;
@@ -32,10 +32,6 @@
   overflow: auto;
   transition: width 0.3s;
   z-index: 3;
-}
-
-.slide-menu__button {
-  position: fixed;
 }
 
 .slide-menu__icon {
@@ -58,7 +54,7 @@
 }
 
 .slide-menu__nav {
-  padding-top: 45px;
+  padding-top: 5px;
 }
 
 .slide-menu__nav ul {
@@ -75,12 +71,82 @@
   width: 250px;
 }
 
+.title-section-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.title-section-container:hover {
+  background-color: #2e404a;
+}
+
+.number-video {
+  border-radius: 100%;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.number-video:hover {
+  background-color: rgb(36, 34, 34);
+}
+
+.video-title-container {
+  border-bottom: 1px solid rgb(199, 193, 193);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.video-title-container:hover {
+  background-color: #2e404a;
+  cursor: pointer;
+}
+
+.title-section-container-icon {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.icon-mat {
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.container-slide-menu {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.slide-menu__button:hover {
+  background-color: #2e404a;
+  cursor: pointer;
+}
+
+.container-slide-menu-label:hover {
+  cursor: pointer;
+  background-color: #2e404a;
+}
+
 /* Estilos para container-view-course */
 .container-view-course {
   display: flex;
   margin-top: 2em;
   width: 100%;
   background-color: #141b1f;
+  cursor: pointer;
 }
 
 /* Estilos para video-container */
