@@ -136,7 +136,7 @@
   border-radius: 4px;
 }
 
-.slide-menu__button{
+.slide-menu__button {
   padding: 15px;
   display: flex;
   align-items: center;
@@ -148,7 +148,6 @@
   background-color: #2e404a;
   cursor: pointer;
 }
-
 
 /* Estilos para container-view-course */
 .container-view-course {
@@ -258,6 +257,15 @@
   width: 100%;
 }
 
+.btn-save {
+  margin-top: 10px;
+  float: right;
+}
+
+
+.comments-container{
+  padding-top: 50px;
+}
 /* Media query para tablets */
 @media (min-width: 769px) and (max-width: 1024px) {
   .container-view-course {

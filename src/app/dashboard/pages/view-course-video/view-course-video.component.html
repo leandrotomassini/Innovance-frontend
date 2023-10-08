@@ -9,7 +9,7 @@
           arrow_back_ios
         </mat-icon>
         <label class="container-slide-menu-label">
-          Cerrar menú
+          Cerrar listado
         </label>
       </div>
       <div *ngFor="let section of sectionsCourse">
@@ -73,7 +73,21 @@
 
   <div class="comments">
     <div class="text-area-container">
-      <textarea></textarea>
+      <div>
+        <editor #myEditor apiKey="k1aum4wv94q604j0ctufs0qmjwgxhpjd6dc04czxctayhh2v" [init]="{
+         height: 200,
+         menubar: false,
+         plugins: [
+
+         ],
+         toolbar:
+           'undo redo | formatselect | bold italic backcolor | \
+           alignleft aligncenter alignright alignjustify | \
+           bullist numlist outdent indent | removeformat | help'
+       }"></editor>
+      </div>
+
+      <button mat-raised-button color="primary" class="btn-save" (click)="guardarContenido()">Publicar</button>
     </div>
     <div class="comments-container">
       <div class="card-comment">

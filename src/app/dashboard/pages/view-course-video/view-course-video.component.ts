@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
@@ -50,6 +50,10 @@ export class ViewCourseVideoComponent implements OnInit {
     title: '',
     url: '',
   };
+
+  @ViewChild('myEditor') myEditor: any;
+  editorContent = '';
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -166,5 +170,16 @@ export class ViewCourseVideoComponent implements OnInit {
       .subscribe((instructors) => {
         this.instructorsCourseList = instructors;
       });
+  }
+
+  guardarContenido() {
+    // Obtener el contenido del editor
+    const content = this.myEditor.editor.getContent();
+
+    // Mostrar el contenido en la consola
+    console.log(content);
+
+    // También puedes asignar el contenido a una variable si lo necesitas en otro lugar
+    this.editorContent = content;
   }
 }

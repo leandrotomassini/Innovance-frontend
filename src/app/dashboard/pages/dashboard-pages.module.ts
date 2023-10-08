@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 import { MaterialModule } from 'src/app/material/material.module';
 
@@ -29,7 +30,8 @@ import { ViewCourseVideoComponent } from './view-course-video/view-course-video.
     CommonModule,
     MaterialModule,
     RouterModule,
-    DashboardComponentsModule
+    DashboardComponentsModule,
+    EditorModule
   ]
 })
 export class DashboardPagesModule { }
