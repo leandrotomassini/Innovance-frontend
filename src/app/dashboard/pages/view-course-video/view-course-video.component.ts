@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 import {
   Course,
@@ -44,7 +45,7 @@ export class ViewCourseVideoComponent implements OnInit {
   courseVideo: CourseVideo = {
     description: '',
     link: '',
-    number: '',
+    number: 0,
     previewAnimation: '',
     thumbnailUrl: '',
     title: '',
@@ -62,7 +63,7 @@ export class ViewCourseVideoComponent implements OnInit {
     private videoSectionService: CourseVideoSectionService,
     private instructorsCourse: CourseInstructorService,
     private sanitizer: DomSanitizer
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -75,13 +76,11 @@ export class ViewCourseVideoComponent implements OnInit {
         this.sectionService
           .findByCourseId(course.idCourse!)
           .subscribe((sections) => {
-            this.sectionsCourse = sections;
-            this.loadVideosForSections();
+            this.sectionsCourse = this.sortVideosByNumber(sections); // Ordenar las secciones y videos
             this.findFirstVideoBySlug(this.slugVideo);
           });
       });
     });
-    this.findFirstVideoBySlug(this.slugVideo);
   }
 
   isMenuOpen = false;
@@ -113,7 +112,7 @@ export class ViewCourseVideoComponent implements OnInit {
       this.videoSectionService
         .findBySectionId(section.sectionCourseId!)
         .subscribe((videos) => {
-          section.videos = videos.map((video) => video.videoCourse);
+          section.videos = videos.map((video) => video.videoCourse).sort((a, b) => a.number - b.number);
         });
     }
   }
@@ -131,7 +130,6 @@ export class ViewCourseVideoComponent implements OnInit {
           this.link = this.sanitizer.bypassSecurityTrustResourceUrl(
             `https://iframe.mediadelivery.net/embed/159263/${this.courseVideo.link}?autoplay=true&loop=false&muted=false&preload=true`
           );
-
           break;
         }
       }
@@ -153,14 +151,12 @@ export class ViewCourseVideoComponent implements OnInit {
           if (foundVideo) {
             this.courseVideo = foundVideo;
             this.link = this.sanitizer.bypassSecurityTrustResourceUrl(
-              `https://iframe.mediadelivery.net/embed/159263/${this.courseVideo.link}?autoplay=true&loop=false&muted=false&preload=true`
+              `https://iframe.mediadelivery.net/embed/163809/${this.courseVideo.link}?autoplay=true&loop=false&muted=false&preload=true`
             );
             break;
-          } else {
           }
-        } else {
         }
-      } catch (error) {}
+      } catch (error) { }
     }
   }
 
@@ -181,5 +177,14 @@ export class ViewCourseVideoComponent implements OnInit {
 
     // También puedes asignar el contenido a una variable si lo necesitas en otro lugar
     this.editorContent = content;
+  }
+
+  sortVideosByNumber(sections: CourseSection[]): CourseSection[] {
+    sections.forEach((section) => {
+      if (section.videos && section.videos.length > 0) {
+        section.videos.sort((a, b) => a.number - b.number);
+      }
+    });
+    return sections;
   }
 }

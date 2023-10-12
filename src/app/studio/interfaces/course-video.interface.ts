@@ -3,7 +3,7 @@ export interface CourseVideo {
   title: string;
   description: string;
   link: string;
-  number: string;
+  number: 0;
   url: string;
   thumbnailUrl: string;
   previewAnimation: string;

@@ -21,7 +21,7 @@ export class VideoPreviewComponent implements OnDestroy {
   sectionId: string = '';
 
   video: CourseVideo = {
-    number: '0',
+    number: 0,
     title: '',
     url: '',
     link: '',

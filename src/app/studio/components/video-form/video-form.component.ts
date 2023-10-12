@@ -14,7 +14,7 @@ import { CourseVideoService, CourseVideoSectionService } from '../../services';
 export class VideoFormComponent implements OnInit {
   videoForm!: FormGroup;
   videoCourse: CourseVideo = {
-    number: '',
+    number: 0,
     title: '',
     link: '',
     description: '',

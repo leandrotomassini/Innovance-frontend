@@ -5,6 +5,7 @@ import { Component, Input } from '@angular/core';
   templateUrl: './video-iframe.component.html',
   styleUrls: ['./video-iframe.component.css'],
 })
-export class VideoIframeComponent {
+export class VideoIframeComponent  {
   @Input() link:any = undefined;
+
 }

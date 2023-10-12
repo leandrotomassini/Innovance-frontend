@@ -33,7 +33,7 @@ export class CourseVideoListComponent implements OnInit {
       .subscribe((videos: CourseVideoSection[]) => {
         this.videosSection = videos
           .map((v) => v.videoCourse)
-          .sort((a, b) => a.number.localeCompare(b.number));
+          .sort((a, b) => a.number - b.number); 
       });
   }
 
