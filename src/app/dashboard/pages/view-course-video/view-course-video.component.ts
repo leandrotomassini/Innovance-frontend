@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, firstValueFrom } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { firstValueFrom } from 'rxjs';
+
+import { enviroment } from 'src/environments/environments';
 
 import {
   Course,
@@ -24,12 +25,14 @@ import {
   styleUrls: ['./view-course-video.component.css'],
 })
 export class ViewCourseVideoComponent implements OnInit {
+  apiKey: string = enviroment.tinyApi;
   id: string = 'cb6b4cd5-24c9-48f6-82e6-b0b306a55dbb';
   link: SafeResourceUrl = '';
   cursoSlug: string = '';
   slugVideo: string = '';
   videosList: CourseVideo[] = [];
   instructorsCourseList: CourseInstructor[] = [];
+  
 
   course: Course = {
     description: '',
