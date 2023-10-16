@@ -72,19 +72,22 @@ export class ViewCourseVideoComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.cursoSlug = params['slugCurso'];
       this.slugVideo = params['slugVideo'];
-
+  
       this.coursesService.findBySlug(this.cursoSlug).subscribe((course) => {
         this.course = course;
         this.getInstructorsCourse();
         this.sectionService
           .findByCourseId(course.idCourse!)
           .subscribe((sections) => {
-            this.sectionsCourse = this.sortVideosByNumber(sections); // Ordenar las secciones y videos
+            this.sectionsCourse = this.sortVideosByNumber(sections);
+            // Load videos for each section
+            this.loadVideosForSections();
             this.findFirstVideoBySlug(this.slugVideo);
           });
       });
     });
   }
+  
 
   isMenuOpen = false;
 
@@ -119,6 +122,7 @@ export class ViewCourseVideoComponent implements OnInit {
         });
     }
   }
+  
 
   findVideoBySlug(slug: string) {
     let routeCourse: string = '/clases/' + this.course.slug + '/' + slug;
