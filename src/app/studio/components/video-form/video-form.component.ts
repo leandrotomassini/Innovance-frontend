@@ -1,7 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Observer } from 'rxjs';
+import { enviroment } from 'src/environments/environments';
 
 import { CourseVideo, CourseVideoSectionCreate } from '../../interfaces';
 import { CourseVideoService, CourseVideoSectionService } from '../../services';
@@ -12,7 +13,10 @@ import { CourseVideoService, CourseVideoSectionService } from '../../services';
   styleUrls: ['./video-form.component.css'],
 })
 export class VideoFormComponent implements OnInit {
+  @ViewChild('myEditor') myEditor: any;
   videoForm!: FormGroup;
+  apiKey: string = enviroment.tinyApi;
+
   videoCourse: CourseVideo = {
     number: 0,
     title: '',

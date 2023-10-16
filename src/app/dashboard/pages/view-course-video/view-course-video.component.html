@@ -65,9 +65,7 @@
     </div>
     <div class="video-description">
       <h1>{{courseVideo.title}}</h1>
-      <p>
-        {{courseVideo.description}}
-      </p>
+      <div [innerHTML]="courseVideo.description"></div>
     </div>
   </div>
 

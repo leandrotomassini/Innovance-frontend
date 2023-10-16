@@ -50,14 +50,22 @@
       </mat-error>
     </mat-form-field>
     
-    <mat-form-field>
-      <mat-label>Descripción del video:</mat-label>
-      <textarea matInput placeholder="Breve descripción para el video..." formControlName="description"></textarea>
-      <mat-error *ngIf="videoForm.get('description')?.invalid && videoForm.get('description')?.touched">
-        Ingrese una descripción válida
-      </mat-error>
-    </mat-form-field>
+    <div>
+      <editor #myEditor [apiKey]="apiKey" [init]="{
+       height: 200,
+       menubar: false,
+       plugins: [
 
+       ],
+       toolbar:
+         'undo redo | formatselect | bold italic backcolor | \
+         alignleft aligncenter alignright alignjustify | \
+         bullist numlist outdent indent | removeformat | help'
+     }" formControlName="description"></editor>
+     <mat-error *ngIf="videoForm.get('description')?.invalid && videoForm.get('description')?.touched">
+       Ingrese una descripción válida
+     </mat-error>
+    </div>
 
 
     <div class="button-row">

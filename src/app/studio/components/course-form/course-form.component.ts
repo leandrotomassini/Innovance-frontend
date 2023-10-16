@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { enviroment } from 'src/environments/environments';
 import { CoursesService } from '../../services';
 import { Course } from '../../interfaces';
 
@@ -13,7 +13,9 @@ import { Course } from '../../interfaces';
 })
 export class CourseFormComponent implements OnInit {
 
+  @ViewChild('myEditor') myEditor: any;
   @Input() courseSlug: string = '';
+  apiKey: string = enviroment.tinyApi;
 
   courseForm: FormGroup;
   course!: Course;

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 import { CoursesTableComponent } from './courses-table/courses-table.component';
 import { MaterialModule } from 'src/app/material/material.module';
@@ -39,14 +40,16 @@ import { AttachedMaterialFormComponent } from './attached-material-form/attached
     CoursesTableComponent,
     RoutesTableComponent,
     SchoolTableComponent,
-    CourseFormComponent
+    CourseFormComponent,
+    EditorModule
   ],
   imports: [
     CommonModule,
     MaterialModule,
     RouterModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    EditorModule
   ],
   providers: [VideoPreviewService]
 })

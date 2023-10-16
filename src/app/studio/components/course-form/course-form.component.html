@@ -16,14 +16,23 @@
         válido</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="full-width">
-      <mat-label>Breve descripción del curso:</mat-label>
-      <textarea matInput placeholder="Descripción para el curso..." formControlName="description"></textarea>
-      <mat-error *ngIf="courseForm.get('description')?.invalid && courseForm.get('description')?.touched">Ingrese una
-        descripción válida</mat-error>
-    </mat-form-field>
+    <div>
+      <editor #myEditor [apiKey]="apiKey" [init]="{
+       height: 200,
+       menubar: false,
+       plugins: [
 
-    <mat-form-field class="full-width">
+       ],
+       toolbar:
+         'undo redo | formatselect | bold italic backcolor | \
+         alignleft aligncenter alignright alignjustify | \
+         bullist numlist outdent indent | removeformat | help'
+     }" formControlName="description"></editor>
+    </div>
+    <mat-error *ngIf="courseForm.get('description')?.invalid && courseForm.get('description')?.touched">Ingrese una
+      descripción válida</mat-error>
+
+    <mat-form-field class="full-width" style="margin-top: 10px;">
       <mat-label>Slug:</mat-label>
       <input matInput placeholder="URL para el curso, sin la barra diagonal '/', por ejemplo: 'historia-dinero'."
         formControlName="slug">
