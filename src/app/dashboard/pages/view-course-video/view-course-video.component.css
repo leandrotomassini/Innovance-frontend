@@ -224,7 +224,7 @@
 /* Estilos para video-description */
 .video-description {
   margin-top: 20px;
-  padding-top: 25px;
+  padding: 25px;
   max-height: 400px;
   overflow: auto;
 }
