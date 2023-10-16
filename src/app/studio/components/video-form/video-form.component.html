@@ -10,7 +10,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Url del video:</mat-label>
+      <mat-label>Slug (URL) para ver el vídeo:</mat-label>
       <input matInput placeholder="Url del video..." formControlName="url">
       <mat-error *ngIf="videoForm.get('url')?.invalid && videoForm.get('url')?.touched">
         Ingrese una URL válida
@@ -27,10 +27,10 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Link:</mat-label>
+      <mat-label>Id del video (Hosting):</mat-label>
       <input matInput placeholder="Link del servidor del video..." formControlName="link">
       <mat-error *ngIf="videoForm.get('link')?.invalid && videoForm.get('link')?.touched">
-        Ingrese un link válido
+        Ingrese un id del vídeo válido
       </mat-error>
     </mat-form-field>
 
