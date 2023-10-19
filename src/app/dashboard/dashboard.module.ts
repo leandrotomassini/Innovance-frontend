@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 import { MaterialModule } from '../material/material.module';
 
@@ -22,6 +23,7 @@ import { DashboardsharedModule } from './shared/dashboardshared.module';
     DashboardsharedModule,
     DashboardRoutingModule,
     MaterialModule,
-  ]
+  ],
+  providers: [DatePipe]
 })
 export class DashboardModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { firstValueFrom } from 'rxjs';
 
 import { enviroment } from 'src/environments/environments';
@@ -69,7 +70,8 @@ export class ViewCourseVideoComponent implements OnInit {
     private videoSectionService: CourseVideoSectionService,
     private instructorsCourse: CourseInstructorService,
     private sanitizer: DomSanitizer,
-    private commentVideoService: CommentsVideoService
+    private commentVideoService: CommentsVideoService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -188,6 +190,7 @@ export class ViewCourseVideoComponent implements OnInit {
       return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
     });
   }
+
   getCommentsVideo() {
     this.commentVideoService.findByVideoId(this.courseVideo!.idVideo!)
       .subscribe(commentsVideo => {
@@ -196,12 +199,19 @@ export class ViewCourseVideoComponent implements OnInit {
       });
   }
 
+  showCommentAddedToast() {
+    this.snackBar.open('Comentario agregado correctamente', 'Cerrar', {
+      duration: 2000,
+    });
+  }
+
   saveComment() {
     const content = this.myEditor.editor.getContent();
     this.editorContent = content;
     this.commentVideoService.create(this.courseVideo.idVideo!, this.editorContent).subscribe((commentVideo) => {
       this.getCommentsVideo();
       this.myEditor.editor.setContent('');
+      this.showCommentAddedToast();
     });
   }
 

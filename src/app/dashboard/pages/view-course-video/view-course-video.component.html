@@ -41,7 +41,7 @@
           </div>
         </li>
       </div>
-      
+
     </ul>
   </nav>
 </div>
@@ -90,6 +90,10 @@
     <div class="comments-container">
       <div class="card-comment" *ngFor="let commentVideo of commentsVideo">
         <div [innerHTML]="commentVideo.comment"></div>
+        <p style="font-size: 11px;">{{ commentVideo.updatedAt | date: 'dd-MM-yyyy' }}</p>
+      </div>
+      <div class="card-comment" *ngIf="commentsVideo.length === 0">
+        <p>¡Aún no hay comentarios, sé el primero!</p>
       </div>
     </div>
   </div>
