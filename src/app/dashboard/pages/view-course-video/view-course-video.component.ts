@@ -18,6 +18,8 @@ import {
   CourseVideoSectionService,
   CoursesService,
 } from 'src/app/studio/services';
+import { CommentsVideoService } from 'src/app/studio/services/comments-video.service';
+import { CommentVideo } from 'src/app/interfaces/comment.interface';
 
 @Component({
   selector: 'app-view-course-video',
@@ -32,7 +34,8 @@ export class ViewCourseVideoComponent implements OnInit {
   slugVideo: string = '';
   videosList: CourseVideo[] = [];
   instructorsCourseList: CourseInstructor[] = [];
-  
+  commentsVideo: CommentVideo[] = [];
+
 
   course: Course = {
     description: '',
@@ -65,14 +68,15 @@ export class ViewCourseVideoComponent implements OnInit {
     private sectionService: CourseSectionService,
     private videoSectionService: CourseVideoSectionService,
     private instructorsCourse: CourseInstructorService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private commentVideoService: CommentsVideoService
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.cursoSlug = params['slugCurso'];
       this.slugVideo = params['slugVideo'];
-  
+
       this.coursesService.findBySlug(this.cursoSlug).subscribe((course) => {
         this.course = course;
         this.getInstructorsCourse();
@@ -87,7 +91,7 @@ export class ViewCourseVideoComponent implements OnInit {
       });
     });
   }
-  
+
 
   isMenuOpen = false;
 
@@ -122,7 +126,7 @@ export class ViewCourseVideoComponent implements OnInit {
         });
     }
   }
-  
+
 
   findVideoBySlug(slug: string) {
     let routeCourse: string = '/clases/' + this.course.slug + '/' + slug;
@@ -137,6 +141,7 @@ export class ViewCourseVideoComponent implements OnInit {
           this.link = this.sanitizer.bypassSecurityTrustResourceUrl(
             `https://iframe.mediadelivery.net/embed/159263/${this.courseVideo.link}?autoplay=true&loop=false&muted=false&preload=true`
           );
+          this.getCommentsVideo();
           break;
         }
       }
@@ -160,8 +165,11 @@ export class ViewCourseVideoComponent implements OnInit {
             this.link = this.sanitizer.bypassSecurityTrustResourceUrl(
               `https://iframe.mediadelivery.net/embed/163809/${this.courseVideo.link}?autoplay=true&loop=false&muted=false&preload=true`
             );
+            this.getCommentsVideo();
             break;
           }
+
+
         }
       } catch (error) { }
     }
@@ -175,15 +183,26 @@ export class ViewCourseVideoComponent implements OnInit {
       });
   }
 
-  guardarContenido() {
-    // Obtener el contenido del editor
+  sortCommentsByDate() {
+    this.commentsVideo.sort((a, b) => {
+      return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+    });
+  }
+  getCommentsVideo() {
+    this.commentVideoService.findByVideoId(this.courseVideo!.idVideo!)
+      .subscribe(commentsVideo => {
+        this.commentsVideo = commentsVideo;
+        this.sortCommentsByDate();
+      });
+  }
+
+  saveComment() {
     const content = this.myEditor.editor.getContent();
-
-    // Mostrar el contenido en la consola
-    console.log(content);
-
-    // También puedes asignar el contenido a una variable si lo necesitas en otro lugar
     this.editorContent = content;
+    this.commentVideoService.create(this.courseVideo.idVideo!, this.editorContent).subscribe((commentVideo) => {
+      this.getCommentsVideo();
+      this.myEditor.editor.setContent('');
+    });
   }
 
   sortVideosByNumber(sections: CourseSection[]): CourseSection[] {
