@@ -89,6 +89,31 @@
     </div>
     <div class="comments-container">
       <div class="card-comment" *ngFor="let commentVideo of commentsVideo">
+        <div class="title-comment">
+          <h5>{{commentVideo.user.fullName}}:</h5>
+
+          <mat-icon class="slide-menu__button" [matMenuTriggerFor]="menu">
+            more_vert
+          </mat-icon>
+
+          <mat-menu #menu="matMenu">
+            <mat-list role="list">
+              <mat-list-item style="cursor: pointer">
+                <mat-icon matListItemIcon>edit</mat-icon>
+                <div >Editar comentario</div>
+              </mat-list-item>
+              <mat-list-item style="cursor: pointer">
+                <mat-icon matListItemIcon>delete</mat-icon>
+                <div >Borrar comentario</div>
+              </mat-list-item>
+              <mat-list-item style="cursor: pointer">
+                <mat-icon matListItemIcon>flag</mat-icon>
+                <div >Denunciar</div>
+              </mat-list-item>
+            </mat-list>
+          </mat-menu>
+        </div>
+        
         <div [innerHTML]="commentVideo.comment"></div>
         <p style="font-size: 11px;">{{ commentVideo.updatedAt | date: 'dd-MM-yyyy' }}</p>
       </div>

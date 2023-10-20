@@ -266,6 +266,13 @@
 .comments-container{
   padding-top: 50px;
 }
+
+.title-comment{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 /* Media query para tablets */
 @media (min-width: 769px) and (max-width: 1024px) {
   .container-view-course {
