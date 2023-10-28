@@ -10,3 +10,11 @@
   align-items: center;
   justify-content: center;
 }
+
+.video-title-list{
+  cursor: pointer;
+}
+
+.video-title-list:hover{
+  background-color: #fcf5f5;
+}

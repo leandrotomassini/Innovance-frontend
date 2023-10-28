@@ -141,7 +141,7 @@ export class ViewCourseVideoComponent implements OnInit {
         if (foundVideo) {
           this.courseVideo = foundVideo;
           this.link = this.sanitizer.bypassSecurityTrustResourceUrl(
-            `https://iframe.mediadelivery.net/embed/159263/${this.courseVideo.link}?autoplay=true&loop=false&muted=false&preload=true`
+            `https://iframe.mediadelivery.net/embed/168255/${this.courseVideo.link}?autoplay=true&loop=false&muted=false&preload=true`
           );
           this.getCommentsVideo();
           break;
@@ -165,7 +165,7 @@ export class ViewCourseVideoComponent implements OnInit {
           if (foundVideo) {
             this.courseVideo = foundVideo;
             this.link = this.sanitizer.bypassSecurityTrustResourceUrl(
-              `https://iframe.mediadelivery.net/embed/163809/${this.courseVideo.link}?autoplay=true&loop=false&muted=false&preload=true`
+              `https://iframe.mediadelivery.net/embed/168255/${this.courseVideo.link}?autoplay=true&loop=false&muted=false&preload=true`
             );
             this.getCommentsVideo();
             break;

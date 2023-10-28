@@ -73,7 +73,7 @@ export class VideoPreviewComponent implements OnDestroy {
   addFile() { }
 
   getSafeHTMLContent(): SafeHtml {
-    let linkVideo = `<div style="position:relative;padding-top:56.25%;"><iframe src="https://iframe.mediadelivery.net/embed/163809/${this.video.link}?autoplay=true&loop=false&muted=false&preload=true" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe></div>`;
+    let linkVideo = `<div style="position:relative;padding-top:56.25%;"><iframe src="https://iframe.mediadelivery.net/embed/168255/${this.video.link}?autoplay=true&loop=false&muted=false&preload=true" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe></div>`;
     return this.sanitizer.bypassSecurityTrustHtml(linkVideo);
   }
 }

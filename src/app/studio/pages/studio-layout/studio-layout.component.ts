@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
@@ -12,9 +14,16 @@ export class StudioLayoutComponent {
     { label: 'Dashboard', icon: 'apps', url: '/clases' },
   ];
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+    ) { }
 
   logout() {
     this.authService.logout();
+  }
+
+  goHome(){
+    this.router.navigateByUrl('/studio');
   }
 }

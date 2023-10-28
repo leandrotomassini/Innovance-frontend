@@ -3,8 +3,9 @@
   <mat-card>
     <mat-card-content class="preserve-line-breaks">
       <div [innerHTML]="getSafeHTMLContent()"></div>
-      
-      <mat-card-title (click)="editVideo(video.idVideo)" class="editVideo">{{video.title | titlecase}} -
+
+      <mat-card-title (click)="editVideo(video.idVideo)" class="editVideo">{{video.number}} - {{video.title |
+        titlecase}} -
         <mat-icon>edit</mat-icon> Editar video</mat-card-title>
       <div [innerHTML]="video.description" class="video-description"></div>
     </mat-card-content>

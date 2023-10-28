@@ -18,7 +18,7 @@
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <span>Innovance</span>
+    <span (click)="goHome()" class="logo-menu">Innovance</span>
     <span class="spacer"></span>
     <button mat-icon-button aria-label="Mensajes" [routerLink]="'/panel-control'">
       <mat-icon matBadgeColor="warn">timeline</mat-icon>
